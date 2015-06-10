@@ -23,9 +23,11 @@
 @interface BKViewController ()
 {
     BOOL _isRegistNib;
+    int _isEditTextIndex;//0：正在编辑金额; 1：正在编辑备注
     NSDateFormatter *_shortDateFormatter;
     NSMutableArray *_arraybase;
     NSMutableArray *_arrayBank;
+    NSArray *_arrayMoney;
     NSArray *tableData;
     dispatch_queue_t sQueue;//定义一个串行队列
 }
@@ -38,9 +40,7 @@
     [super viewDidLoad];
     self.automaticallyAdjustsScrollViewInsets = NO;
     // Do any additional setup after loading the view.
-    
-    self.txtMoney.delegate = self;
-    self.txtRemark.delegate = self;
+    _arrayMoney = [NSArray arrayWithObjects:@"金额",@"备注", nil];
     _isRegistNib = NO;
     _shortDateFormatter = [DateFormatterHelper getShortDateFormatter];
     [self loadTableViewData];
@@ -72,13 +72,14 @@
 {
     [super viewWillAppear:animated];
     //页面将要显示时，重新加载可能被释放掉的对象
-    [self initDatePicker];
+    //[self initDatePicker];
     
     if (_tapGesture == nil) {
         //轻点手势
         UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyBoard)];
         tapGesture.numberOfTapsRequired = 1;
         _tapGesture = tapGesture;
+        [_tapGesture setEnabled:NO];
         [self.tableview1 addGestureRecognizer:self.tapGesture];
     }
 }
@@ -98,12 +99,22 @@
     return UIStatusBarStyleLightContent;
 }
 
+- (IBAction)btnOKDate_Click:(id)sender {
+    [self setTheApplyDate:[_shortDateFormatter stringFromDate:self.dataPicker.date]];
+    self.datePickerBottomConstraint.constant = -220;
+    _isShowDatePicker = NO;
+}
+
+- (IBAction)btnCancelDate_Click:(id)sender {
+    self.datePickerBottomConstraint.constant = -220;
+    _isShowDatePicker = NO;
+}
 
 -(void)loadTableViewData
 {
     _arraybase = [NSMutableArray arrayWithObjects:@"记账日期",@"记账类型",@"资金流动类型",@"费用科目",nil];
     _arrayBank = [NSMutableArray arrayWithObjects:@"出账银行",@"入账银行",nil];
-    tableData = @[_arraybase,_arrayBank];
+    tableData = @[_arraybase,_arrayBank, _arrayMoney];
 }
 
 -(void)reloadTableViewData
@@ -167,10 +178,10 @@
         }
     }
     if (_arrayBank.count == 0) {
-        tableData = @[_arraybase];
+        tableData = @[_arraybase, _arrayBank, _arrayMoney];
     }else
     {
-        tableData = @[_arraybase,_arrayBank];
+        tableData = @[_arraybase,_arrayBank, _arrayMoney];
     }
     [self.tableview1 reloadData];
 }
@@ -227,83 +238,11 @@
     }
 }
 
-//初始化日期选择器视图
--(void) initDatePicker
-{
-    _isShowDatePicker= NO;
-    // Do any additional setup after loading the view.
-    _screenFrame = [[UIScreen mainScreen] bounds];
-    if (!_datePickerContainer) {
-        _datePickerContainer = [[UIView alloc] initWithFrame:CGRectMake(0, _screenFrame.size.height, _screenFrame.size.width, 180)];
-        _datePickerContainer.backgroundColor=[UIColor whiteColor];
-        _datePickerContainer.translatesAutoresizingMaskIntoConstraints = NO;
-        [self.view addSubview:_datePickerContainer];
-    }
-    if (!_datePicker) {
-        NSDate *now = [NSDate date];
-        _datePicker = [[UIDatePicker alloc] initWithFrame:CGRectMake(0, 30, _screenFrame.size.width, 150)];
-        _datePicker.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
-        _datePicker.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
-        _datePicker.datePickerMode = UIDatePickerModeDate;
-        _datePicker.date = now;
-        _datePicker.tag = 22;
-        _datePicker.minimumDate = [now dateByAddingTimeInterval:-60*60*24*30 ];
-        _datePicker.maximumDate = now;
-        //[_datePicker addTarget:self action:@selector(datePickerChanged) forControlEvents:UIControlEventValueChanged];
-        [_datePickerContainer addSubview:_datePicker];
-    }
-    if (!_cancelDatePicker) {
-        _cancelDatePicker = [[UIButton alloc] initWithFrame:CGRectMake(0, 10, 100, 30)];
-        [_cancelDatePicker setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        [_cancelDatePicker setTitle:@"取消" forState:UIControlStateNormal];
-        [_cancelDatePicker setContentHorizontalAlignment:UIControlContentHorizontalAlignmentCenter];
-        [_cancelDatePicker addTarget:self action:@selector(cancelDatePickerClick) forControlEvents:UIControlEventTouchUpInside];
-        [_datePickerContainer addSubview:_cancelDatePicker];
-    }
-    if (!_okDatePicker) {
-        _okDatePicker = [[UIButton alloc] initWithFrame:CGRectMake(_screenFrame.size.width-100, 10, 100, 30)];
-        [_okDatePicker setTitle:@"确定" forState:UIControlStateNormal];
-        [_okDatePicker setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        [_okDatePicker setContentHorizontalAlignment:UIControlContentHorizontalAlignmentCenter];
-        [_okDatePicker addTarget:self action:@selector(okDatePickerClick) forControlEvents:UIControlEventTouchUpInside];
-        [_datePickerContainer addSubview:_okDatePicker];
-    }
-}
-
--(void)cancelDatePickerClick
-{
-    [self showDatePicker];
-}
--(void)okDatePickerClick
-{
-    [self setTheApplyDate:[_shortDateFormatter stringFromDate:_datePicker.date]];
-    [self showDatePicker];
-}
--(void) showDatePicker
-{
-    if( _isShowDatePicker == NO)
-    {
-        [UIView animateWithDuration:0.1 delay:0.0 options:0 animations:^{
-                             [_datePickerContainer setFrame:CGRectMake(0, _screenFrame.size.height - 200 - 50, _screenFrame.size.width, 200)];
-                         } completion:^(BOOL finished) {
-                             _isShowDatePicker = !_isShowDatePicker;
-                         }];
-    }
-    else
-    {
-        [UIView animateWithDuration:0.1 delay:0.0 options:0 animations:^{
-                             [_datePickerContainer setFrame:CGRectMake(0, _screenFrame.size.height, _screenFrame.size.width, 200)];
-                         } completion:^(BOOL finished) {
-                             _isShowDatePicker = !_isShowDatePicker;
-                         }];
-    }
-}
-
+//隐藏键盘
 -(void)hideKeyBoard
 {
-    [self.txtMoney resignFirstResponder];
-    [self.txtRemark resignFirstResponder];
-    //[self.tableview1 removeGestureRecognizer:self.tapGesture];
+    UITableViewCell *cell = [self.tableview1 cellForRowAtIndexPath:[NSIndexPath indexPathForRow:_isEditTextIndex inSection:2]];
+    [[cell viewWithTag:302] resignFirstResponder];
     [_tapGesture setEnabled:NO];
 }
 
@@ -315,24 +254,13 @@
     _checkFeeItem = nil;        //释放已选费用科目
     _inUserBank = nil;          //释放已选入账银行
     _outUserBank = nil;         //释放已选出账银行
-    [self disposeDatePicker];   //释放日期选择控件
+    _applyRemark = nil;         //释放备注信息
+    //[self disposeDatePicker];   //释放日期选择控件
     //释放轻击table隐藏键盘 手势检测器
     [self.tableview1 removeGestureRecognizer:_tapGesture];
     _tapGesture = nil;
 }
-/*销毁日期选择器相关view*/
--(void)disposeDatePicker
-{
-    /*销毁日期选择器相关view*/
-    [_datePicker removeFromSuperview];
-    _datePicker = nil;
-    [_okDatePicker removeFromSuperview];
-    _okDatePicker = nil;
-    [_cancelDatePicker removeFromSuperview];
-    _cancelDatePicker = nil;
-    [_datePickerContainer removeFromSuperview];
-    _datePickerContainer = nil;
-}
+
 
 //提交记账数据
 -(void)submit
@@ -370,7 +298,7 @@
         return;
     }
     
-    if ([self.txtMoney.text isEqualToString:@""]) {
+    if (self.applyMoney <= 0) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"请填写完整信息" message:@"请填写正确的金额，必须大于0"
                               delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
         [alert show];
@@ -406,8 +334,8 @@
             [alert show];
             return;
         }
-        [request addPostValue:[NSNumber numberWithDouble:[self.txtMoney.text doubleValue]] forKey:@"money"];
-        [request addPostValue:self.txtRemark.text forKey:@"cAdd"];
+        [request addPostValue:[NSNumber numberWithDouble:self.applyMoney] forKey:@"money"];
+        [request addPostValue:self.applyRemark forKey:@"cAdd"];
         [request setDidFinishSelector:@selector(bookKeepFinished:)];
         [request setDidFailSelector:@selector(bookKeepFailed:)];
         [request startAsynchronous];
@@ -424,7 +352,7 @@
         [request addPostValue:[NSNumber numberWithInt:13] forKey:@"userID"];
         [request addPostValue:self.applyDate forKey:@"ApplyDate"];
         [request addPostValue:self.checkFlowType.flowTypeID forKey:@"FlowTypeID"];
-        [request addPostValue:[NSNumber numberWithDouble:[self.txtMoney.text doubleValue]] forKey:@"money"];
+        [request addPostValue:[NSNumber numberWithDouble:self.applyMoney] forKey:@"money"];
         //如果是银行收入，只选择入账银行即可
         if ([self.checkFlowType.inOutType isEqualToString:@"in"]) {
             [request addPostValue:[NSNumber numberWithInt:0] forKey:@"feeItemID"];
@@ -447,7 +375,7 @@
             [alert show];
             return;
         }
-        [request addPostValue:self.txtRemark.text forKey:@"cAdd"];
+        [request addPostValue:self.applyRemark forKey:@"cAdd"];
         [request setDidFinishSelector:@selector(bookKeepFinished:)];
         [request setDidFailSelector:@selector(bookKeepFailed:)];
         [request startAsynchronous];
@@ -466,7 +394,7 @@
         [request addPostValue:self.checkFlowType.flowTypeID forKey:@"FlowTypeID"];
         [request addPostValue:[NSNumber numberWithInt:0] forKey:@"feeItemID"];
         [request addPostValue:@"" forKey:@"feeItemName"];
-        [request addPostValue:[NSNumber numberWithDouble:[self.txtMoney.text doubleValue]] forKey:@"money"];
+        [request addPostValue:[NSNumber numberWithDouble:self.applyMoney] forKey:@"money"];
         if ([self.checkFlowType.inOutType isEqualToString: @"存钱"])
         {
             [request addPostValue:self.inUserBank.userBankID forKey:@"inUBID"];
@@ -489,7 +417,7 @@
             [alert show];
             return;
         }
-        [request addPostValue:self.txtRemark.text forKey:@"cAdd"];
+        [request addPostValue:self.applyRemark forKey:@"cAdd"];
         [request setDidFinishSelector:@selector(bookKeepFinished:)];
         [request setDidFailSelector:@selector(bookKeepFailed:)];
         [request startAsynchronous];
@@ -607,7 +535,22 @@
     }
     else
     {
-        return nil;
+        //section == 2
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"moneyCell"];
+        UILabel *lbltitle = (UILabel *)[cell viewWithTag:301];
+        lbltitle.text = [[tableData objectAtIndex:sectioinNo] objectAtIndex:rowNo];
+        UITextField *txtValue = (UITextField *)[cell viewWithTag:302];
+        if (rowNo == 0) {
+            txtValue.placeholder = @"请输入金额";
+        }
+        else
+        {
+            txtValue.placeholder = @"如有需要可输入备注信息";
+        }
+        txtValue.delegate = self;
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.accessoryType = UITableViewCellAccessoryNone;
+        return cell;
     }
     
 }
@@ -623,14 +566,23 @@
 
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
-    return 0;
+    return 1;
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    /*LycTableCellViewDefault *cell = (LycTableCellViewDefault *)[tableView cellForRowAtIndexPath:indexPath];*/
+    //点击日期弹出日期选择
     if (indexPath.section == 0 && indexPath.row == 0) {
-        [self showDatePicker];
+        //[self showDatePicker];
+        if (_isShowDatePicker == NO) {
+            [self.datePickerBottomConstraint setConstant:0];
+            _isShowDatePicker = YES;
+        }else
+        {
+            [self.datePickerBottomConstraint setConstant:-220];
+            _isShowDatePicker = NO;
+        }
+        
     }
     //点击记账类型cell，跳转到选择资金类型页面
     else if (indexPath.section == 0 && (indexPath.row == 1 || indexPath.row == 2)) {
@@ -777,8 +729,131 @@
 
 -(void)textFieldDidBeginEditing:(UITextField *)textField
 {
+    if ([textField.placeholder isEqualToString:@"请输入金额"]) {
+        _isEditTextIndex = 0;
+    }
+    else
+    {
+        _isEditTextIndex = 1;
+    }
     [_tapGesture setEnabled:YES];
 }
 
+//文本编辑结束后给相关记账属性赋值
+-(void)textFieldDidEndEditing:(UITextField *)textField
+{
+    if (textField.tag == 302) {
+        NSIndexPath *index = [NSIndexPath indexPathForRow:_isEditTextIndex inSection:2];
+        UITextField *txt = (UITextField *)[[self.tableview1 cellForRowAtIndexPath:index] viewWithTag:302];
+        if (_isEditTextIndex == 0) {
+            _applyMoney = [txt.text doubleValue];
+        }
+        else
+        {
+            _applyRemark = txt.text;
+        }
+    }
+}
+
 /*******************textFieldDelegate实现*******************/
+
+
+
+
+
+
+
+
+
+
+
+
+/************暂不使用的方法************/
+//初始化日期选择器视图(不使用)
+-(void) initDatePicker
+{
+    _isShowDatePicker= NO;
+    // Do any additional setup after loading the view.
+    _screenFrame = [[UIScreen mainScreen] bounds];
+    if (!_datePickerContainer) {
+        _datePickerContainer = [[UIView alloc] initWithFrame:CGRectMake(0, _screenFrame.size.height, _screenFrame.size.width, 180)];
+        _datePickerContainer.backgroundColor=[UIColor whiteColor];
+        _datePickerContainer.translatesAutoresizingMaskIntoConstraints = NO;
+        [self.view addSubview:_datePickerContainer];
+    }
+    if (!_datePicker) {
+        NSDate *now = [NSDate date];
+        _datePicker = [[UIDatePicker alloc] initWithFrame:CGRectMake(0, 30, _screenFrame.size.width, 150)];
+        _datePicker.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
+        _datePicker.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
+        _datePicker.datePickerMode = UIDatePickerModeDate;
+        _datePicker.date = now;
+        _datePicker.tag = 22;
+        _datePicker.minimumDate = [now dateByAddingTimeInterval:-60*60*24*30 ];
+        _datePicker.maximumDate = now;
+        //[_datePicker addTarget:self action:@selector(datePickerChanged) forControlEvents:UIControlEventValueChanged];
+        [_datePickerContainer addSubview:_datePicker];
+    }
+    if (!_cancelDatePicker) {
+        _cancelDatePicker = [[UIButton alloc] initWithFrame:CGRectMake(0, 10, 100, 30)];
+        [_cancelDatePicker setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [_cancelDatePicker setTitle:@"取消" forState:UIControlStateNormal];
+        [_cancelDatePicker setContentHorizontalAlignment:UIControlContentHorizontalAlignmentCenter];
+        [_cancelDatePicker addTarget:self action:@selector(cancelDatePickerClick) forControlEvents:UIControlEventTouchUpInside];
+        [_datePickerContainer addSubview:_cancelDatePicker];
+    }
+    if (!_okDatePicker) {
+        _okDatePicker = [[UIButton alloc] initWithFrame:CGRectMake(_screenFrame.size.width-100, 10, 100, 30)];
+        [_okDatePicker setTitle:@"确定" forState:UIControlStateNormal];
+        [_okDatePicker setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [_okDatePicker setContentHorizontalAlignment:UIControlContentHorizontalAlignmentCenter];
+        [_okDatePicker addTarget:self action:@selector(okDatePickerClick) forControlEvents:UIControlEventTouchUpInside];
+        [_datePickerContainer addSubview:_okDatePicker];
+    }
+}
+//(不使用)
+-(void)cancelDatePickerClick
+{
+    [self showDatePicker];
+}
+//(不使用)
+-(void)okDatePickerClick
+{
+    [self setTheApplyDate:[_shortDateFormatter stringFromDate:_datePicker.date]];
+    [self showDatePicker];
+}
+//(不使用)
+-(void) showDatePicker
+{
+    if( _isShowDatePicker == NO)
+    {
+        [UIView animateWithDuration:0.1 delay:0.0 options:0 animations:^{
+            [_datePickerContainer setFrame:CGRectMake(0, _screenFrame.size.height - 200 - 50, _screenFrame.size.width, 200)];
+        } completion:^(BOOL finished) {
+            _isShowDatePicker = !_isShowDatePicker;
+        }];
+    }
+    else
+    {
+        [UIView animateWithDuration:0.1 delay:0.0 options:0 animations:^{
+            [_datePickerContainer setFrame:CGRectMake(0, _screenFrame.size.height, _screenFrame.size.width, 200)];
+        } completion:^(BOOL finished) {
+            _isShowDatePicker = !_isShowDatePicker;
+        }];
+    }
+}
+
+/*销毁日期选择器相关view(不使用)*/
+-(void)disposeDatePicker
+{
+    /*销毁日期选择器相关view*/
+    [_datePicker removeFromSuperview];
+    _datePicker = nil;
+    [_okDatePicker removeFromSuperview];
+    _okDatePicker = nil;
+    [_cancelDatePicker removeFromSuperview];
+    _cancelDatePicker = nil;
+    [_datePickerContainer removeFromSuperview];
+    _datePickerContainer = nil;
+}
 @end
