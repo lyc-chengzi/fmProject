@@ -38,6 +38,9 @@
     [super viewDidLoad];
     self.automaticallyAdjustsScrollViewInsets = NO;
     // Do any additional setup after loading the view.
+    
+    self.txtMoney.delegate = self;
+    self.txtRemark.delegate = self;
     _isRegistNib = NO;
     _shortDateFormatter = [DateFormatterHelper getShortDateFormatter];
     [self loadTableViewData];
@@ -63,10 +66,6 @@
                                                 forKeys:@[__fm_KPTypeOfCash_String,__fm_KPTypeOfBank_String,__fm_KPTypeOfChange_String]];
     
     [self loadBaseData];
-    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyBoard)];
-    tapGesture.numberOfTapsRequired = 1;
-    [self.navigationController.navigationBar addGestureRecognizer:tapGesture];
-    
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -74,10 +73,18 @@
     [super viewWillAppear:animated];
     //页面将要显示时，重新加载可能被释放掉的对象
     [self initDatePicker];
+    
+    if (_tapGesture == nil) {
+        //轻点手势
+        UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyBoard)];
+        tapGesture.numberOfTapsRequired = 1;
+        _tapGesture = tapGesture;
+        [self.tableview1 addGestureRecognizer:self.tapGesture];
+    }
 }
 -(void)viewWillDisappear:(BOOL)animated
 {
-    [self disposeDatePicker];
+    //[self disposeDatePicker];
     [super viewWillDisappear:animated];
 }
 - (void)didReceiveMemoryWarning {
@@ -124,7 +131,6 @@
     //如果是现金记账，隐藏选择银行的section
     if ([self.keepType isEqualToString:__fm_KPTypeOfCash_String]) {
         [_arrayBank removeAllObjects];
-        return;
     }
     //如果是银行记账
     else if ([self.keepType isEqualToString:__fm_KPTypeOfBank_String])
@@ -297,17 +303,22 @@
 {
     [self.txtMoney resignFirstResponder];
     [self.txtRemark resignFirstResponder];
+    //[self.tableview1 removeGestureRecognizer:self.tapGesture];
+    [_tapGesture setEnabled:NO];
 }
 
 -(void)disposeResource
 {
     NSLog(@"释放资源");
-    _flowTypeController = nil;
-    _checkFlowType = nil;
-    _checkFeeItem = nil;
-    _inUserBank = nil;
-    _outUserBank = nil;
-    [self disposeDatePicker];
+    _flowTypeController = nil;  //释放选择资金类型controller
+    _checkFlowType = nil;       //释放已选资金类型
+    _checkFeeItem = nil;        //释放已选费用科目
+    _inUserBank = nil;          //释放已选入账银行
+    _outUserBank = nil;         //释放已选出账银行
+    [self disposeDatePicker];   //释放日期选择控件
+    //释放轻击table隐藏键盘 手势检测器
+    [self.tableview1 removeGestureRecognizer:_tapGesture];
+    _tapGesture = nil;
 }
 /*销毁日期选择器相关view*/
 -(void)disposeDatePicker
@@ -377,8 +388,24 @@
         [request addPostValue:[NSNumber numberWithInt:13] forKey:@"userID"];
         [request addPostValue:self.applyDate forKey:@"ApplyDate"];
         [request addPostValue:self.checkFlowType.flowTypeID forKey:@"FlowTypeID"];
-        [request addPostValue:self.checkFeeItem.feeItemID forKey:@"feeItemID"];
-        [request addPostValue:self.checkFeeItem.feeItemName forKey:@"feeItemName"];
+        //如果是现金收入，费用项目传空字符串
+        if ([self.checkFlowType.inOutType isEqualToString: @"in"])
+        {
+            [request addPostValue:[NSNumber numberWithInt:0] forKey:@"feeItemID"];
+            [request addPostValue:@"" forKey:@"feeItemName"];
+        }
+        else if ([self.checkFlowType.inOutType isEqualToString: @"out"])
+        {
+            [request addPostValue:self.checkFeeItem.feeItemID forKey:@"feeItemID"];
+            [request addPostValue:self.checkFeeItem.feeItemName forKey:@"feeItemName"];
+        }
+        else
+        {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"记账错误" message:@"请重新选择资金类型"
+                                                      delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+            [alert show];
+            return;
+        }
         [request addPostValue:[NSNumber numberWithDouble:[self.txtMoney.text doubleValue]] forKey:@"money"];
         [request addPostValue:self.txtRemark.text forKey:@"cAdd"];
         [request setDidFinishSelector:@selector(bookKeepFinished:)];
@@ -397,28 +424,26 @@
         [request addPostValue:[NSNumber numberWithInt:13] forKey:@"userID"];
         [request addPostValue:self.applyDate forKey:@"ApplyDate"];
         [request addPostValue:self.checkFlowType.flowTypeID forKey:@"FlowTypeID"];
-        [request addPostValue:self.checkFeeItem.feeItemID forKey:@"feeItemID"];
-        [request addPostValue:self.checkFeeItem.feeItemName forKey:@"feeItemName"];
         [request addPostValue:[NSNumber numberWithDouble:[self.txtMoney.text doubleValue]] forKey:@"money"];
         //如果是银行收入，只选择入账银行即可
         if ([self.checkFlowType.inOutType isEqualToString:@"in"]) {
+            [request addPostValue:[NSNumber numberWithInt:0] forKey:@"feeItemID"];
+            [request addPostValue:@"" forKey:@"feeItemName"];
             [request addPostValue:self.inUserBank.userBankID forKey:@"inUBID"];
             [request addPostValue:[NSNumber numberWithInt:0] forKey:@"outUBID"];
-            NSLog(@"inUserBankID:%ld",[self.inUserBank.userBankID integerValue]);
-            NSLog(@"inUserBankName:%@",[self.inUserBank bankName]);
         }
         //如果是银行支出，只选择出账银行即可
         else if ([self.checkFlowType.inOutType isEqualToString:@"out"])
         {
+            [request addPostValue:self.checkFeeItem.feeItemID forKey:@"feeItemID"];
+            [request addPostValue:self.checkFeeItem.feeItemName forKey:@"feeItemName"];
             [request addPostValue:[NSNumber numberWithInt:0] forKey:@"inUBID"];
             [request addPostValue:self.outUserBank.userBankID forKey:@"outUBID"];
-            NSLog(@"outUserBankID:%ld",[self.outUserBank.userBankID integerValue]);
-            NSLog(@"outUserBankName:%@",[self.outUserBank bankName]);
         }
         else
         {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"记账错误" message:@"请重新选择资金类型"
-                                                           delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+                                                      delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
             [alert show];
             return;
         }
@@ -439,11 +464,31 @@
         [request addPostValue:[NSNumber numberWithInt:13] forKey:@"userID"];
         [request addPostValue:self.applyDate forKey:@"ApplyDate"];
         [request addPostValue:self.checkFlowType.flowTypeID forKey:@"FlowTypeID"];
-        [request addPostValue:self.checkFeeItem.feeItemID forKey:@"feeItemID"];
-        [request addPostValue:self.checkFeeItem.feeItemName forKey:@"feeItemName"];
+        [request addPostValue:[NSNumber numberWithInt:0] forKey:@"feeItemID"];
+        [request addPostValue:@"" forKey:@"feeItemName"];
         [request addPostValue:[NSNumber numberWithDouble:[self.txtMoney.text doubleValue]] forKey:@"money"];
-        [request addPostValue:self.inUserBank.userBankID forKey:@"inUBID"];
-        [request addPostValue:self.outUserBank.userBankID forKey:@"outUBID"];
+        if ([self.checkFlowType.inOutType isEqualToString: @"存钱"])
+        {
+            [request addPostValue:self.inUserBank.userBankID forKey:@"inUBID"];
+            [request addPostValue:[NSNumber numberWithInt:0] forKey:@"outUBID"];
+        }
+        else if ([self.checkFlowType.inOutType isEqualToString: @"取现"])
+        {
+            [request addPostValue:[NSNumber numberWithInt:0] forKey:@"inUBID"];
+            [request addPostValue:self.outUserBank.userBankID forKey:@"outUBID"];
+        }
+        else if ([self.checkFlowType.inOutType isEqualToString: @"内部转账"])
+        {
+            [request addPostValue:self.inUserBank.userBankID forKey:@"inUBID"];
+            [request addPostValue:self.outUserBank.userBankID forKey:@"outUBID"];
+        }
+        else
+        {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"记账错误" message:@"请重新选择资金类型"
+                                                           delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+            [alert show];
+            return;
+        }
         [request addPostValue:self.txtRemark.text forKey:@"cAdd"];
         [request setDidFinishSelector:@selector(bookKeepFinished:)];
         [request setDidFailSelector:@selector(bookKeepFailed:)];
@@ -487,6 +532,7 @@
             bkType = @"转账记账失败";
         }
     }
+    
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:bkType message:[request responseString]
                                               delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
     [alert show];
@@ -542,7 +588,7 @@
         LycTableCellViewDefault *cell = (LycTableCellViewDefault *)[tableView dequeueReusableCellWithIdentifier:cellID];
         cell.lblTitle.text = [[tableData objectAtIndex:sectioinNo] objectAtIndex:rowNo];
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-        
+    
         //给可能的value赋一个默认值
         if ([cell.lblValue.text isEqual:@""]) {
             if (sectioinNo == 0) {
@@ -611,17 +657,33 @@
         //UIStoryboard *sbMain = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         CheckUserBankViewController *cv = [self.storyboard instantiateViewControllerWithIdentifier:@"checkUserBankNib"];
         cv.delegate = self;
-        if(indexPath.row == 0)
-        {
-            cv.inOutBankType = @"out";
+        if (_arrayBank.count == 0) {
+            return;
         }
-        else if (indexPath.row == 1)
-        {
-            cv.inOutBankType = @"in";
+        else if (_arrayBank.count == 1) {
+            if([_arrayBank[0] isEqualToString:@"出账银行"])
+            {
+                cv.inOutBankType = @"out";
+            }
+            else
+            {
+                cv.inOutBankType = @"in";
+            }
         }
         else
         {
-            cv.inOutBankType = @"";
+            if(indexPath.row == 0)
+            {
+                cv.inOutBankType = @"out";
+            }
+            else if (indexPath.row == 1)
+            {
+                cv.inOutBankType = @"in";
+            }
+            else
+            {
+                cv.inOutBankType = @"";
+            }
         }
         [self.navigationController pushViewController:cv animated:YES];
     }
@@ -676,7 +738,14 @@
 -(void)setTheOutUserBank:(Local_UserBank *) oub
 {
     _outUserBank = oub;
-    LycTableCellViewDefault2 *cell = (LycTableCellViewDefault2 *)[self.tableview1 cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1]];
+    LycTableCellViewDefault2 *cell;
+    if (_arrayBank.count == 2) {
+        cell = (LycTableCellViewDefault2 *)[self.tableview1 cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1]];
+    }
+    else if (_arrayBank.count == 1 && [_arrayBank[0] isEqualToString:@"出账银行"])
+    {
+        cell = (LycTableCellViewDefault2 *)[self.tableview1 cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1]];
+    }
     cell.lblValueTop.text = oub.bankName;
     cell.lblValueBottom.text = oub.cardNo;
 }
@@ -684,7 +753,14 @@
 -(void)setTheInUserBank:(Local_UserBank *) iub
 {
     _inUserBank = iub;
-    LycTableCellViewDefault2 *cell = (LycTableCellViewDefault2 *)[self.tableview1 cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:1]];
+    LycTableCellViewDefault2 *cell;
+    if (_arrayBank.count == 2) {
+        cell = (LycTableCellViewDefault2 *)[self.tableview1 cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:1]];
+    }
+    else if (_arrayBank.count == 1 && [_arrayBank[0] isEqualToString:@"入账银行"])
+    {
+        cell = (LycTableCellViewDefault2 *)[self.tableview1 cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1]];
+    }
     cell.lblValueTop.text = iub.bankName;
     cell.lblValueBottom.text = iub.cardNo;
 }
@@ -694,9 +770,15 @@
     _applyMoney = money;
 }
 
--(void)setTheTest:(Local_UserBank *)a
-{
-    _test = a;
-}
 /****************实现页面数据委托相关方法****************/
+
+
+/*******************textFieldDelegate实现*******************/
+
+-(void)textFieldDidBeginEditing:(UITextField *)textField
+{
+    [_tapGesture setEnabled:YES];
+}
+
+/*******************textFieldDelegate实现*******************/
 @end
