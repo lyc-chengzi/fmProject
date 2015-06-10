@@ -7,7 +7,7 @@
 //
 
 #import "CheckViewController.h"
-
+#import "AppDelegate.h"
 #import "AppConfiguration.h"
 #import "ApiJsonHelper.h"
 #import "DateFormatterHelper.h"
@@ -50,7 +50,15 @@
     _requestData = [[NSMutableData alloc] init];
     
     //1、检查是否需要更新基础数据
-    [self checkNeedUpdateBaseData];
+    AppDelegate *app = [[UIApplication sharedApplication] delegate];
+    if (app.isConnectNet == YES) {
+        [self checkNeedUpdateBaseData];
+    }
+    else
+    {
+        NSLog(@"网络未连接，基础数据不会更新！");
+    }
+    
     
     //2、加载费用科目
     [self getFeeItemAction];
@@ -90,6 +98,7 @@
     //新建一个线程，检查是否需要更新主数据
     NSString *requestFeeItemURL = [__fm_serverIP stringByAppendingString:__fm_apiPath_getBaseUpdateTime];
     ASIFormDataRequest *requestUpdateTime= [ASIFormDataRequest requestWithURL:[NSURL URLWithString:requestFeeItemURL]];
+    requestUpdateTime.name = @"检查是否需要更新主数据";
     requestUpdateTime.delegate = self;
     requestUpdateTime.shouldAttemptPersistentConnection = YES;
     requestUpdateTime.requestMethod = @"POST";
@@ -151,6 +160,7 @@
     //第一个任务，下载资金类型
     NSString *requestURL = [__fm_serverIP stringByAppendingString:__fm_apiPath_getFlowType];
     ASIFormDataRequest *requestFlowType= [ASIFormDataRequest requestWithURL:[NSURL URLWithString:requestURL]];
+    requestFlowType.name = @"下载资金类型";
     requestFlowType.delegate = self;
     requestFlowType.shouldAttemptPersistentConnection = YES;
     requestFlowType.requestMethod = @"POST";
@@ -162,6 +172,7 @@
     //第二个任务，下载费用科目
     NSString *requestFeeItemURL = [__fm_serverIP stringByAppendingString:__fm_apiPath_getFeeItem];
     ASIFormDataRequest *requestFeeItem= [ASIFormDataRequest requestWithURL:[NSURL URLWithString:requestFeeItemURL]];
+    requestFeeItem.name = @"下载费用科目";
     requestFeeItem.delegate = self;
     requestFeeItem.shouldAttemptPersistentConnection = YES;
     requestFeeItem.requestMethod = @"POST";
@@ -218,7 +229,14 @@
 -(void)requestDidFailedCallBack:(ASIHTTPRequest *) requests
 {
     NSError *errors = requests.error;
+    
     NSLog(@"*******failed*******,result string is %@",errors);
+    if (errors.code == 1) {
+        NSLog(@"[%@]:网络未连接",requests.name);
+    }
+    if (errors.code == 2) {
+        NSLog(@"[%@]:连接超时",requests.name);
+    }
 }
 
 //获取所有费用科目
