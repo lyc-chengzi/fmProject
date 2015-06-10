@@ -8,8 +8,7 @@
 
 #import "BKViewController.h"
 #import "AppConfiguration.h"
-#import "ReachabilityHelper.h"
-
+#import "AppDelegate.h"
 #import "LycTableCellViewDefault.h"
 #import "LycTableCellViewDefault2.h"
 #import "DateFormatterHelper.h"
@@ -25,8 +24,9 @@
 {
     BOOL _isRegistNib;
     NSDateFormatter *_shortDateFormatter;
+    NSMutableArray *_arraybase;
+    NSMutableArray *_arrayBank;
     NSArray *tableData;
-    
     dispatch_queue_t sQueue;//定义一个串行队列
 }
 @end
@@ -63,6 +63,10 @@
                                                 forKeys:@[__fm_KPTypeOfCash_String,__fm_KPTypeOfBank_String,__fm_KPTypeOfChange_String]];
     
     [self loadBaseData];
+    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyBoard)];
+    tapGesture.numberOfTapsRequired = 1;
+    [self.navigationController.navigationBar addGestureRecognizer:tapGesture];
+    
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -90,9 +94,79 @@
 
 -(void)loadTableViewData
 {
-    NSArray *arraybase = [NSArray arrayWithObjects:@"记账日期",@"记账类型",@"资金流动类型",@"费用科目",nil];
-    NSMutableArray *arraymoney = [NSMutableArray arrayWithObjects:@"出账银行",@"入账银行",nil];
-    tableData = [NSArray arrayWithObjects:arraybase,arraymoney, nil];
+    _arraybase = [NSMutableArray arrayWithObjects:@"记账日期",@"记账类型",@"资金流动类型",@"费用科目",nil];
+    _arrayBank = [NSMutableArray arrayWithObjects:@"出账银行",@"入账银行",nil];
+    tableData = @[_arraybase,_arrayBank];
+}
+
+-(void)reloadTableViewData
+{
+    if ([self.checkFlowType.inOutType isEqualToString:@"out"])
+    {
+        //如果是支出，要显示费用科目的选项
+        [_arraybase removeAllObjects];
+        [_arraybase addObject:@"记账日期"];
+        [_arraybase addObject:@"记账类型"];
+        [_arraybase addObject:@"资金流动类型"];
+        [_arraybase addObject:@"费用科目"];
+
+    }
+    else
+    {
+        //如果是收入或者转账，要隐藏掉费用科目的选项
+        [_arraybase removeAllObjects];
+        [_arraybase addObject:@"记账日期"];
+        [_arraybase addObject:@"记账类型"];
+        [_arraybase addObject:@"资金流动类型"];
+    }
+    
+    
+    //如果是现金记账，隐藏选择银行的section
+    if ([self.keepType isEqualToString:__fm_KPTypeOfCash_String]) {
+        [_arrayBank removeAllObjects];
+        return;
+    }
+    //如果是银行记账
+    else if ([self.keepType isEqualToString:__fm_KPTypeOfBank_String])
+    {
+        //如果是收入，只显示入账银行选项
+        if ([self.checkFlowType.inOutType isEqualToString:@"in"]) {
+            [_arrayBank removeAllObjects];
+            [_arrayBank addObject:@"入账银行"];
+        }
+        else if ([self.checkFlowType.inOutType isEqualToString:@"out"])
+        {
+            //如果是支出，只显示出账银行选项
+            [_arrayBank removeAllObjects];
+            [_arrayBank addObject:@"出账银行"];
+        }
+    }
+    //如果是内部转账
+    else
+    {
+        if ([self.checkFlowType.inOutType isEqualToString:@"取现"]) {
+            [_arrayBank removeAllObjects];
+            [_arrayBank addObject:@"出账银行"];
+        }
+        else if ([self.checkFlowType.inOutType isEqualToString:@"存钱"])
+        {
+            [_arrayBank removeAllObjects];
+            [_arrayBank addObject:@"入账银行"];
+        }
+        else if ([self.checkFlowType.inOutType isEqualToString:@"内部转账"])
+        {
+            [_arrayBank removeAllObjects];
+            [_arrayBank addObject:@"出账银行"];
+            [_arrayBank addObject:@"入账银行"];
+        }
+    }
+    if (_arrayBank.count == 0) {
+        tableData = @[_arraybase];
+    }else
+    {
+        tableData = @[_arraybase,_arrayBank];
+    }
+    [self.tableview1 reloadData];
 }
 
 -(void)loadBaseData
@@ -252,37 +326,43 @@
 //提交记账数据
 -(void)submit
 {
-    [self hideKeyBoard];
-    if ([ReachabilityHelper isConnectInternet] == NO) {
-        [[[UIAlertView alloc] initWithTitle:@"网络未连接" message:@"当前版本必须联网才能记账！"
-                              delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil] show];
+    AppDelegate *app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    if (app.isConnectNet == NO) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"网络未连接" message:@"当前版本必须联网才能记账！"
+                              delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+        [alert show];
         return;
     }
     
     if (self.applyDate == nil) {
-        [[[UIAlertView alloc] initWithTitle:@"请填写完整信息" message:@"记账日期必须选择"
-                              delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil] show];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"请填写完整信息" message:@"记账日期必须选择"
+                              delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+        [alert show];
         return;
     }
     if (self.keepType == nil) {
-        [[[UIAlertView alloc] initWithTitle:@"请填写完整信息" message:@"记账类型必须选择"
-                              delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil] show];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"请填写完整信息" message:@"记账类型必须选择"
+                              delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+        [alert show];
         return;
     }
     if (self.checkFlowType == nil) {
-        [[[UIAlertView alloc] initWithTitle:@"请填写完整信息" message:@"资金类型必须选择"
-                              delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil] show];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"请填写完整信息" message:@"资金类型必须选择"
+                              delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+        [alert show];
         return;
     }
     if ([self.checkFlowType.inOutType isEqual:@"out"] && self.checkFeeItem == nil) {
-        [[[UIAlertView alloc] initWithTitle:@"请填写完整信息" message:@"支出记账必须选择费用科目"
-                              delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil] show];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"请填写完整信息" message:@"支出记账必须选择费用科目"
+                              delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+        [alert show];
         return;
     }
     
     if ([self.txtMoney.text isEqualToString:@""]) {
-        [[[UIAlertView alloc] initWithTitle:@"请填写完整信息" message:@"请填写正确的金额，必须大于0"
-                              delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil] show];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"请填写完整信息" message:@"请填写正确的金额，必须大于0"
+                              delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+        [alert show];
         return;
     }
     
@@ -370,8 +450,9 @@
         [request startAsynchronous];
     }
     else{
-        [[[UIAlertView alloc] initWithTitle:@"记账错误" message:@"请重新选择一个记账类型"
-                                   delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil] show];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"记账错误" message:@"请重新选择一个记账类型"
+                                   delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+        [alert show];
     }
 }
 
@@ -413,8 +494,9 @@
 
 -(void)bookKeepFailed:(ASIHTTPRequest *) request
 {
-    [[[UIAlertView alloc] initWithTitle:@"记账失败" message:[request responseString]
-                          delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil] show];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"记账失败" message:[request responseString]
+                          delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+    [alert show];
 }
 
 
@@ -580,6 +662,8 @@
     _checkFlowType = lft;
     LycTableCellViewDefault *cell = (LycTableCellViewDefault *)[self.tableview1 cellForRowAtIndexPath:[NSIndexPath indexPathForRow:2 inSection:0]];
     cell.lblValue.text = lft.name;
+    //设置相关选项的隐藏和显示
+    [self reloadTableViewData];
 }
 //设置费用科目
 -(void)setTheCheckFeeItem:(Local_FeeItem *) lfi
