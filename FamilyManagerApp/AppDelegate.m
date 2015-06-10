@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "AppConfiguration.h"
+#import "Reachability.h"
 #import "ReachabilityHelper.h"
 #import "ASIFormDataRequest.h"
 #import "ApiJsonHelper.h"
@@ -18,7 +19,7 @@
 @end
 
 @implementation AppDelegate
-
+@synthesize isConnectNet = _isConnectNet;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
@@ -34,19 +35,25 @@
     //设置按钮文字颜色
     [[UIBarButtonItem appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]} forState:UIControlStateNormal];
     /***********设置导航条背景色和标题颜色***********/
-    BOOL isConnectNet = [ReachabilityHelper isConnectInternet];
-    NSLog(@"是否连接到网络？%@", isConnectNet ? @"yes" : @"no");
     
-    if (isConnectNet == YES) {
+    /********设置联网状态*******/
+    _isConnectNet = [ReachabilityHelper isConnectInternet];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(netStateNotificationCallBack:) name:kReachabilityChangedNotification object:nil];
+    Reachability *reach = [Reachability reachabilityWithHostName:__fm_serverIP];
+    //让reach对象开启被监听状态
+    [reach startNotifier];
+    
+    if (_isConnectNet == YES) {
         //第1个任务，下载用户银行信息
         ASIFormDataRequest *requestUB= [ASIFormDataRequest requestWithURL:[NSURL URLWithString:[__fm_serverIP stringByAppendingString:__fm_apiPath_getUserBanks]]];
         requestUB.shouldAttemptPersistentConnection = YES;
         requestUB.requestMethod = @"POST";
         requestUB.delegate = self;
+        requestUB.name = @"下载用户银行信息";
         [requestUB addPostValue:[NSNumber numberWithInt:13] forKey:@"userid"];
         [requestUB setDidFinishSelector:@selector(requestFinishGetUserBank:)];
         [requestUB setDidFailSelector:@selector(requestDidFailedCallBack:)];
-        [requestUB startSynchronous];
+        [requestUB startAsynchronous];
     }
     return YES;
 }
@@ -90,7 +97,31 @@
 {
     NSError *errors = requests.error;
     NSLog(@"failed,result string is %@",errors);
+    if (errors.code == 1) {
+        NSLog(@"%@:网络未连接",requests.name);
+    }
+    if (errors.code == 2) {
+        NSLog(@"%@:连接超时",requests.name);
+    }
 }
+
+-(void)netStateNotificationCallBack:(NSNotification *) note
+{
+    //获取被监听的reach对象
+    Reachability *reach = [note object];
+    //获取网络状态
+    NetworkStatus status = [reach currentReachabilityStatus];
+    if (status == NotReachable) {
+        NSLog(@"网络已经断开");
+        _isConnectNet = NO;
+    }
+    else
+    {
+        NSLog(@"网络已连接");
+        _isConnectNet = YES;
+    }
+}
+
 
 #pragma mark - Core Data stack
 

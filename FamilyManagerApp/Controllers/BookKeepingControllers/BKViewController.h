@@ -35,10 +35,9 @@
 //设置记账金额
 -(void)setTheApplyMoney:(CGFloat) money;
 
--(void)setTheTest:(Local_UserBank *) a;
 @end
 
-@interface BKViewController : UIViewController<UITableViewDelegate,UITableViewDataSource,BKViewControllerDataSourceDelegate>
+@interface BKViewController : UIViewController<UITableViewDelegate,UITableViewDataSource,BKViewControllerDataSourceDelegate, UITextFieldDelegate>
 {
     UIView *_datePickerContainer;
     UIDatePicker *_datePicker;
@@ -67,5 +66,5 @@
 @property (strong, nonatomic, readonly) NSMutableDictionary *flowTypeList;  //资金类型列表，按记账类型标记好了
 @property (strong, nonatomic, readonly) NSArray *feeItemList;               //费用科目列表，使用时再处理
 
-@property (nonatomic, weak) Local_UserBank *test;
+@property (strong, nonatomic, readonly) UITapGestureRecognizer *tapGesture;//taptableview时隐藏键盘
 @end
