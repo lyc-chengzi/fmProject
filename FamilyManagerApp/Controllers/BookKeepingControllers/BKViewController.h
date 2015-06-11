@@ -10,6 +10,7 @@
 #import "Local_FeeItem.h"
 #import "Local_FlowType.h"
 #import "Local_UserBank.h"
+#import "CheckViewController.h"
 
 @protocol BKViewControllerDataSourceDelegate <NSObject>
 
@@ -55,22 +56,26 @@
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *datePickerBottomConstraint;
 
+@property (weak, nonatomic) CheckViewController *ccontroller;
 
-
+//已通过
 @property (strong, nonatomic, readonly) NSString *applyDate;    //记账日期
-@property (strong, nonatomic, readonly) NSString *keepType;     //记账类型
 @property (strong, nonatomic, readonly) Local_FlowType *checkFlowType;  //选择的资金类型
-@property (strong, nonatomic, readonly) Local_FeeItem *checkFeeItem;    //选择的费用科目
-@property (nonatomic, readonly) CGFloat applyMoney;         //记账金额
 @property (strong, nonatomic) Local_UserBank *inUserBank;   //入账银行
 @property (strong, nonatomic) Local_UserBank *outUserBank;  //出账银行
-@property (nonatomic) NSString *applyRemark;//备注信息
 
-@property (strong, nonatomic, readonly) UIViewController *flowTypeController;   //资金类型选择页面
-@property (weak, nonatomic, readonly) UIViewController *feeItemController;      //资金类型选择页面
+@property (nonatomic) NSString *applyRemark;//备注信息
+@property (nonatomic, readonly) CGFloat applyMoney;         //记账金额
 
 @property (strong, nonatomic, readonly) NSMutableDictionary *flowTypeList;  //资金类型列表，按记账类型标记好了
 @property (strong, nonatomic, readonly) NSArray *feeItemList;               //费用科目列表，使用时再处理
 
 @property (strong, nonatomic, readonly) UITapGestureRecognizer *tapGesture;//taptableview时隐藏键盘
+@property (strong, nonatomic, readonly) UIViewController *flowTypeController;   //资金类型选择页面
+
+//未测试通过
+
+@property (strong, nonatomic, readonly) NSString *keepType;     //记账类型
+@property (strong, nonatomic, readonly) Local_FeeItem *checkFeeItem;    //选择的费用科目
+
 @end

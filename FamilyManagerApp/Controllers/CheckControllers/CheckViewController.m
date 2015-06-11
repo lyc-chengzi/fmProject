@@ -11,6 +11,7 @@
 #import "AppConfiguration.h"
 #import "ApiJsonHelper.h"
 #import "DateFormatterHelper.h"
+#import "BKViewController.h"
 
 #import "ASIFormDataRequest.h"
 #import "Local_FeeItem.h"
@@ -33,6 +34,26 @@
 
 @implementation CheckViewController
 @synthesize queue = _queue;
+
+- (IBAction)btnLeft_click:(id)sender
+{
+    NSLog(@"打印内存泄漏情况：");
+    NSLog(@"_B_controller:,%@",_B_controller);
+    NSLog(@"_B_keepType:,%@",_B_keepType);
+    NSLog(@"_B_checkFeeItem:,%@",_B_checkFeeItem);
+    
+    /*
+    //NSLog(@"_B_flowTypeList:,%@",_B_flowTypeList);
+    //NSLog(@"_B_feeItemList:,%@",_B_feeItemList);
+    //NSLog(@"_B_checkFlowType:,%@",_B_checkFlowType);
+    //NSLog(@"_B_applyDate:,%@",_B_applyDate);
+    //NSLog(@"_B_tapGesture:,%@",_B_tapGesture);
+    //NSLog(@"_B_applyRemark:,%@",_B_applyRemark);
+    NSLog(@"_B_inUserBank:,%@",_B_inUserBank);
+    NSLog(@"_B_outUserBank:,%@",_B_outUserBank);
+     NSLog(@"_B_flowTypeController:,%@",_B_flowTypeController);
+     */
+}
 //property queue的get方法
 -(NSOperationQueue *)queue
 {
@@ -68,6 +89,7 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {

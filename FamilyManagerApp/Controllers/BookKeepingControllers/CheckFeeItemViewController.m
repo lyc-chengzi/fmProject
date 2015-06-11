@@ -61,6 +61,9 @@
 }
 
 - (IBAction)btnCancle_click:(id)sender {
+    _firstFeeItem = nil;
+    _secondFeeItem = nil;
+    _feeItemRelation = nil;
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 

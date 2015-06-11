@@ -66,6 +66,7 @@
                                                 forKeys:@[__fm_KPTypeOfCash_String,__fm_KPTypeOfBank_String,__fm_KPTypeOfChange_String]];
     
     [self loadBaseData];
+    self.ccontroller = (CheckViewController *)[[self.navigationController viewControllers] objectAtIndex:0];
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -184,6 +185,8 @@
         tableData = @[_arraybase,_arrayBank, _arrayMoney];
     }
     [self.tableview1 reloadData];
+    
+    
 }
 
 -(void)loadBaseData
@@ -476,15 +479,6 @@
 
 #pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-    if ([segue.identifier isEqual: @"jumpToCheckFeeItemPage"]) {
-        [(CheckFeeItemViewController *)[segue destinationViewController] setDelegate:self];
-    }
-}
-
 /*********************tableView代理********************/
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -598,11 +592,9 @@
         //UIStoryboard *sbMain = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         CheckFlowTypeViewController *cv = [self.storyboard instantiateViewControllerWithIdentifier:@"checkFeeItemNib"];
         cv.delegate = self;
-        
         dispatch_async(dispatch_get_main_queue(), ^(void){
             [self presentViewController:cv animated:YES completion:nil];
         });
-        //[self performSegueWithIdentifier:@"jumpToCheckFeeItemPage" sender:@"checkFeeItem"];
     }
     //如果点击费用科目，跳转到费用科目选择页面
     else if (indexPath.section == 1) {
@@ -667,6 +659,7 @@
 -(void)setTheKeepType:(NSString *) kType
 {
     _keepType = kType;
+    self.ccontroller.B_keepType = self.keepType;
     LycTableCellViewDefault *cell = (LycTableCellViewDefault *)[self.tableview1 cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
     cell.lblValue.text = kType;
 }
@@ -683,6 +676,7 @@
 -(void)setTheCheckFeeItem:(Local_FeeItem *) lfi
 {
     _checkFeeItem = lfi;
+    self.ccontroller.B_checkFeeItem = self.checkFeeItem;
     LycTableCellViewDefault *cell = (LycTableCellViewDefault *)[self.tableview1 cellForRowAtIndexPath:[NSIndexPath indexPathForRow:3 inSection:0]];
     cell.lblValue.text = lfi.feeItemName;
 }
