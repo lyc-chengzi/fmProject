@@ -42,6 +42,12 @@
 		5D08C4841B0482FC00C24712 /* rabbit.png in Resources */ = {isa = PBXBuildFile; fileRef = 5D08C47C1B0482FC00C24712 /* rabbit.png */; };
 		5D08C4881B049BC900C24712 /* DateFormatterHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D08C4871B049BC900C24712 /* DateFormatterHelper.m */; };
 		5D33B7411B2972DA00D15562 /* UserCenterIndexViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D33B7401B2972DA00D15562 /* UserCenterIndexViewController.m */; };
+		5D33B7481B297C6C00D15562 /* tab_usercenter@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5D33B7471B297C6C00D15562 /* tab_usercenter@1x.png */; };
+		5D33B74A1B297D8A00D15562 /* tab_usercenter@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5D33B7491B297D8A00D15562 /* tab_usercenter@2x.png */; };
+		5D33B74D1B297E5300D15562 /* tabzhangdan@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5D33B74B1B297E5300D15562 /* tabzhangdan@1x.png */; };
+		5D33B74E1B297E5300D15562 /* tabzhangdan@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5D33B74C1B297E5300D15562 /* tabzhangdan@2x.png */; };
+		5D33B7511B297F1600D15562 /* tab_caifu@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5D33B74F1B297F1600D15562 /* tab_caifu@1x.png */; };
+		5D33B7521B297F1600D15562 /* tab_caifu@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5D33B7501B297F1600D15562 /* tab_caifu@2x.png */; };
 		5D3861891B05C01300844721 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D3861881B05C01300844721 /* SystemConfiguration.framework */; };
 		5D3861921B05D2B200844721 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D38618F1B05D2B200844721 /* Reachability.m */; };
 		5D3861931B05D2B200844721 /* ReachabilityHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D3861911B05D2B200844721 /* ReachabilityHelper.m */; };
@@ -147,6 +153,12 @@
 		5D08C48A1B049DF400C24712 /* AppConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppConfiguration.h; sourceTree = "<group>"; };
 		5D33B73F1B2972DA00D15562 /* UserCenterIndexViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserCenterIndexViewController.h; sourceTree = "<group>"; };
 		5D33B7401B2972DA00D15562 /* UserCenterIndexViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserCenterIndexViewController.m; sourceTree = "<group>"; };
+		5D33B7471B297C6C00D15562 /* tab_usercenter@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tab_usercenter@1x.png"; sourceTree = "<group>"; };
+		5D33B7491B297D8A00D15562 /* tab_usercenter@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tab_usercenter@2x.png"; sourceTree = "<group>"; };
+		5D33B74B1B297E5300D15562 /* tabzhangdan@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tabzhangdan@1x.png"; sourceTree = "<group>"; };
+		5D33B74C1B297E5300D15562 /* tabzhangdan@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tabzhangdan@2x.png"; sourceTree = "<group>"; };
+		5D33B74F1B297F1600D15562 /* tab_caifu@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tab_caifu@1x.png"; sourceTree = "<group>"; };
+		5D33B7501B297F1600D15562 /* tab_caifu@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tab_caifu@2x.png"; sourceTree = "<group>"; };
 		5D3861881B05C01300844721 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		5D38618E1B05D2B200844721 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		5D38618F1B05D2B200844721 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
@@ -522,6 +534,7 @@
 		5D08C4741B0482E100C24712 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				5D33B7421B297B6E00D15562 /* tabImages */,
 				5D08C4751B0482FC00C24712 /* 123.png */,
 				5D08C4761B0482FC00C24712 /* 321.png */,
 				5D08C4771B0482FC00C24712 /* dog.png */,
@@ -544,6 +557,19 @@
 				005BADB61B1ACB8300B4B69D /* ApiJsonHelper.m */,
 			);
 			path = commonLib;
+			sourceTree = "<group>";
+		};
+		5D33B7421B297B6E00D15562 /* tabImages */ = {
+			isa = PBXGroup;
+			children = (
+				5D33B74F1B297F1600D15562 /* tab_caifu@1x.png */,
+				5D33B7501B297F1600D15562 /* tab_caifu@2x.png */,
+				5D33B74B1B297E5300D15562 /* tabzhangdan@1x.png */,
+				5D33B74C1B297E5300D15562 /* tabzhangdan@2x.png */,
+				5D33B7491B297D8A00D15562 /* tab_usercenter@2x.png */,
+				5D33B7471B297C6C00D15562 /* tab_usercenter@1x.png */,
+			);
+			name = tabImages;
 			sourceTree = "<group>";
 		};
 		5D3861871B05BFBE00844721 /* Frameworks */ = {
@@ -794,18 +820,24 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5D33B7511B297F1600D15562 /* tab_caifu@1x.png in Resources */,
+				5D33B7521B297F1600D15562 /* tab_caifu@2x.png in Resources */,
+				5D33B74D1B297E5300D15562 /* tabzhangdan@1x.png in Resources */,
 				5D08C47F1B0482FC00C24712 /* dog.png in Resources */,
 				5D08C4821B0482FC00C24712 /* frog.png in Resources */,
 				5D08C47E1B0482FC00C24712 /* 321.png in Resources */,
 				00E8BA4D1B1F1F30009C390C /* Main.storyboard in Resources */,
 				5D08C4801B0482FC00C24712 /* duck.png in Resources */,
 				5D08C4721B0480C300C24712 /* LycTableCellViewDefault.xib in Resources */,
+				5D33B74A1B297D8A00D15562 /* tab_usercenter@2x.png in Resources */,
 				5D08C4841B0482FC00C24712 /* rabbit.png in Resources */,
 				5D08C4441B04746900C24712 /* LaunchScreen.xib in Resources */,
 				5D08C4811B0482FC00C24712 /* elephant.png in Resources */,
 				5D08C4411B04746900C24712 /* Images.xcassets in Resources */,
 				5D08C4831B0482FC00C24712 /* mouse.png in Resources */,
+				5D33B7481B297C6C00D15562 /* tab_usercenter@1x.png in Resources */,
 				5D08C47D1B0482FC00C24712 /* 123.png in Resources */,
+				5D33B74E1B297E5300D15562 /* tabzhangdan@2x.png in Resources */,
 				005F5FE01B22AFF7004B9FA0 /* LycTableCellViewDefault2.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -32,8 +32,8 @@
         <scene sceneID="VHs-7a-0pS">
             <objects>
                 <navigationController id="jFd-9z-m4q" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="财富" id="oK9-bf-Ih6">
-                        <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="-6"/>
+                    <tabBarItem key="tabBarItem" title="财富" image="tab_caifu.png" id="oK9-bf-Ih6">
+                        <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="-3"/>
                     </tabBarItem>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="cEy-Gr-48z">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -357,8 +357,8 @@
         <scene sceneID="DMw-t6-DdA">
             <objects>
                 <navigationController title="账单导航" hidesBottomBarWhenPushed="YES" id="NmC-Ma-H4i" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="账单" id="Hgu-LH-dJb">
-                        <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="-6"/>
+                    <tabBarItem key="tabBarItem" title="账单" image="tabzhangdan.png" id="Hgu-LH-dJb">
+                        <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="-3"/>
                     </tabBarItem>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
@@ -403,7 +403,7 @@
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="账单" id="emf-c1-QHq">
-                        <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="-6"/>
+                        <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="-3"/>
                     </tabBarItem>
                     <navigationItem key="navigationItem" title="账单" id="RVw-5E-wSn">
                         <barButtonItem key="leftBarButtonItem" style="plain" systemItem="done" id="v1L-Ed-IjV">
@@ -614,8 +614,8 @@
         <scene sceneID="90J-WU-WGC">
             <objects>
                 <navigationController id="ptF-ev-GkF" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="个人信息" id="Ems-EY-Ml0">
-                        <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="-6"/>
+                    <tabBarItem key="tabBarItem" title="个人信息" image="tab_usercenter.png" id="Ems-EY-Ml0">
+                        <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="-3"/>
                     </tabBarItem>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="wUA-BM-eUY">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -630,6 +630,11 @@
             <point key="canvasLocation" x="-244" y="1819"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="tab_caifu.png" width="24" height="24"/>
+        <image name="tab_usercenter.png" width="24" height="24"/>
+        <image name="tabzhangdan.png" width="24" height="24"/>
+    </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
