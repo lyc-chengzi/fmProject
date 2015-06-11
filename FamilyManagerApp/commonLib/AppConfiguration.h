@@ -44,8 +44,8 @@
 
 //服务器ip相关 宏定义
 //#define __fm_serverIP @"http://192.168.1.122:5555"
-#define __fm_serverIP @"http://192.168.1.123:5555"
-//#define __fm_serverIP @"http://10.0.1.182:52222"
+//#define __fm_serverIP @"http://192.168.1.123:5555"
+#define __fm_serverIP @"http://10.0.1.182:52222"
 
 //aip路径
 #define __fm_apiPath_getBaseUpdateTime @"/baseDataapi/getupdatetime"   //获得基础数据--费用科目
