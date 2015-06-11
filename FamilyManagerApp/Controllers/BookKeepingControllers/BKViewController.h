@@ -47,8 +47,13 @@
     UIButton *_okDatePicker;
 }
 @property (weak, nonatomic) IBOutlet UITableView *tableview1;
-@property (weak, nonatomic) IBOutlet UITextField *txtMoney;
-@property (weak, nonatomic) IBOutlet UITextField *txtRemark;
+@property (weak, nonatomic) IBOutlet UIButton *btnOKDate;
+@property (weak, nonatomic) IBOutlet UIButton *btnCancelDate;
+@property (weak, nonatomic) IBOutlet UIDatePicker *dataPicker;
+- (IBAction)btnOKDate_Click:(id)sender;
+- (IBAction)btnCancelDate_Click:(id)sender;
+
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *datePickerBottomConstraint;
 
 
 
@@ -59,6 +64,7 @@
 @property (nonatomic, readonly) CGFloat applyMoney;         //记账金额
 @property (strong, nonatomic) Local_UserBank *inUserBank;   //入账银行
 @property (strong, nonatomic) Local_UserBank *outUserBank;  //出账银行
+@property (nonatomic) NSString *applyRemark;//备注信息
 
 @property (strong, nonatomic, readonly) UIViewController *flowTypeController;   //资金类型选择页面
 @property (weak, nonatomic, readonly) UIViewController *feeItemController;      //资金类型选择页面
