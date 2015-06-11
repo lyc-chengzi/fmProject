@@ -41,6 +41,7 @@
 		5D08C4831B0482FC00C24712 /* mouse.png in Resources */ = {isa = PBXBuildFile; fileRef = 5D08C47B1B0482FC00C24712 /* mouse.png */; };
 		5D08C4841B0482FC00C24712 /* rabbit.png in Resources */ = {isa = PBXBuildFile; fileRef = 5D08C47C1B0482FC00C24712 /* rabbit.png */; };
 		5D08C4881B049BC900C24712 /* DateFormatterHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D08C4871B049BC900C24712 /* DateFormatterHelper.m */; };
+		5D33B7411B2972DA00D15562 /* UserCenterIndexViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D33B7401B2972DA00D15562 /* UserCenterIndexViewController.m */; };
 		5D3861891B05C01300844721 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D3861881B05C01300844721 /* SystemConfiguration.framework */; };
 		5D3861921B05D2B200844721 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D38618F1B05D2B200844721 /* Reachability.m */; };
 		5D3861931B05D2B200844721 /* ReachabilityHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D3861911B05D2B200844721 /* ReachabilityHelper.m */; };
@@ -144,6 +145,8 @@
 		5D08C4861B049BC900C24712 /* DateFormatterHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DateFormatterHelper.h; sourceTree = "<group>"; };
 		5D08C4871B049BC900C24712 /* DateFormatterHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DateFormatterHelper.m; sourceTree = "<group>"; };
 		5D08C48A1B049DF400C24712 /* AppConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppConfiguration.h; sourceTree = "<group>"; };
+		5D33B73F1B2972DA00D15562 /* UserCenterIndexViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserCenterIndexViewController.h; sourceTree = "<group>"; };
+		5D33B7401B2972DA00D15562 /* UserCenterIndexViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserCenterIndexViewController.m; sourceTree = "<group>"; };
 		5D3861881B05C01300844721 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		5D38618E1B05D2B200844721 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		5D38618F1B05D2B200844721 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
@@ -381,6 +384,8 @@
 		5D08C45D1B0474E100C24712 /* UserCenterControllers */ = {
 			isa = PBXGroup;
 			children = (
+				5D33B73F1B2972DA00D15562 /* UserCenterIndexViewController.h */,
+				5D33B7401B2972DA00D15562 /* UserCenterIndexViewController.m */,
 			);
 			path = UserCenterControllers;
 			sourceTree = "<group>";
@@ -842,6 +847,7 @@
 				000A16831B189FC8000C010B /* ASICustomRequest.m in Sources */,
 				5D3861921B05D2B200844721 /* Reachability.m in Sources */,
 				5D3861EB1B05E6C400844721 /* ASIWebPageRequest.m in Sources */,
+				5D33B7411B2972DA00D15562 /* UserCenterIndexViewController.m in Sources */,
 				00E4DE051B227FD300DB62FD /* Local_UserBank.m in Sources */,
 				5D08C46F1B047D5600C24712 /* LycTableCellViewDefault.m in Sources */,
 				5D3861F61B05E6C400844721 /* ASIS3ObjectRequest.m in Sources */,
