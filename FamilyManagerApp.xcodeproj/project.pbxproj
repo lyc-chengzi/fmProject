@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		000A16831B189FC8000C010B /* ASICustomRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 000A16821B189FC8000C010B /* ASICustomRequest.m */; };
+		004D112F1B2AFDD700EDF576 /* LycDialogView.m in Sources */ = {isa = PBXBuildFile; fileRef = 004D112E1B2AFDD700EDF576 /* LycDialogView.m */; };
 		005BADB71B1ACB8300B4B69D /* ApiJsonHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 005BADB61B1ACB8300B4B69D /* ApiJsonHelper.m */; };
 		005F5FE01B22AFF7004B9FA0 /* LycTableCellViewDefault2.xib in Resources */ = {isa = PBXBuildFile; fileRef = 005F5FDF1B22AFF7004B9FA0 /* LycTableCellViewDefault2.xib */; };
 		005F5FE31B22B0A1004B9FA0 /* LycTableCellViewDefault2.m in Sources */ = {isa = PBXBuildFile; fileRef = 005F5FE21B22B0A1004B9FA0 /* LycTableCellViewDefault2.m */; };
@@ -96,6 +97,8 @@
 /* Begin PBXFileReference section */
 		000A16811B189FC8000C010B /* ASICustomRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASICustomRequest.h; sourceTree = "<group>"; };
 		000A16821B189FC8000C010B /* ASICustomRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASICustomRequest.m; sourceTree = "<group>"; };
+		004D112D1B2AFDD700EDF576 /* LycDialogView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LycDialogView.h; path = LycDialogView/LycDialogView.h; sourceTree = "<group>"; };
+		004D112E1B2AFDD700EDF576 /* LycDialogView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LycDialogView.m; path = LycDialogView/LycDialogView.m; sourceTree = "<group>"; };
 		005BADB51B1ACB8300B4B69D /* ApiJsonHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApiJsonHelper.h; sourceTree = "<group>"; };
 		005BADB61B1ACB8300B4B69D /* ApiJsonHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApiJsonHelper.m; sourceTree = "<group>"; };
 		005F5FDF1B22AFF7004B9FA0 /* LycTableCellViewDefault2.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LycTableCellViewDefault2.xib; sourceTree = "<group>"; };
@@ -250,6 +253,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		004D112C1B2AFD8700EDF576 /* LycDialogView */ = {
+			isa = PBXGroup;
+			children = (
+				004D112D1B2AFDD700EDF576 /* LycDialogView.h */,
+				004D112E1B2AFDD700EDF576 /* LycDialogView.m */,
+			);
+			name = LycDialogView;
+			sourceTree = "<group>";
+		};
 		00B796A31B19C11F00BA879F /* LocalModel */ = {
 			isa = PBXGroup;
 			children = (
@@ -473,6 +485,7 @@
 		5D08C4651B0474E100C24712 /* CustomView */ = {
 			isa = PBXGroup;
 			children = (
+				004D112C1B2AFD8700EDF576 /* LycDialogView */,
 				5D08C46C1B047CFB00C24712 /* LycTableCellView */,
 				5D08C46B1B047CB200C24712 /* BookKeepingView */,
 			);
@@ -887,6 +900,7 @@
 				5D3861A11B05D99100844721 /* GCDAsyncSocket.m in Sources */,
 				5D08C4331B04746900C24712 /* main.m in Sources */,
 				5D3861E71B05E6C400844721 /* ASIFormDataRequest.m in Sources */,
+				004D112F1B2AFDD700EDF576 /* LycDialogView.m in Sources */,
 				5D3861EE1B05E6C400844721 /* ASICloudFilesContainerRequest.m in Sources */,
 				00E4DE021B227F6C00DB62FD /* Local_UserBankDAO.m in Sources */,
 				00E8BA421B1F1EBE009C390C /* BKViewController.m in Sources */,

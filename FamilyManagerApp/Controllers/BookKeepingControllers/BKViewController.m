@@ -47,7 +47,7 @@
     self.tableview1.dataSource = self;
     self.tableview1.delegate = self;
     
-    
+    _dialogView = [[LycDialogView alloc] initWithTitle:@"正在加载" andSuperView:self.view];
     //设置导航条
     UIBarButtonItem *btnRight = [[UIBarButtonItem alloc] initWithTitle:@"提交"
                                                          style:UIBarButtonItemStylePlain target:self action:@selector(submit)];
@@ -66,7 +66,6 @@
                                                 forKeys:@[__fm_KPTypeOfCash_String,__fm_KPTypeOfBank_String,__fm_KPTypeOfChange_String]];
     
     [self loadBaseData];
-    self.ccontroller = (CheckViewController *)[[self.navigationController viewControllers] objectAtIndex:0];
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -192,8 +191,6 @@
         tableData = @[_arraybase,_arrayBank, _arrayMoney];
     }
     [self.tableview1 reloadData];
-    
-    
 }
 
 -(void)loadBaseData
@@ -240,7 +237,7 @@
             //加载完数据后在主线程要执行的代码
             //隐藏等待窗口
             dispatch_async(dispatch_get_main_queue(), ^(void){
-                NSLog(@"在主线程中应该要隐藏等待窗口");
+                
             });
             
         });
@@ -315,7 +312,7 @@
         [alert show];
         return;
     }
-    
+    [_dialogView showDialog];
     //现金记账
     if ([self.keepType isEqualToString:__fm_KPTypeOfCash_String]) {
         NSString *requestURL = [__fm_serverIP stringByAppendingString:__fm_apiPath_doCashAccounting];
@@ -340,6 +337,7 @@
         }
         else
         {
+            [_dialogView hideDialog];
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"记账错误" message:@"请重新选择资金类型"
                                                       delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
             [alert show];
@@ -381,6 +379,7 @@
         }
         else
         {
+            [_dialogView hideDialog];
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"记账错误" message:@"请重新选择资金类型"
                                                       delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
             [alert show];
@@ -423,6 +422,7 @@
         }
         else
         {
+            [_dialogView hideDialog];
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"记账错误" message:@"请重新选择资金类型"
                                                            delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
             [alert show];
@@ -434,6 +434,7 @@
         [request startAsynchronous];
     }
     else{
+        [_dialogView hideDialog];
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"记账错误" message:@"请重新选择一个记账类型"
                                    delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
         [alert show];
@@ -442,8 +443,10 @@
 
 -(void)bookKeepFinished:(ASIHTTPRequest *) request
 {
+    [_dialogView hideDialog];
     NSString *bkType = @"记账成功";
-    NSLog(@"返回的字符串:%@",[request responseString]);
+    NSString *responseString = [request responseString];
+    NSLog(@"返回的字符串:%@", responseString);
     if ([[request responseString] containsString:@"bSuccess\":true"] ) {
         if (request.tag == 100)
         {
@@ -472,14 +475,16 @@
         }
     }
     
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:bkType message:[request responseString]
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:bkType message:responseString
                                               delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
     [alert show];
 }
 
 -(void)bookKeepFailed:(ASIHTTPRequest *) request
 {
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"记账失败" message:[request responseString]
+    [_dialogView hideDialog];
+    NSString *responseString = [request responseString];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"记账失败" message:responseString
                           delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
     [alert show];
 }
@@ -673,7 +678,7 @@
 -(void)setTheKeepType:(NSString *) kType
 {
     _keepType = kType;
-    self.ccontroller.B_keepType = self.keepType;
+    //self.ccontroller.B_keepType = self.keepType;
     LycTableCellViewDefault *cell = (LycTableCellViewDefault *)[self.tableview1 cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
     cell.lblValue.text = kType;
 }
@@ -690,7 +695,7 @@
 -(void)setTheCheckFeeItem:(Local_FeeItem *) lfi
 {
     _checkFeeItem = lfi;
-    self.ccontroller.B_checkFeeItem = self.checkFeeItem;
+    //self.ccontroller.B_checkFeeItem = self.checkFeeItem;
     LycTableCellViewDefault *cell = (LycTableCellViewDefault *)[self.tableview1 cellForRowAtIndexPath:[NSIndexPath indexPathForRow:3 inSection:0]];
     cell.lblValue.text = lfi.feeItemName;
 }

@@ -11,6 +11,7 @@
 #import "Local_FlowType.h"
 #import "Local_UserBank.h"
 #import "CheckViewController.h"
+#import "LycDialogView.h"
 
 @protocol BKViewControllerDataSourceDelegate <NSObject>
 
@@ -77,5 +78,6 @@
 
 @property (strong, nonatomic, readonly) NSString *keepType;     //记账类型
 @property (strong, nonatomic, readonly) Local_FeeItem *checkFeeItem;    //选择的费用科目
+@property (strong, nonatomic, readonly) LycDialogView *dialogView;
 
 @end
