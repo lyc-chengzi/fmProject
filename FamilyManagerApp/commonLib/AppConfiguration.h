@@ -11,6 +11,7 @@
 
 //调试sql命令：-com.apple.CoreData.SQLDebug 1
 
+
 /**************公共方法定义**************/
 //使用方法:__UIColorFromRGB(0xe8e8e8);
 #define __fm_fn_UIColorFromRGB(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
@@ -21,9 +22,21 @@
 /**************公共方法定义**************/
 
 
+
+/************获取ios版本************/
+#define __fm_IOSVersion_getVersion [[[UIDevice currentDevice] systemVersion] doubleValue]
+#define __fm_IOSVersion_ios6Later ([[[UIDevice currentDevice] systemVersion] doubleValue] >= 6.0)
+#define __fm_IOSVersion_ios7Later ([[[UIDevice currentDevice] systemVersion] doubleValue] >= 7.0)
+#define __fm_IOSVersion_ios8Later ([[[UIDevice currentDevice] systemVersion] doubleValue] >= 8.0)
+#define __fm_IOSVersion_ios9Later ([[[UIDevice currentDevice] systemVersion] doubleValue] >= 9.0)
+/************获取ios版本************/
+
+
+
 /**************全局样式定义**************/
 #define  __fm_Global_color_blue [UIColor colorWithRed:0.1 green:0.67 blue:1 alpha:1]
 /**************全局样式定义**************/
+
 
 
 //记账类型 宏定义
