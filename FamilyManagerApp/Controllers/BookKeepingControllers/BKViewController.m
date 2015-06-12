@@ -106,6 +106,8 @@
         [self.view layoutIfNeeded];
     }];
     _isShowDatePicker = NO;
+    
+    [self setTheApplyDate:[_shortDateFormatter stringFromDate:self.dataPicker.date]];
 }
 
 - (IBAction)btnCancelDate_Click:(id)sender {
