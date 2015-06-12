@@ -101,13 +101,18 @@
 }
 
 - (IBAction)btnOKDate_Click:(id)sender {
-    [self setTheApplyDate:[_shortDateFormatter stringFromDate:self.dataPicker.date]];
     self.datePickerBottomConstraint.constant = -220;
+    [UIView animateWithDuration:0.3 animations:^(void){
+        [self.view layoutIfNeeded];
+    }];
     _isShowDatePicker = NO;
 }
 
 - (IBAction)btnCancelDate_Click:(id)sender {
     self.datePickerBottomConstraint.constant = -220;
+    [UIView animateWithDuration:0.3 animations:^(void){
+        [self.view layoutIfNeeded];
+    }];
     _isShowDatePicker = NO;
 }
 
@@ -258,6 +263,7 @@
     _inUserBank = nil;          //释放已选入账银行
     _outUserBank = nil;         //释放已选出账银行
     _applyRemark = nil;         //释放备注信息
+    _keepType = nil;
     //[self disposeDatePicker];   //释放日期选择控件
     //释放轻击table隐藏键盘 手势检测器
     [self.tableview1 removeGestureRecognizer:_tapGesture];
@@ -570,10 +576,16 @@
         //[self showDatePicker];
         if (_isShowDatePicker == NO) {
             [self.datePickerBottomConstraint setConstant:0];
+            [UIView animateWithDuration:0.3 animations:^(void){
+                [self.view layoutIfNeeded];
+            }];
             _isShowDatePicker = YES;
         }else
         {
             [self.datePickerBottomConstraint setConstant:-220];
+            [UIView animateWithDuration:0.3 animations:^(void){
+                [self.view layoutIfNeeded];
+            }];
             _isShowDatePicker = NO;
         }
         
