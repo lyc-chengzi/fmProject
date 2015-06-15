@@ -406,12 +406,12 @@
                         <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="-3"/>
                     </tabBarItem>
                     <navigationItem key="navigationItem" title="账单" id="RVw-5E-wSn">
-                        <barButtonItem key="leftBarButtonItem" style="plain" systemItem="done" id="v1L-Ed-IjV">
+                        <barButtonItem key="leftBarButtonItem" systemItem="done" id="v1L-Ed-IjV">
                             <connections>
                                 <action selector="btnLeft_click:" destination="PeW-Qg-WDJ" id="BeP-84-6nj"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="compose" id="Qeh-yI-ePq">
+                        <barButtonItem key="rightBarButtonItem" systemItem="compose" id="Qeh-yI-ePq">
                             <connections>
                                 <segue destination="eq4-Ft-RxH" kind="push" identifier="pushToBKView" id="Dxd-JI-Blx"/>
                             </connections>
