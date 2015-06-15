@@ -23,6 +23,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    [self checkSettingBundle];//检查配置信息是否有默认值
     /***********设置状态栏***********/
     
     /***********设置导航条背景色和标题颜色***********/
@@ -39,13 +40,16 @@
     /********设置联网状态*******/
     _isConnectNet = [ReachabilityHelper isConnectInternet];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(netStateNotificationCallBack:) name:kReachabilityChangedNotification object:nil];
-    Reachability *reach = [Reachability reachabilityWithHostName:__fm_serverIP];
+    
+    NSString *serverIP = __fm_userDefaults_serverIP;
+    NSLog(@"serverIP:%@",serverIP);
+    Reachability *reach = [Reachability reachabilityWithHostName:serverIP];
     //让reach对象开启被监听状态
     [reach startNotifier];
     
     if (_isConnectNet == YES) {
         //第1个任务，下载用户银行信息
-        ASIFormDataRequest *requestUB= [ASIFormDataRequest requestWithURL:[NSURL URLWithString:[__fm_serverIP stringByAppendingString:__fm_apiPath_getUserBanks]]];
+        ASIFormDataRequest *requestUB= [ASIFormDataRequest requestWithURL:[NSURL URLWithString:[serverIP stringByAppendingString:__fm_apiPath_getUserBanks]]];
         requestUB.shouldAttemptPersistentConnection = YES;
         requestUB.requestMethod = @"POST";
         requestUB.delegate = self;
@@ -119,6 +123,18 @@
     {
         NSLog(@"网络已连接");
         _isConnectNet = YES;
+    }
+}
+
+//检查是否有值
+-(void)checkSettingBundle
+{
+    
+    if (!__fm_userDefaults_serverIP) {
+        NSLog(@"没有serverIP，默认配置成：http://192.168.1.123:5555");
+        NSUserDefaults *de = [NSUserDefaults standardUserDefaults];
+        [de setValue:@"http://192.168.1.123:5555" forKey:@"string_serverip"];
+        [de synchronize];
     }
 }
 

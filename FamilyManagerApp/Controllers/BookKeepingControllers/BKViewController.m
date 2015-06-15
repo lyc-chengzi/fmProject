@@ -315,7 +315,7 @@
     [_dialogView showDialog];
     //现金记账
     if ([self.keepType isEqualToString:__fm_KPTypeOfCash_String]) {
-        NSString *requestURL = [__fm_serverIP stringByAppendingString:__fm_apiPath_doCashAccounting];
+        NSString *requestURL = [__fm_userDefaults_serverIP stringByAppendingString:__fm_apiPath_doCashAccounting];
         ASIFormDataRequest *request= [ASIFormDataRequest requestWithURL:[NSURL URLWithString:requestURL]];
         request.tag = 100;
         request.delegate = self;
@@ -352,7 +352,7 @@
     //银行记账
     else if ([self.keepType isEqualToString:__fm_KPTypeOfBank_String])
     {
-        NSString *requestURL = [__fm_serverIP stringByAppendingString:__fm_apiPath_doBankAccounting];
+        NSString *requestURL = [__fm_userDefaults_serverIP stringByAppendingString:__fm_apiPath_doBankAccounting];
         ASIFormDataRequest *request= [ASIFormDataRequest requestWithURL:[NSURL URLWithString:requestURL]];
         request.tag = 200;
         request.delegate = self;
@@ -393,7 +393,7 @@
     //转账
     else if ([self.keepType isEqualToString:__fm_KPTypeOfChange_String])
     {
-        NSString *requestURL = [__fm_serverIP stringByAppendingString:__fm_apiPath_doZhuanZhang];
+        NSString *requestURL = [__fm_userDefaults_serverIP stringByAppendingString:__fm_apiPath_doZhuanZhang];
         ASIFormDataRequest *request= [ASIFormDataRequest requestWithURL:[NSURL URLWithString:requestURL]];
         request.tag = 300;
         request.delegate = self;

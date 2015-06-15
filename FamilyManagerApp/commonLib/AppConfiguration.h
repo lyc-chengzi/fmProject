@@ -11,6 +11,11 @@
 
 //调试sql命令：-com.apple.CoreData.SQLDebug 1
 
+/**************NSDefault参数定义**************/
+#define __fm_userDefaults_serverIP [[NSUserDefaults standardUserDefaults] stringForKey:@"string_serverip"]
+#define __fm_userDefaults_autoTB [[NSUserDefaults standardUserDefaults] boolForKey:@"bool_autoTB"]
+/**************NSDefault参数定义**************/
+
 
 /**************公共方法定义**************/
 //使用方法:__UIColorFromRGB(0xe8e8e8);
@@ -58,7 +63,6 @@
 //服务器ip相关 宏定义
 //#define __fm_serverIP @"http://192.168.1.122:5555"
 //#define __fm_serverIP @"http://192.168.1.123:5555"
-#define __fm_serverIP @"http://10.0.1.182:52222"
 
 //aip路径
 #define __fm_apiPath_getBaseUpdateTime @"/baseDataapi/getupdatetime"   //获得基础数据--费用科目

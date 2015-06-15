@@ -42,6 +42,7 @@
 		5D08C4831B0482FC00C24712 /* mouse.png in Resources */ = {isa = PBXBuildFile; fileRef = 5D08C47B1B0482FC00C24712 /* mouse.png */; };
 		5D08C4841B0482FC00C24712 /* rabbit.png in Resources */ = {isa = PBXBuildFile; fileRef = 5D08C47C1B0482FC00C24712 /* rabbit.png */; };
 		5D08C4881B049BC900C24712 /* DateFormatterHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D08C4871B049BC900C24712 /* DateFormatterHelper.m */; };
+		5D2639561B2E64DF0061E060 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 5D2639551B2E64DF0061E060 /* Settings.bundle */; };
 		5D33B7411B2972DA00D15562 /* UserCenterIndexViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D33B7401B2972DA00D15562 /* UserCenterIndexViewController.m */; };
 		5D33B7481B297C6C00D15562 /* tab_usercenter@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5D33B7471B297C6C00D15562 /* tab_usercenter@1x.png */; };
 		5D33B74A1B297D8A00D15562 /* tab_usercenter@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5D33B7491B297D8A00D15562 /* tab_usercenter@2x.png */; };
@@ -154,6 +155,7 @@
 		5D08C4861B049BC900C24712 /* DateFormatterHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DateFormatterHelper.h; sourceTree = "<group>"; };
 		5D08C4871B049BC900C24712 /* DateFormatterHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DateFormatterHelper.m; sourceTree = "<group>"; };
 		5D08C48A1B049DF400C24712 /* AppConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppConfiguration.h; sourceTree = "<group>"; };
+		5D2639551B2E64DF0061E060 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		5D33B73F1B2972DA00D15562 /* UserCenterIndexViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserCenterIndexViewController.h; sourceTree = "<group>"; };
 		5D33B7401B2972DA00D15562 /* UserCenterIndexViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserCenterIndexViewController.m; sourceTree = "<group>"; };
 		5D33B7471B297C6C00D15562 /* tab_usercenter@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tab_usercenter@1x.png"; sourceTree = "<group>"; };
@@ -332,6 +334,7 @@
 				5D08C4301B04746900C24712 /* Supporting Files */,
 				5D08C4631B0474E100C24712 /* ViewModels */,
 				5D08C4641B0474E100C24712 /* Views */,
+				5D2639551B2E64DF0061E060 /* Settings.bundle */,
 			);
 			path = FamilyManagerApp;
 			sourceTree = "<group>";
@@ -845,6 +848,7 @@
 				5D33B74A1B297D8A00D15562 /* tab_usercenter@2x.png in Resources */,
 				5D08C4841B0482FC00C24712 /* rabbit.png in Resources */,
 				5D08C4441B04746900C24712 /* LaunchScreen.xib in Resources */,
+				5D2639561B2E64DF0061E060 /* Settings.bundle in Resources */,
 				5D08C4811B0482FC00C24712 /* elephant.png in Resources */,
 				5D08C4411B04746900C24712 /* Images.xcassets in Resources */,
 				5D08C4831B0482FC00C24712 /* mouse.png in Resources */,

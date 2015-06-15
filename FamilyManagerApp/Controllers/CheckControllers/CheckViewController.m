@@ -118,7 +118,7 @@
 -(void)checkNeedUpdateBaseData
 {
     //新建一个线程，检查是否需要更新主数据
-    NSString *requestFeeItemURL = [__fm_serverIP stringByAppendingString:__fm_apiPath_getBaseUpdateTime];
+    NSString *requestFeeItemURL = [__fm_userDefaults_serverIP stringByAppendingString:__fm_apiPath_getBaseUpdateTime];
     ASIFormDataRequest *requestUpdateTime= [ASIFormDataRequest requestWithURL:[NSURL URLWithString:requestFeeItemURL]];
     requestUpdateTime.name = @"检查是否需要更新主数据";
     requestUpdateTime.delegate = self;
@@ -177,10 +177,10 @@
 //下载基础数据（费用科目、资金类型）到本地
 -(void)loadBaseData
 {
-    
+    NSString *serverIP = __fm_userDefaults_serverIP;
     //创建两个任务
     //第一个任务，下载资金类型
-    NSString *requestURL = [__fm_serverIP stringByAppendingString:__fm_apiPath_getFlowType];
+    NSString *requestURL = [serverIP stringByAppendingString:__fm_apiPath_getFlowType];
     ASIFormDataRequest *requestFlowType= [ASIFormDataRequest requestWithURL:[NSURL URLWithString:requestURL]];
     requestFlowType.name = @"下载资金类型";
     requestFlowType.delegate = self;
@@ -192,7 +192,7 @@
     [self.queue addOperation:requestFlowType];
     
     //第二个任务，下载费用科目
-    NSString *requestFeeItemURL = [__fm_serverIP stringByAppendingString:__fm_apiPath_getFeeItem];
+    NSString *requestFeeItemURL = [serverIP stringByAppendingString:__fm_apiPath_getFeeItem];
     ASIFormDataRequest *requestFeeItem= [ASIFormDataRequest requestWithURL:[NSURL URLWithString:requestFeeItemURL]];
     requestFeeItem.name = @"下载费用科目";
     requestFeeItem.delegate = self;
