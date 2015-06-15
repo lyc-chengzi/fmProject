@@ -42,22 +42,25 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(netStateNotificationCallBack:) name:kReachabilityChangedNotification object:nil];
     
     NSString *serverIP = __fm_userDefaults_serverIP;
-    NSLog(@"serverIP:%@",serverIP);
     Reachability *reach = [Reachability reachabilityWithHostName:serverIP];
     //让reach对象开启被监听状态
     [reach startNotifier];
     
-    if (_isConnectNet == YES) {
+    //如果联网且已登陆，更新用户银行信息
+    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+    BOOL isLogin = [ud boolForKey:__fm_defaultsKey_loginUser_Status];
+    if (_isConnectNet == YES && isLogin == YES) {
         //第1个任务，下载用户银行信息
         ASIFormDataRequest *requestUB= [ASIFormDataRequest requestWithURL:[NSURL URLWithString:[serverIP stringByAppendingString:__fm_apiPath_getUserBanks]]];
         requestUB.shouldAttemptPersistentConnection = YES;
         requestUB.requestMethod = @"POST";
         requestUB.delegate = self;
         requestUB.name = @"下载用户银行信息";
-        [requestUB addPostValue:[NSNumber numberWithInt:13] forKey:@"userid"];
+        NSInteger userID = [ud integerForKey:__fm_defaultsKey_loginUser_ID];
+        [requestUB addPostValue:[NSNumber numberWithInteger:userID] forKey:@"userid"];
         [requestUB setDidFinishSelector:@selector(requestFinishGetUserBank:)];
         [requestUB setDidFailSelector:@selector(requestDidFailedCallBack:)];
-        [requestUB startAsynchronous];
+        [requestUB startSynchronous];
     }
     return YES;
 }
@@ -88,11 +91,13 @@
 //asiHttp回调函数
 -(void)requestFinishGetUserBank:(ASIHTTPRequest *) re
 {
+    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+    NSInteger userID = [ud integerForKey:__fm_defaultsKey_loginUser_ID];
     ApiJsonHelper *ah = [[ApiJsonHelper alloc] initWithData:[re responseData] requestName:@"获取用户银行信息"];
     if (ah.bSuccess == YES) {
         Local_UserBankDAO *ubDao = [[Local_UserBankDAO alloc] init];
-        [ubDao deleteAllUserBanksWithUserID:13];
-        [ubDao addUserBanks:ah.jsonObj toUserID:13];
+        [ubDao deleteAllUserBanksWithUserID:(int)userID];
+        [ubDao addUserBanks:ah.jsonObj toUserID:(int)userID];
         NSLog(@"程序启动任务1：更新userbank数据完成；");
     }
     ah.jsonObj = nil;

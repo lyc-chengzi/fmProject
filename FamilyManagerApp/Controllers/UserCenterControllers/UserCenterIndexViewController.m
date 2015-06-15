@@ -7,6 +7,7 @@
 //
 
 #import "UserCenterIndexViewController.h"
+#import "AppConfiguration.h"
 
 @interface UserCenterIndexViewController ()
 
@@ -22,9 +23,12 @@
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-    
-    self.lblAccount.text = @"10000";
-    self.lblName.text = @"刘一呈";
+}
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self setLogStatus];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -57,6 +61,30 @@
     return 10;
 }
 
+-(void) setLogStatus
+{
+    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+    //先判断用户登录状态
+    BOOL isLogin = [ud boolForKey:__fm_defaultsKey_loginUser_Status];
+    if (isLogin == YES) {
+        self.lblAccount.text = [ud stringForKey:__fm_defaultsKey_loginUser_code];
+        self.lblName.text = [ud stringForKey:__fm_defaultsKey_loginUser_name];
+        self.btnLogin.hidden = YES;
+    }else {
+        self.lblAccount.text = @"";
+        self.lblName.text = @"";
+        self.btnLogin.hidden = NO;
+    }
+}
+
+
+- (IBAction)btnLogout_click:(id)sender {
+    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+    [ud setBool:NO forKey:__fm_defaultsKey_loginUser_Status];
+    [ud synchronize];
+    [self setLogStatus];
+    //[self.view layoutIfNeeded];
+}
 @end
 
 /*

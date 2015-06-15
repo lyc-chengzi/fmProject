@@ -274,45 +274,51 @@
 -(void)submit
 {
     AppDelegate *app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    
+    //获取app参数
+    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+    BOOL isLogin = [ud boolForKey:__fm_defaultsKey_loginUser_Status];
+
+    NSString *warnTitle;
+    NSString *warnInfo;
     if (app.isConnectNet == NO) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"网络未连接" message:@"当前版本必须联网才能记账！"
-                              delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
-        [alert show];
+        warnTitle = @"网络未连接";
+        warnInfo = @"当前版本必须联网才能记账！";
+    }
+    else if (isLogin == NO){
+        warnTitle = @"您还未登陆";
+        warnInfo = @"当前版本必须登陆后才能记账！";
+    }
+    else if (self.applyDate == nil) {
+        warnTitle = @"请填写完整信息";
+        warnInfo = @"记账日期必须选择！";
+    }
+    else if (self.keepType == nil) {
+        warnTitle = @"请填写完整信息";
+        warnInfo = @"记账类型必须选择！";
+    }
+    else if (self.checkFlowType == nil) {
+        warnTitle = @"请填写完整信息";
+        warnInfo = @"资金类型必须选择！";
+    }
+    else if ([self.checkFlowType.inOutType isEqual:@"out"] && self.checkFeeItem == nil) {
+        warnTitle = @"请填写完整信息";
+        warnInfo = @"支出记账必须选择费用科目！";
+    }
+    else if (self.applyMoney <= 0) {
+        warnTitle = @"请填写完整信息";
+        warnInfo = @"请填写正确的金额，必须大于0！";
+    }
+    //如果有警告信息，提示框弹出，终止提交操作
+    if (!warnTitle) {
+        UIAlertView *warnAlert = [[UIAlertView alloc] initWithTitle:warnTitle message:warnInfo delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+        [warnAlert show];
         return;
     }
     
-    if (self.applyDate == nil) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"请填写完整信息" message:@"记账日期必须选择"
-                              delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
-        [alert show];
-        return;
-    }
-    if (self.keepType == nil) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"请填写完整信息" message:@"记账类型必须选择"
-                              delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
-        [alert show];
-        return;
-    }
-    if (self.checkFlowType == nil) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"请填写完整信息" message:@"资金类型必须选择"
-                              delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
-        [alert show];
-        return;
-    }
-    if ([self.checkFlowType.inOutType isEqual:@"out"] && self.checkFeeItem == nil) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"请填写完整信息" message:@"支出记账必须选择费用科目"
-                              delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
-        [alert show];
-        return;
-    }
-    
-    if (self.applyMoney <= 0) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"请填写完整信息" message:@"请填写正确的金额，必须大于0"
-                              delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
-        [alert show];
-        return;
-    }
     [_dialogView showDialog];
+    
+    NSInteger userID = [ud integerForKey:__fm_defaultsKey_loginUser_ID];
     //现金记账
     if ([self.keepType isEqualToString:__fm_KPTypeOfCash_String]) {
         NSString *requestURL = [__fm_userDefaults_serverIP stringByAppendingString:__fm_apiPath_doCashAccounting];
@@ -321,7 +327,7 @@
         request.delegate = self;
         request.shouldAttemptPersistentConnection = YES;
         request.requestMethod = @"POST";
-        [request addPostValue:[NSNumber numberWithInt:13] forKey:@"userID"];
+        [request addPostValue:[NSNumber numberWithInteger:userID] forKey:@"userID"];
         [request addPostValue:self.applyDate forKey:@"ApplyDate"];
         [request addPostValue:self.checkFlowType.flowTypeID forKey:@"FlowTypeID"];
         //如果是现金收入，费用项目传空字符串
@@ -358,7 +364,7 @@
         request.delegate = self;
         request.shouldAttemptPersistentConnection = YES;
         request.requestMethod = @"POST";
-        [request addPostValue:[NSNumber numberWithInt:13] forKey:@"userID"];
+        [request addPostValue:[NSNumber numberWithInteger:userID] forKey:@"userID"];
         [request addPostValue:self.applyDate forKey:@"ApplyDate"];
         [request addPostValue:self.checkFlowType.flowTypeID forKey:@"FlowTypeID"];
         [request addPostValue:[NSNumber numberWithDouble:self.applyMoney] forKey:@"money"];
@@ -399,7 +405,7 @@
         request.delegate = self;
         request.shouldAttemptPersistentConnection = YES;
         request.requestMethod = @"POST";
-        [request addPostValue:[NSNumber numberWithInt:13] forKey:@"userID"];
+        [request addPostValue:[NSNumber numberWithInteger:userID] forKey:@"userID"];
         [request addPostValue:self.applyDate forKey:@"ApplyDate"];
         [request addPostValue:self.checkFlowType.flowTypeID forKey:@"FlowTypeID"];
         [request addPostValue:[NSNumber numberWithInt:0] forKey:@"feeItemID"];

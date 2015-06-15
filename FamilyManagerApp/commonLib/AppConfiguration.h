@@ -14,6 +14,17 @@
 /**************NSDefault参数定义**************/
 #define __fm_userDefaults_serverIP [[NSUserDefaults standardUserDefaults] stringForKey:@"string_serverip"]
 #define __fm_userDefaults_autoTB [[NSUserDefaults standardUserDefaults] boolForKey:@"bool_autoTB"]
+
+//NSUserDefaults参数 key的 宏定义
+#define __fm_defaultsKey_loginUser_Status @"loginUserStatus"
+#define __fm_defaultsKey_loginUser_ID @"loginUserID"
+#define __fm_defaultsKey_loginUser_code @"loginUserCode"
+#define __fm_defaultsKey_loginUser_name @"loginUserName"
+
+#define __fm_defaults_baseDataGetDate_Key @"baseDateGetDate"
+#define __fm_defaults_flowTypeGetDate_Key @"flowTypeGetDate"
+#define __fm_defaults_feeItemGetDate_Key @"feeItemGetDate"
+
 /**************NSDefault参数定义**************/
 
 
@@ -50,10 +61,7 @@
 #define __fm_KPTypeOfChange_String @"内部转账"
 
 
-//NSUserDefaults参数 key的 宏定义
-#define __fm_defaults_baseDataGetDate_Key @"baseDateGetDate"
-#define __fm_defaults_flowTypeGetDate_Key @"flowTypeGetDate"
-#define __fm_defaults_feeItemGetDate_Key @"feeItemGetDate"
+
 
 //api相应json对应的key定义
 #define __fm_apiJsonKey_bSuccess @"bSuccess"
@@ -72,5 +80,6 @@
 #define __fm_apiPath_doCashAccounting @"/applyapi/doCashAccounting" //现金记账接口
 #define __fm_apiPath_doBankAccounting @"/applyapi/DoBankAccounting" //银行记账接口
 #define __fm_apiPath_doZhuanZhang @"/applyapi/DoZhuanZhang" //转账记账接口
+#define __fm_apiPath_doLogin @"/userinfoapi/UserLogin" //登陆接口
 
 #endif

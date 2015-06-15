@@ -12,4 +12,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *lblAccount;
 @property (weak, nonatomic) IBOutlet UILabel *lblName;
 
+@property (weak, nonatomic) IBOutlet UIButton *btnLogin;
+- (IBAction)btnLogout_click:(id)sender;
+
 @end
