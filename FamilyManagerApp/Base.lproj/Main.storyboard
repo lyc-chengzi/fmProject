@@ -158,7 +158,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="T6K-CN-hiR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="835" y="-184"/>
+            <point key="canvasLocation" x="266" y="-1004"/>
         </scene>
         <!--Check Flow Type View Controller-->
         <scene sceneID="OQO-dj-5lP">
@@ -184,7 +184,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uPU-n4-HAt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1316" y="-910"/>
+            <point key="canvasLocation" x="772" y="-1004"/>
         </scene>
         <!--Check Fee Item View Controller-->
         <scene sceneID="9gz-1Z-NBE">
@@ -256,7 +256,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Cgo-Bu-Jhg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1316" y="-227"/>
+            <point key="canvasLocation" x="1572" y="-1004"/>
         </scene>
         <!--Check User Bank View Controller-->
         <scene sceneID="8ct-lJ-jKB">
@@ -351,7 +351,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zu2-Sb-5ev" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1316" y="426"/>
+            <point key="canvasLocation" x="1192" y="-1004"/>
         </scene>
         <!--账单导航-->
         <scene sceneID="DMw-t6-DdA">
@@ -370,7 +370,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </toolbar>
                     <connections>
-                        <segue destination="PeW-Qg-WDJ" kind="relationship" relationship="rootViewController" id="7RC-qf-rlg"/>
+                        <segue destination="8nv-ml-PpJ" kind="relationship" relationship="rootViewController" id="2DS-cz-Vwr"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sGd-de-jKF" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -378,52 +378,45 @@
             <point key="canvasLocation" x="-234" y="-184"/>
         </scene>
         <!--账单-->
-        <scene sceneID="S5D-o8-P1v">
+        <scene sceneID="HuV-3M-4tZ">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="PeW-Qg-WDJ" customClass="CheckViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="1tE-Ee-q4c"/>
-                        <viewControllerLayoutGuide type="bottom" id="iut-BG-3Dg"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="4Bh-Yt-BtR">
+                <tableViewController id="8nv-ml-PpJ" customClass="CheckViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="uWv-2h-K0O">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="CfM-hq-uf5">
-                                <rect key="frame" x="0.0" y="64" width="320" height="455"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </tableView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstAttribute="trailingMargin" secondItem="CfM-hq-uf5" secondAttribute="trailing" constant="-16" id="4ye-KI-VCc"/>
-                            <constraint firstItem="CfM-hq-uf5" firstAttribute="top" secondItem="1tE-Ee-q4c" secondAttribute="bottom" id="uss-XE-LLN"/>
-                            <constraint firstItem="iut-BG-3Dg" firstAttribute="top" secondItem="CfM-hq-uf5" secondAttribute="bottom" id="wYO-xm-mfx"/>
-                            <constraint firstItem="CfM-hq-uf5" firstAttribute="leading" secondItem="4Bh-Yt-BtR" secondAttribute="leadingMargin" constant="-16" id="zbi-7v-z7l"/>
-                        </constraints>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="账单" id="emf-c1-QHq">
-                        <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="-3"/>
-                    </tabBarItem>
-                    <navigationItem key="navigationItem" title="账单" id="RVw-5E-wSn">
-                        <barButtonItem key="leftBarButtonItem" systemItem="done" id="v1L-Ed-IjV">
+                        <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="defaultCell" rowHeight="44" id="jio-xF-L5W">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="jio-xF-L5W" id="OBD-At-fFP">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="标题" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D7S-Yj-nM2">
+                                            <rect key="frame" x="20" y="11" width="192" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="8nv-ml-PpJ" id="loZ-uA-cag"/>
+                            <outlet property="delegate" destination="8nv-ml-PpJ" id="CgF-fd-r0j"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="账单" id="hBn-Vu-2sF">
+                        <barButtonItem key="rightBarButtonItem" systemItem="compose" id="LUc-N1-eFG">
                             <connections>
-                                <action selector="btnLeft_click:" destination="PeW-Qg-WDJ" id="BeP-84-6nj"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="compose" id="Qeh-yI-ePq">
-                            <connections>
-                                <segue destination="eq4-Ft-RxH" kind="push" identifier="pushToBKView" id="Dxd-JI-Blx"/>
+                                <segue destination="eq4-Ft-RxH" kind="push" id="QVk-hh-XTi"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
-                    <connections>
-                        <outlet property="tableView1" destination="CfM-hq-uf5" id="djU-MJ-eW0"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="IAh-x4-7Td" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="LkW-6N-dtA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="212" y="-184"/>
+            <point key="canvasLocation" x="260" y="-185"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="x4E-pJ-jfb">

@@ -84,6 +84,8 @@
 		5D3861FB1B05E8FB00844721 /* libz.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D3861FA1B05E8FB00844721 /* libz.1.dylib */; };
 		5D3861FD1B05E95000844721 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D3861FC1B05E95000844721 /* CFNetwork.framework */; };
 		5D3861FF1B05E98C00844721 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D3861FE1B05E98C00844721 /* libxml2.dylib */; };
+		5DD5AC2B1B2EB725004182D7 /* Property List.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5DD5AC2A1B2EB725004182D7 /* Property List.plist */; };
+		5DD5AC2D1B2EB803004182D7 /* CheckViewTableData.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5DD5AC2C1B2EB803004182D7 /* CheckViewTableData.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -234,6 +236,8 @@
 		5D3861FA1B05E8FB00844721 /* libz.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.dylib; path = usr/lib/libz.1.dylib; sourceTree = SDKROOT; };
 		5D3861FC1B05E95000844721 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		5D3861FE1B05E98C00844721 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
+		5DD5AC2A1B2EB725004182D7 /* Property List.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Property List.plist"; sourceTree = "<group>"; };
+		5DD5AC2C1B2EB803004182D7 /* CheckViewTableData.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = CheckViewTableData.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -432,6 +436,7 @@
 		5D08C45F1B0474E100C24712 /* DataLib */ = {
 			isa = PBXGroup;
 			children = (
+				5DD5AC291B2EB70C004182D7 /* plistData */,
 				5D08C4601B0474E100C24712 /* localDataSource */,
 			);
 			path = DataLib;
@@ -761,6 +766,15 @@
 			path = S3;
 			sourceTree = "<group>";
 		};
+		5DD5AC291B2EB70C004182D7 /* plistData */ = {
+			isa = PBXGroup;
+			children = (
+				5DD5AC2C1B2EB803004182D7 /* CheckViewTableData.plist */,
+				5DD5AC2A1B2EB725004182D7 /* Property List.plist */,
+			);
+			name = plistData;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -848,6 +862,7 @@
 				5D08C4821B0482FC00C24712 /* frog.png in Resources */,
 				5D08C47E1B0482FC00C24712 /* 321.png in Resources */,
 				00E8BA4D1B1F1F30009C390C /* Main.storyboard in Resources */,
+				5DD5AC2D1B2EB803004182D7 /* CheckViewTableData.plist in Resources */,
 				5D08C4801B0482FC00C24712 /* duck.png in Resources */,
 				5D08C4721B0480C300C24712 /* LycTableCellViewDefault.xib in Resources */,
 				5D33B74A1B297D8A00D15562 /* tab_usercenter@2x.png in Resources */,
@@ -860,6 +875,7 @@
 				5D33B7481B297C6C00D15562 /* tab_usercenter@1x.png in Resources */,
 				5D08C47D1B0482FC00C24712 /* 123.png in Resources */,
 				5D33B74E1B297E5300D15562 /* tabzhangdan@2x.png in Resources */,
+				5DD5AC2B1B2EB725004182D7 /* Property List.plist in Resources */,
 				005F5FE01B22AFF7004B9FA0 /* LycTableCellViewDefault2.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

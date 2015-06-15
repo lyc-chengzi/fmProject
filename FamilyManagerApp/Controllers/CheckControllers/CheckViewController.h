@@ -12,8 +12,8 @@
 #import "Local_UserBank.h"
 @class BKViewController;
 
-@interface CheckViewController : UIViewController<UITabBarDelegate,UITableViewDataSource,NSURLConnectionDelegate>
-@property (weak, nonatomic) IBOutlet UITableView *tableView1;
+@interface CheckViewController : UITableViewController<NSURLConnectionDelegate>
+
 - (IBAction)btnLeft_click:(id)sender;
 
 

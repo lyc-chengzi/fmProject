@@ -55,7 +55,7 @@
         requestUB.shouldAttemptPersistentConnection = YES;
         requestUB.requestMethod = @"POST";
         requestUB.delegate = self;
-        requestUB.name = @"下载用户银行信息";
+        //requestUB.name = @"下载用户银行信息";
         NSInteger userID = [ud integerForKey:__fm_defaultsKey_loginUser_ID];
         [requestUB addPostValue:[NSNumber numberWithInteger:userID] forKey:@"userid"];
         [requestUB setDidFinishSelector:@selector(requestFinishGetUserBank:)];
@@ -107,10 +107,12 @@
     NSError *errors = requests.error;
     NSLog(@"failed,result string is %@",errors);
     if (errors.code == 1) {
-        NSLog(@"%@:网络未连接",requests.name);
+        //NSLog(@"%@:网络未连接",requests.name);
+        NSLog(@"网络未连接");
     }
     if (errors.code == 2) {
-        NSLog(@"%@:连接超时",requests.name);
+        //NSLog(@"%@:连接超时",requests.name);
+        NSLog(@"连接超时");
     }
 }
 

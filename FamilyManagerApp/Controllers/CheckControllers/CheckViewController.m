@@ -24,10 +24,11 @@
 {
     //最后一次更新基础数据的时间
     NSString *_lastUpdateBaseDataTimeStr;
-    NSMutableArray *_feeItemList;
-    NSMutableData *_requestData;
     dispatch_queue_t sQueue;//串行队列
     dispatch_queue_t cQueue;//并发队列
+    
+    //table数据
+    NSArray *tableData;
 }
 
 @end
@@ -66,9 +67,7 @@
 -(void)viewDidLoad
 {
     [super viewDidLoad];
-    //NSLog(@"viewDidLoad时的NSThread Info:%@",[NSThread currentThread]);
-    self.tableView1.dataSource = self;
-    _requestData = [[NSMutableData alloc] init];
+    
     
     //1、检查是否需要更新基础数据
     AppDelegate *app = [[UIApplication sharedApplication] delegate];
@@ -79,10 +78,12 @@
     {
         NSLog(@"网络未连接，基础数据不会更新！");
     }
+    //从plist文件夹在table的数据
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"CheckViewTableData" ofType:@"plist"];
+    tableData = [NSArray arrayWithContentsOfFile:path];
     
-    
-    //2、加载费用科目
-    [self getFeeItemAction];
+    NSLog(@"height:%f",self.tableView.frame.size.height);
+    NSLog(@"y:%f",self.tableView.frame.origin.y);
 }
 
 - (void)didReceiveMemoryWarning {
@@ -90,28 +91,45 @@
     // Dispose of any resources that can be recreated.
 }
 
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return tableData.count;
+}
+
+-(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    return [[tableData objectAtIndex:section] objectForKey:@"sectionName"];
+}
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return _feeItemList.count;
+    return [[[tableData objectAtIndex:section] objectForKey:@"sectionRows"] count];
 }
+/*
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    if (section == 0) {
+        return 5;
+    }
+    return 10;
+}*/
+
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *cellID = @"cellID";
+    static NSString *cellID = @"defaultCell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
-    if (!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
-    }
-    Local_FeeItem *fi = _feeItemList[indexPath.row];
-    cell.textLabel.text = fi.feeItemName;
+    
+    UILabel *lbl = (UILabel *)[cell viewWithTag:1];
+    lbl.text = [[[tableData objectAtIndex:indexPath.section] objectForKey:@"sectionRows"] objectAtIndex:indexPath.row];
+    
     return cell;
 }
 
-
-
-
-
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 44;
+}
 /*******************************************************检查是否需要更新基础数据**********************************************************************/
 
 //检查是否需要更新主数据
@@ -120,7 +138,7 @@
     //新建一个线程，检查是否需要更新主数据
     NSString *requestFeeItemURL = [__fm_userDefaults_serverIP stringByAppendingString:__fm_apiPath_getBaseUpdateTime];
     ASIFormDataRequest *requestUpdateTime= [ASIFormDataRequest requestWithURL:[NSURL URLWithString:requestFeeItemURL]];
-    requestUpdateTime.name = @"检查是否需要更新主数据";
+    //requestUpdateTime.name = @"检查是否需要更新主数据";
     requestUpdateTime.delegate = self;
     requestUpdateTime.shouldAttemptPersistentConnection = YES;
     requestUpdateTime.requestMethod = @"POST";
@@ -141,8 +159,9 @@
     ApiJsonHelper *jh = [[ApiJsonHelper alloc] initWithData:resultData requestName:@"获取基础数据更新时间点"];
     if (jh.bSuccess) {
         //请求成功
-        NSLog(@"请求到得时间点为：%@",[jh.jsonObj objectForKey:@"updateDate"]);
-        NSDate *updateDate = [[DateFormatterHelper getBasicFormatter] dateFromString:[jh.jsonObj objectForKey:@"updateDate"]];
+        NSString *stringUpdateDate = [jh.jsonObj objectForKey:@"updateDate"];
+        NSLog(@"请求到得时间点为：%@", stringUpdateDate);
+        NSDate *updateDate = [[DateFormatterHelper getBasicFormatter] dateFromString:stringUpdateDate];
         //获取上次更新的时间
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
         _lastUpdateBaseDataTimeStr = [defaults stringForKey:__fm_defaults_baseDataGetDate_Key];
@@ -182,7 +201,7 @@
     //第一个任务，下载资金类型
     NSString *requestURL = [serverIP stringByAppendingString:__fm_apiPath_getFlowType];
     ASIFormDataRequest *requestFlowType= [ASIFormDataRequest requestWithURL:[NSURL URLWithString:requestURL]];
-    requestFlowType.name = @"下载资金类型";
+    //requestFlowType.name = @"下载资金类型";
     requestFlowType.delegate = self;
     requestFlowType.shouldAttemptPersistentConnection = YES;
     requestFlowType.requestMethod = @"POST";
@@ -194,7 +213,7 @@
     //第二个任务，下载费用科目
     NSString *requestFeeItemURL = [serverIP stringByAppendingString:__fm_apiPath_getFeeItem];
     ASIFormDataRequest *requestFeeItem= [ASIFormDataRequest requestWithURL:[NSURL URLWithString:requestFeeItemURL]];
-    requestFeeItem.name = @"下载费用科目";
+    //requestFeeItem.name = @"下载费用科目";
     requestFeeItem.delegate = self;
     requestFeeItem.shouldAttemptPersistentConnection = YES;
     requestFeeItem.requestMethod = @"POST";
@@ -254,24 +273,12 @@
     
     NSLog(@"*******failed*******,result string is %@",errors);
     if (errors.code == 1) {
-        NSLog(@"[%@]:网络未连接",requests.name);
+        //NSLog(@"[%@]:网络未连接",requests.name);
+        NSLog(@"网络未连接");
     }
     if (errors.code == 2) {
-        NSLog(@"[%@]:连接超时",requests.name);
-    }
-}
-
-//获取所有费用科目
--(void)getFeeItemAction
-{
-
-    Local_FeeItemDAO *feeDao = [[Local_FeeItemDAO alloc] init];
-    NSArray *feeList = [feeDao getAllFeeItems];
-    if (feeList == nil) {
-        NSLog(@"本地数据库中没有数据");
-    }else {
-        NSLog(@"一共有%d条数据！",(int)(feeList.count));
-        _feeItemList = [feeList mutableCopy];
+        //NSLog(@"[%@]:连接超时",requests.name);
+        NSLog(@"连接超时");
     }
 }
 

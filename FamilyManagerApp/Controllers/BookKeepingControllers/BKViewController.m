@@ -16,6 +16,7 @@
 #import "CheckFlowTypeViewController.h"
 #import "CheckFeeItemViewController.h"
 #import "CheckUserBankViewController.h"
+#import "ApiJsonHelper.h"
 
 #import "Local_FeeItemDAO.h"
 #import "Local_FlowTypeDAO.h"
@@ -310,7 +311,7 @@
         warnInfo = @"请填写正确的金额，必须大于0！";
     }
     //如果有警告信息，提示框弹出，终止提交操作
-    if (!warnTitle) {
+    if (warnTitle != nil) {
         UIAlertView *warnAlert = [[UIAlertView alloc] initWithTitle:warnTitle message:warnInfo delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
         [warnAlert show];
         return;
@@ -451,9 +452,9 @@
 {
     [_dialogView hideDialog];
     NSString *bkType = @"记账成功";
-    NSString *responseString = [request responseString];
-    NSLog(@"返回的字符串:%@", responseString);
-    if ([[request responseString] containsString:@"bSuccess\":true"] ) {
+    NSData *responseData = [request responseData];
+    ApiJsonHelper *aj = [[ApiJsonHelper alloc] initWithData:responseData requestName:bkType];
+    if (aj.bSuccess == YES) {
         if (request.tag == 100)
         {
             bkType = @"现金记账成功";
@@ -480,8 +481,7 @@
             bkType = @"转账记账失败";
         }
     }
-    
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:bkType message:responseString
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:bkType message:aj.message
                                               delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
     [alert show];
 }
