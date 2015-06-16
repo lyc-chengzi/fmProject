@@ -39,6 +39,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.DatePickerBox.translatesAutoresizingMaskIntoConstraints = NO;
+    self.dataPicker.translatesAutoresizingMaskIntoConstraints = NO;
+    
     self.automaticallyAdjustsScrollViewInsets = NO;
     // Do any additional setup after loading the view.
     _arrayMoney = [NSArray arrayWithObjects:@"金额",@"备注", nil];
@@ -800,18 +804,18 @@
         _datePickerContainer.translatesAutoresizingMaskIntoConstraints = NO;
         [self.view addSubview:_datePickerContainer];
     }
-    if (!_datePicker) {
+    if (!_mydatePicker) {
         NSDate *now = [NSDate date];
-        _datePicker = [[UIDatePicker alloc] initWithFrame:CGRectMake(0, 30, _screenFrame.size.width, 150)];
-        _datePicker.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
-        _datePicker.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
-        _datePicker.datePickerMode = UIDatePickerModeDate;
-        _datePicker.date = now;
-        _datePicker.tag = 22;
-        _datePicker.minimumDate = [now dateByAddingTimeInterval:-60*60*24*30 ];
-        _datePicker.maximumDate = now;
+        _mydatePicker = [[UIDatePicker alloc] initWithFrame:CGRectMake(0, 30, _screenFrame.size.width, 150)];
+        _mydatePicker.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
+        _mydatePicker.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
+        _mydatePicker.datePickerMode = UIDatePickerModeDate;
+        _mydatePicker.date = now;
+        _mydatePicker.tag = 22;
+        _mydatePicker.minimumDate = [now dateByAddingTimeInterval:-60*60*24*30 ];
+        _mydatePicker.maximumDate = now;
         //[_datePicker addTarget:self action:@selector(datePickerChanged) forControlEvents:UIControlEventValueChanged];
-        [_datePickerContainer addSubview:_datePicker];
+        [_datePickerContainer addSubview:_mydatePicker];
     }
     if (!_cancelDatePicker) {
         _cancelDatePicker = [[UIButton alloc] initWithFrame:CGRectMake(0, 10, 100, 30)];
@@ -838,7 +842,7 @@
 //(不使用)
 -(void)okDatePickerClick
 {
-    [self setTheApplyDate:[_shortDateFormatter stringFromDate:_datePicker.date]];
+    [self setTheApplyDate:[_shortDateFormatter stringFromDate:_mydatePicker.date]];
     [self showDatePicker];
 }
 //(不使用)
@@ -866,8 +870,8 @@
 -(void)disposeDatePicker
 {
     /*销毁日期选择器相关view*/
-    [_datePicker removeFromSuperview];
-    _datePicker = nil;
+    [_mydatePicker removeFromSuperview];
+    _mydatePicker = nil;
     [_okDatePicker removeFromSuperview];
     _okDatePicker = nil;
     [_cancelDatePicker removeFromSuperview];

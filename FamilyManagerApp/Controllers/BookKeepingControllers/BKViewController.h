@@ -42,7 +42,7 @@
 @interface BKViewController : UIViewController<UITableViewDelegate,UITableViewDataSource,BKViewControllerDataSourceDelegate, UITextFieldDelegate>
 {
     UIView *_datePickerContainer;
-    UIDatePicker *_datePicker;
+    UIDatePicker *_mydatePicker;
     BOOL _isShowDatePicker;
     CGRect _screenFrame;
     UIButton *_cancelDatePicker;
@@ -51,6 +51,8 @@
 @property (weak, nonatomic) IBOutlet UITableView *tableview1;
 @property (weak, nonatomic) IBOutlet UIButton *btnOKDate;
 @property (weak, nonatomic) IBOutlet UIButton *btnCancelDate;
+
+@property (weak, nonatomic) IBOutlet UIView *DatePickerBox;
 @property (weak, nonatomic) IBOutlet UIDatePicker *dataPicker;
 - (IBAction)btnOKDate_Click:(id)sender;
 - (IBAction)btnCancelDate_Click:(id)sender;

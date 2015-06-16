@@ -81,9 +81,6 @@
     //从plist文件夹在table的数据
     NSString *path = [[NSBundle mainBundle] pathForResource:@"CheckViewTableData" ofType:@"plist"];
     tableData = [NSArray arrayWithContentsOfFile:path];
-    
-    NSLog(@"height:%f",self.tableView.frame.size.height);
-    NSLog(@"y:%f",self.tableView.frame.origin.y);
 }
 
 - (void)didReceiveMemoryWarning {
