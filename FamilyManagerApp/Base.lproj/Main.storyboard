@@ -68,18 +68,25 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="2av-fU-98m" id="HmI-Ct-DlW">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textField opaque="NO" clipsSubviews="YES" tag="302" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ySg-ZY-gaX">
-                                                    <rect key="frame" x="68" y="8" width="238" height="30"/>
+                                                <textField opaque="NO" clipsSubviews="YES" tag="302" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ySg-ZY-gaX">
+                                                    <rect key="frame" x="68" y="7" width="234" height="30"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
                                                 </textField>
-                                                <label opaque="NO" userInteractionEnabled="NO" tag="301" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UJB-Lz-dH7">
+                                                <label opaque="NO" userInteractionEnabled="NO" tag="301" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UJB-Lz-dH7">
                                                     <rect key="frame" x="18" y="11" width="42" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstItem="ySg-ZY-gaX" firstAttribute="right" secondItem="HmI-Ct-DlW" secondAttribute="rightMargin" priority="750" constant="-10" id="Cbm-e4-VB0"/>
+                                                <constraint firstAttribute="centerY" secondItem="ySg-ZY-gaX" secondAttribute="centerY" id="TLm-IP-Nbp"/>
+                                                <constraint firstAttribute="centerY" secondItem="UJB-Lz-dH7" secondAttribute="centerY" id="Xkb-zd-eiH"/>
+                                                <constraint firstItem="ySg-ZY-gaX" firstAttribute="leading" secondItem="UJB-Lz-dH7" secondAttribute="trailing" constant="8" id="seW-4G-hbw"/>
+                                                <constraint firstItem="UJB-Lz-dH7" firstAttribute="leading" secondItem="HmI-Ct-DlW" secondAttribute="leadingMargin" constant="10" id="uws-6t-hvr"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </prototypes>
