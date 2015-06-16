@@ -105,7 +105,7 @@
 }
 
 - (IBAction)btnOKDate_Click:(id)sender {
-    self.datePickerBottomConstraint.constant = -220;
+    self.datePickerBottomConstraint.constant = -50;
     [UIView animateWithDuration:0.3 animations:^(void){
         [self.view layoutIfNeeded];
     }];
@@ -115,7 +115,7 @@
 }
 
 - (IBAction)btnCancelDate_Click:(id)sender {
-    self.datePickerBottomConstraint.constant = -220;
+    self.datePickerBottomConstraint.constant = -50;
     [UIView animateWithDuration:0.3 animations:^(void){
         [self.view layoutIfNeeded];
     }];
@@ -592,14 +592,14 @@
     if (indexPath.section == 0 && indexPath.row == 0) {
         //[self showDatePicker];
         if (_isShowDatePicker == NO) {
-            [self.datePickerBottomConstraint setConstant:0];
+            [self.datePickerBottomConstraint setConstant:200];
             [UIView animateWithDuration:0.3 animations:^(void){
                 [self.view layoutIfNeeded];
             }];
             _isShowDatePicker = YES;
         }else
         {
-            [self.datePickerBottomConstraint setConstant:-220];
+            [self.datePickerBottomConstraint setConstant:-50];
             [UIView animateWithDuration:0.3 animations:^(void){
                 [self.view layoutIfNeeded];
             }];

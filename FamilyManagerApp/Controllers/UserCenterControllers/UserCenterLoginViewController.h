@@ -13,6 +13,8 @@
 @property (weak, nonatomic) IBOutlet UITextField *txtUserCode;
 @property (weak, nonatomic) IBOutlet UITextField *txtUserPwd;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *showWait;
+@property (weak, nonatomic) IBOutlet UIView *pwdView;
+
 - (IBAction)btnLogin_click:(id)sender;
 - (IBAction)btnCancel_click:(id)sender;
 @end

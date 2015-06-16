@@ -38,13 +38,14 @@
 
 - (IBAction)btnLogin_click:(id)sender {
     [self.showWait startAnimating];
+    [self.view setUserInteractionEnabled:NO];
     
     NSString *serverIP = __fm_userDefaults_serverIP;
     ASIFormDataRequest *requestUB= [ASIFormDataRequest requestWithURL:[NSURL URLWithString:[serverIP stringByAppendingString:__fm_apiPath_doLogin]]];
     requestUB.shouldAttemptPersistentConnection = YES;
     requestUB.requestMethod = @"POST";
     requestUB.delegate = self;
-    requestUB.name = @"登陆操作";
+    //requestUB.name = @"登陆操作";
     [requestUB addPostValue:self.txtUserCode.text forKey:@"usercode"];
     [requestUB addPostValue:self.txtUserPwd.text forKey:@"userpwd"];
     [requestUB setDidFinishSelector:@selector(requestFinishLogin:)];
@@ -54,8 +55,10 @@
 
 -(void)requestFinishLogin:(ASIHTTPRequest *) request
 {
+    [self.view setUserInteractionEnabled:YES];
+    [self.showWait stopAnimating];
     NSData *result = [request responseData];
-    ApiJsonHelper *aj = [[ApiJsonHelper alloc] initWithData:result requestName:request.name];
+    ApiJsonHelper *aj = [[ApiJsonHelper alloc] initWithData:result requestName:@"登陆操作"];
     if (aj.bSuccess == YES) {
         //如果登陆成功，更改app的登陆状态
         NSInteger userID = [[aj.jsonObj objectForKey:@"ID"] integerValue];
@@ -70,17 +73,29 @@
         //关闭当前dialog页面
         [self btnCancel_click:nil];
     }else{
+        CAKeyframeAnimation *leftAm = [[CAKeyframeAnimation alloc] init];
+        leftAm.keyPath = @"transform.translation.x";
+        leftAm.values = @[@0, @20, @-20,@0 ];
+        leftAm.duration = 0.2;
+        [self.pwdView.layer addAnimation:leftAm forKey:@"dese"];
+        
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"登陆失败" message:aj.message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
         [alert show];
     }
-    [self.showWait stopAnimating];
+    
 }
 
 -(void)requestDidFailedCallBack:(ASIHTTPRequest *) request
 {
+    [self.view setUserInteractionEnabled:YES];
+    [self.showWait stopAnimating];
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"登陆失败" message:@"与服务器连接失败" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
     [alert show];
-    [self.showWait stopAnimating];
+}
+
+-(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    [self.view endEditing:YES];
 }
 
 - (IBAction)btnCancel_click:(id)sender {
