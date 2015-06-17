@@ -12,6 +12,9 @@
 		005BADB71B1ACB8300B4B69D /* ApiJsonHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 005BADB61B1ACB8300B4B69D /* ApiJsonHelper.m */; };
 		005F5FE01B22AFF7004B9FA0 /* LycTableCellViewDefault2.xib in Resources */ = {isa = PBXBuildFile; fileRef = 005F5FDF1B22AFF7004B9FA0 /* LycTableCellViewDefault2.xib */; };
 		005F5FE31B22B0A1004B9FA0 /* LycTableCellViewDefault2.m in Sources */ = {isa = PBXBuildFile; fileRef = 005F5FE21B22B0A1004B9FA0 /* LycTableCellViewDefault2.m */; };
+		0068C5661B318E7600C42163 /* LycAutoScrollView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0068C5651B318E7600C42163 /* LycAutoScrollView.xib */; };
+		0068C5691B318FA600C42163 /* LycScrollCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0068C5681B318FA600C42163 /* LycScrollCollectionViewCell.m */; };
+		0068C56C1B31928C00C42163 /* WealthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0068C56B1B31928C00C42163 /* WealthViewController.m */; };
 		00B796A71B19C13900BA879F /* Local_FlowType.m in Sources */ = {isa = PBXBuildFile; fileRef = 00B796A61B19C13900BA879F /* Local_FlowType.m */; };
 		00B796AA1B19C13A00BA879F /* Local_FeeItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 00B796A91B19C13A00BA879F /* Local_FeeItem.m */; };
 		00B796B41B19C75300BA879F /* API_FeeItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 00B796B31B19C75300BA879F /* API_FeeItem.m */; };
@@ -108,6 +111,11 @@
 		005F5FDF1B22AFF7004B9FA0 /* LycTableCellViewDefault2.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LycTableCellViewDefault2.xib; sourceTree = "<group>"; };
 		005F5FE11B22B0A1004B9FA0 /* LycTableCellViewDefault2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LycTableCellViewDefault2.h; sourceTree = "<group>"; };
 		005F5FE21B22B0A1004B9FA0 /* LycTableCellViewDefault2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LycTableCellViewDefault2.m; sourceTree = "<group>"; };
+		0068C5651B318E7600C42163 /* LycAutoScrollView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LycAutoScrollView.xib; path = LycScrollView/LycAutoScrollView.xib; sourceTree = "<group>"; };
+		0068C5671B318FA600C42163 /* LycScrollCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LycScrollCollectionViewCell.h; path = LycScrollView/LycScrollCollectionViewCell.h; sourceTree = "<group>"; };
+		0068C5681B318FA600C42163 /* LycScrollCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LycScrollCollectionViewCell.m; path = LycScrollView/LycScrollCollectionViewCell.m; sourceTree = "<group>"; };
+		0068C56A1B31928C00C42163 /* WealthViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WealthViewController.h; sourceTree = "<group>"; };
+		0068C56B1B31928C00C42163 /* WealthViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WealthViewController.m; sourceTree = "<group>"; };
 		00B796A51B19C13900BA879F /* Local_FlowType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Local_FlowType.h; sourceTree = "<group>"; };
 		00B796A61B19C13900BA879F /* Local_FlowType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Local_FlowType.m; sourceTree = "<group>"; };
 		00B796A81B19C13A00BA879F /* Local_FeeItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Local_FeeItem.h; sourceTree = "<group>"; };
@@ -271,6 +279,16 @@
 			name = LycDialogView;
 			sourceTree = "<group>";
 		};
+		0068C5641B318E3B00C42163 /* LycScrollView */ = {
+			isa = PBXGroup;
+			children = (
+				0068C5651B318E7600C42163 /* LycAutoScrollView.xib */,
+				0068C5671B318FA600C42163 /* LycScrollCollectionViewCell.h */,
+				0068C5681B318FA600C42163 /* LycScrollCollectionViewCell.m */,
+			);
+			name = LycScrollView;
+			sourceTree = "<group>";
+		};
 		00B796A31B19C11F00BA879F /* LocalModel */ = {
 			isa = PBXGroup;
 			children = (
@@ -429,6 +447,8 @@
 		5D08C45E1B0474E100C24712 /* WealthControllers */ = {
 			isa = PBXGroup;
 			children = (
+				0068C56A1B31928C00C42163 /* WealthViewController.h */,
+				0068C56B1B31928C00C42163 /* WealthViewController.m */,
 			);
 			path = WealthControllers;
 			sourceTree = "<group>";
@@ -498,6 +518,7 @@
 		5D08C4651B0474E100C24712 /* CustomView */ = {
 			isa = PBXGroup;
 			children = (
+				0068C5641B318E3B00C42163 /* LycScrollView */,
 				004D112C1B2AFD8700EDF576 /* LycDialogView */,
 				5D08C46C1B047CFB00C24712 /* LycTableCellView */,
 				5D08C46B1B047CB200C24712 /* BookKeepingView */,
@@ -855,6 +876,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0068C5661B318E7600C42163 /* LycAutoScrollView.xib in Resources */,
 				5D33B7511B297F1600D15562 /* tab_caifu@1x.png in Resources */,
 				5D33B7521B297F1600D15562 /* tab_caifu@2x.png in Resources */,
 				5D33B74D1B297E5300D15562 /* tabzhangdan@1x.png in Resources */,
@@ -933,11 +955,13 @@
 				00B796A71B19C13900BA879F /* Local_FlowType.m in Sources */,
 				5D3861E51B05E6C400844721 /* ASIDataDecompressor.m in Sources */,
 				00E8BA431B1F1EBE009C390C /* CheckFeeItemViewController.m in Sources */,
+				0068C5691B318FA600C42163 /* LycScrollCollectionViewCell.m in Sources */,
 				5D3861E91B05E6C400844721 /* ASIInputStream.m in Sources */,
 				5D3861F51B05E6C400844721 /* ASIS3BucketRequest.m in Sources */,
 				5D3861EA1B05E6C400844721 /* ASINetworkQueue.m in Sources */,
 				5D2639591B2E7B780061E060 /* UserCenterLoginViewController.m in Sources */,
 				5D3861E81B05E6C400844721 /* ASIHTTPRequest.m in Sources */,
+				0068C56C1B31928C00C42163 /* WealthViewController.m in Sources */,
 				5D3861F71B05E6C400844721 /* ASIS3Request.m in Sources */,
 				5D3861A41B05D99100844721 /* AsyncUdpSocket.m in Sources */,
 				005F5FE31B22B0A1004B9FA0 /* LycTableCellViewDefault2.m in Sources */,

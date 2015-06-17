@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="aqR-aE-41G">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="aqR-aE-41G">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--我的资产-->
         <scene sceneID="9qV-nZ-leg">
             <objects>
-                <viewController id="nrT-CX-NMc" sceneMemberID="viewController">
+                <viewController id="nrT-CX-NMc" customClass="WealthViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="F2z-XJ-cKv"/>
                         <viewControllerLayoutGuide type="bottom" id="dBU-aB-JYs"/>
@@ -17,16 +17,32 @@
                     <view key="view" contentMode="scaleToFill" id="iS3-yj-D6B">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="P3W-vO-b2n">
+                                <rect key="frame" x="0.0" y="64" width="320" height="80"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="ikK-Ib-hqb">
+                                    <size key="itemSize" width="320" height="80"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells/>
+                            </collectionView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="财富" id="JDt-Pd-bXh">
                         <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="-6"/>
                     </tabBarItem>
                     <navigationItem key="navigationItem" title="我的资产" id="f6u-nE-7TD"/>
+                    <connections>
+                        <outlet property="collectionView" destination="P3W-vO-b2n" id="M3W-Ze-H4q"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="f4e-Iy-bx2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="739" y="901"/>
+            <point key="canvasLocation" x="739" y="900.99999999999989"/>
         </scene>
         <!--财富-->
         <scene sceneID="VHs-7a-0pS">
@@ -45,7 +61,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W19-4I-bcq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="260" y="901"/>
+            <point key="canvasLocation" x="260" y="900.99999999999989"/>
         </scene>
         <!--记账-->
         <scene sceneID="QzI-FG-8Jz">
@@ -56,7 +72,7 @@
                         <viewControllerLayoutGuide type="bottom" id="gtV-P6-Lb1"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Y1S-qd-miY">
-                        <rect key="frame" x="0.0" y="64" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" translatesAutoresizingMaskIntoConstraints="NO" id="OGa-zY-JJs">
@@ -155,7 +171,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="T6K-CN-hiR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="266" y="-1005"/>
+            <point key="canvasLocation" x="266" y="-1004.9999999999999"/>
         </scene>
         <!--Check Flow Type View Controller-->
         <scene sceneID="OQO-dj-5lP">
@@ -372,7 +388,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sGd-de-jKF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-234" y="-184"/>
+            <point key="canvasLocation" x="-234" y="-183.99999999999997"/>
         </scene>
         <!--账单-->
         <scene sceneID="HuV-3M-4tZ">
@@ -413,7 +429,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LkW-6N-dtA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="260" y="-185"/>
+            <point key="canvasLocation" x="260" y="-184.99999999999997"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="x4E-pJ-jfb">
@@ -433,7 +449,7 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eXM-iy-maU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-244" y="901"/>
+            <point key="canvasLocation" x="-244" y="900.99999999999989"/>
         </scene>
         <!--我-->
         <scene sceneID="UGG-as-e7E">
@@ -589,7 +605,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="e6C-HF-gkE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="266" y="1815"/>
+            <point key="canvasLocation" x="266" y="1814.9999999999998"/>
         </scene>
         <!--User Center Login View Controller-->
         <scene sceneID="g6v-Mj-S8D">
@@ -732,7 +748,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6Ln-M9-Hoe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="835" y="1815"/>
+            <point key="canvasLocation" x="835" y="1814.9999999999998"/>
         </scene>
         <!--个人信息-->
         <scene sceneID="90J-WU-WGC">
