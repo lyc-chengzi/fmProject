@@ -41,7 +41,7 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-    NSLog(@"选择资金类型页面收到内存警告！！！！");
+    LYCLog(@"选择资金类型页面收到内存警告！！！！");
     _selectedKP = nil;
 }
 
@@ -49,8 +49,6 @@
 -(void)finishCheckFlowType
 {
     Local_FlowType *ft = [[self.dataSouce objectForKey:_selectedKP] objectAtIndex:[self.pv selectedRowInComponent:1]];
-    
-    //NSLog(@"选择了：%@,%@", _selectedKP, ft.name);
     //设置选择的记账类型
     [self.delegate setTheKeepType:_selectedKP];
     //设置选择的资金类型

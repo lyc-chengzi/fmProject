@@ -25,6 +25,7 @@
     // Override point for customization after application launch.
     [self checkSettingBundle];//检查配置信息是否有默认值
     /***********设置状态栏***********/
+    application.statusBarStyle = UIStatusBarStyleLightContent;
     
     /***********设置导航条背景色和标题颜色***********/
     UINavigationBar *shareNB = [UINavigationBar appearance];
@@ -98,7 +99,7 @@
         Local_UserBankDAO *ubDao = [[Local_UserBankDAO alloc] init];
         [ubDao deleteAllUserBanksWithUserID:(int)userID];
         [ubDao addUserBanks:ah.jsonObj toUserID:(int)userID];
-        NSLog(@"程序启动任务1：更新userbank数据完成；");
+        LYCLog(@"程序启动任务1：更新userbank数据完成；");
     }
     ah.jsonObj = nil;
 }
@@ -108,11 +109,11 @@
     NSLog(@"failed,result string is %@",errors);
     if (errors.code == 1) {
         //NSLog(@"%@:网络未连接",requests.name);
-        NSLog(@"网络未连接");
+        LYCLog(@"网络未连接");
     }
     if (errors.code == 2) {
         //NSLog(@"%@:连接超时",requests.name);
-        NSLog(@"连接超时");
+        LYCLog(@"连接超时");
     }
 }
 
@@ -123,12 +124,12 @@
     //获取网络状态
     NetworkStatus status = [reach currentReachabilityStatus];
     if (status == NotReachable) {
-        NSLog(@"网络已经断开");
+        LYCLog(@"网络已经断开");
         _isConnectNet = NO;
     }
     else
     {
-        NSLog(@"网络已连接");
+        LYCLog(@"网络已连接");
         _isConnectNet = YES;
     }
 }

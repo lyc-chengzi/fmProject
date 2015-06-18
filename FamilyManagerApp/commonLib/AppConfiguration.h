@@ -10,6 +10,12 @@
 #define FamilyManagerApp_AppConfiguration_h
 
 //调试sql命令：-com.apple.CoreData.SQLDebug 1
+#ifdef DEBUG
+    #define LYCLog(...) NSLog(__VA_ARGS__)
+#else
+    #define LYCLog(...) //NSLog(__VA_ARGS__)
+#endif
+
 
 /**************NSDefault参数定义**************/
 #define __fm_userDefaults_serverIP [[NSUserDefaults standardUserDefaults] stringForKey:@"string_serverip"]

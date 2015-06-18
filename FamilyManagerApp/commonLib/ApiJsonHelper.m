@@ -32,7 +32,7 @@
             _message = [jsonResult objectForKey:__fm_apiJsonKey_message];
             _jsonObj = [jsonResult objectForKey:__fm_apiJsonKey_jsonObj];
         }else{
-            NSLog(@"%@，在转换json数据时发生错误；%@", tishi, error);
+            LYCLog(@"%@，在转换json数据时发生错误；%@", tishi, error);
         }
     }
     return self;

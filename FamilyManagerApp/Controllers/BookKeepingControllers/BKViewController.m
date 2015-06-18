@@ -95,8 +95,17 @@
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    NSLog(@"记账页面收到内存警告！！！！");
+    LYCLog(@"记账页面收到内存警告！！！！");
     [self disposeResource];
+}
+
+-(void)dealloc
+{
+    LYCLog(@"记账页面被销毁了");
+    LYCLog(@"keepType -- %@",_keepType);
+    _keepType = nil;     //记账类型
+    _checkFeeItem = nil;    //选择的费用科目
+    _dialogView = nil;
 }
 
 - (UIStatusBarStyle)preferredStatusBarStyle
@@ -260,7 +269,7 @@
 
 -(void)disposeResource
 {
-    NSLog(@"释放资源");
+    LYCLog(@"释放资源");
     _flowTypeController = nil;  //释放选择资金类型controller
     _checkFlowType = nil;       //释放已选资金类型
     _checkFeeItem = nil;        //释放已选费用科目

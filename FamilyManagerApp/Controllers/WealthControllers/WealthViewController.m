@@ -8,6 +8,7 @@
 
 #import "WealthViewController.h"
 #import "LycScrollCollectionViewCell.h"
+#import "AppConfiguration.h"
 
 @interface WealthViewController ()
 {
@@ -56,13 +57,11 @@
 
 -(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
-        NSLog(@"111111");
     return 1;
 }
 
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-        NSLog(@"22222");
     return collectionData.count * 1000;
 }
 
@@ -79,9 +78,6 @@
     NSDictionary *dic = [collectionData objectAtIndex:indexPath.item % collectionData.count];
     UIImage *img = [UIImage imageNamed:dic[@"img"]];
     [cell setContents:dic[@"title"] andImage:img];
-    //NSLog(@"cell-------%@",cell);
-    
-    NSLog(@"33333333");
     return cell;
 }
 @end

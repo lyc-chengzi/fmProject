@@ -38,21 +38,21 @@
 
 - (IBAction)btnLeft_click:(id)sender
 {
-    NSLog(@"打印内存泄漏情况：");
-    NSLog(@"_B_controller:,%@",_B_controller);
-    NSLog(@"_B_keepType:,%@",_B_keepType);
-    NSLog(@"_B_checkFeeItem:,%@",_B_checkFeeItem);
+    LYCLog(@"打印内存泄漏情况：");
+    LYCLog(@"_B_controller:,%@",_B_controller);
+    LYCLog(@"_B_keepType:,%@",_B_keepType);
+    LYCLog(@"_B_checkFeeItem:,%@",_B_checkFeeItem);
     
     /*
-    //NSLog(@"_B_flowTypeList:,%@",_B_flowTypeList);
-    //NSLog(@"_B_feeItemList:,%@",_B_feeItemList);
-    //NSLog(@"_B_checkFlowType:,%@",_B_checkFlowType);
-    //NSLog(@"_B_applyDate:,%@",_B_applyDate);
-    //NSLog(@"_B_tapGesture:,%@",_B_tapGesture);
-    //NSLog(@"_B_applyRemark:,%@",_B_applyRemark);
-    NSLog(@"_B_inUserBank:,%@",_B_inUserBank);
-    NSLog(@"_B_outUserBank:,%@",_B_outUserBank);
-     NSLog(@"_B_flowTypeController:,%@",_B_flowTypeController);
+    //LYCLog(@"_B_flowTypeList:,%@",_B_flowTypeList);
+    //LYCLog(@"_B_feeItemList:,%@",_B_feeItemList);
+    //LYCLog(@"_B_checkFlowType:,%@",_B_checkFlowType);
+    //LYCLog(@"_B_applyDate:,%@",_B_applyDate);
+    //LYCLog(@"_B_tapGesture:,%@",_B_tapGesture);
+    //LYCLog(@"_B_applyRemark:,%@",_B_applyRemark);
+    LYCLog(@"_B_inUserBank:,%@",_B_inUserBank);
+    LYCLog(@"_B_outUserBank:,%@",_B_outUserBank);
+     LYCLog(@"_B_flowTypeController:,%@",_B_flowTypeController);
      */
 }
 //property queue的get方法
@@ -76,7 +76,7 @@
     }
     else
     {
-        NSLog(@"网络未连接，基础数据不会更新！");
+        LYCLog(@"网络未连接，基础数据不会更新！");
     }
     //从plist文件夹在table的数据
     NSString *path = [[NSBundle mainBundle] pathForResource:@"CheckViewTableData" ofType:@"plist"];
@@ -157,7 +157,7 @@
     if (jh.bSuccess) {
         //请求成功
         NSString *stringUpdateDate = [jh.jsonObj objectForKey:@"updateDate"];
-        NSLog(@"请求到得时间点为：%@", stringUpdateDate);
+        LYCLog(@"请求到得时间点为：%@", stringUpdateDate);
         NSDate *updateDate = [[DateFormatterHelper getBasicFormatter] dateFromString:stringUpdateDate];
         //获取上次更新的时间
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -171,18 +171,18 @@
             //如果存在,将上次基础数据更新时间配置 转换为NSDate类型数据
             lastUpdateTime = [[DateFormatterHelper getBasicFormatter] dateFromString:_lastUpdateBaseDataTimeStr];
         }
-        NSLog(@"%@",_lastUpdateBaseDataTimeStr);
+        LYCLog(@"%@",_lastUpdateBaseDataTimeStr);
         
         if ([lastUpdateTime compare:updateDate] == NSOrderedAscending) {
-            NSLog(@"需要更新");
+            LYCLog(@"需要更新");
             //如果需要更新，调用 loadBaseData 方法
             [self loadBaseData];
         }else{
-            NSLog(@"不需要更新");
+            LYCLog(@"不需要更新");
         }
         
     }else{
-        NSLog(@"接口返回false，请求失败");
+        LYCLog(@"接口返回false，请求失败");
     }
     
     //释放 ApiJsonHelper 的 jsonObj对象
@@ -233,7 +233,7 @@
         Local_FlowTypeDAO *lftDao = [[Local_FlowTypeDAO alloc] init];
         [lftDao deleteAllFlowType];//先清空历史数据
         [lftDao addFlowTypes:ah.jsonObj];
-        NSLog(@"资金类型添加后的数量：%lu",(unsigned long)[[lftDao getAllFlowTypes] count]);
+        LYCLog(@"资金类型添加后的数量：%lu",(unsigned long)[[lftDao getAllFlowTypes] count]);
     }
     ah.jsonObj = nil;
 }
@@ -248,7 +248,7 @@
         Local_FeeItemDAO *lftDao = [[Local_FeeItemDAO alloc] init];
         [lftDao deleteAllFeeItems];//先清空历史数据
         [lftDao addFeeItems:ah.jsonObj];
-        NSLog(@"费用科目添加后的数量：%lu",(unsigned long)[[lftDao getAllFeeItems] count]);
+        LYCLog(@"费用科目添加后的数量：%lu",(unsigned long)[[lftDao getAllFeeItems] count]);
         
         [self updateBaseDateGetDate];
     }
@@ -268,14 +268,12 @@
 {
     NSError *errors = requests.error;
     
-    NSLog(@"*******failed*******,result string is %@",errors);
+    LYCLog(@"*******failed*******,result string is %@",errors);
     if (errors.code == 1) {
-        //NSLog(@"[%@]:网络未连接",requests.name);
-        NSLog(@"网络未连接");
+        LYCLog(@"网络未连接");
     }
     if (errors.code == 2) {
-        //NSLog(@"[%@]:连接超时",requests.name);
-        NSLog(@"连接超时");
+        LYCLog(@"连接超时");
     }
 }
 
