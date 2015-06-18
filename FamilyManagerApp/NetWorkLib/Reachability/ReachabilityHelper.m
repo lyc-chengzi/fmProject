@@ -39,7 +39,7 @@
 //示例代码，演示怎么获取网络连接状态，不可调用
 -(void)demoFunc
 {
-    Reachability *reach = [Reachability reachabilityWithHostName:__fm_serverIP];
+    Reachability *reach = [Reachability reachabilityWithHostName:__fm_userDefaults_serverIP];
     switch ([reach currentReachabilityStatus]) {
         case NotReachable:
             NSLog(@"不能访问网络");
@@ -54,7 +54,7 @@
 -(void)demoAddNotification
 {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(demoNotificationCallBack:) name:kReachabilityChangedNotification object:nil];
-    Reachability *reach = [Reachability reachabilityWithHostName:__fm_serverIP];
+    Reachability *reach = [Reachability reachabilityWithHostName:__fm_userDefaults_serverIP];
     //让reach对象开启被监听状态
     [reach startNotifier];
 }

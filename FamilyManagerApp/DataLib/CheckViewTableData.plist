@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>sectionName</key>
+		<string>账单查询</string>
+		<key>sectionRows</key>
+		<array>
+			<string>在线账单</string>
+			<string>本地缓存账单</string>
+		</array>
+	</dict>
+	<dict>
+		<key>sectionName</key>
+		<string>账单设置</string>
+		<key>sectionRows</key>
+		<array>
+			<string>同步账单</string>
+			<string>清空本地账单</string>
+		</array>
+	</dict>
+</array>
+</plist>

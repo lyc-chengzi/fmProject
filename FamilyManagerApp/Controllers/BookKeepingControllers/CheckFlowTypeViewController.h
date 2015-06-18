@@ -14,7 +14,7 @@
 @property (weak, nonatomic) id<BKViewControllerDataSourceDelegate> delegate;
 
 //已选择的记账类型
-@property (strong, nonatomic, readonly) NSString *selectedKP;
+@property (weak, nonatomic, readonly) NSString *selectedKP;
 
 @property (weak, nonatomic) NSMutableDictionary *dataSouce;
 

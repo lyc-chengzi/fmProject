@@ -8,9 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		000A16831B189FC8000C010B /* ASICustomRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 000A16821B189FC8000C010B /* ASICustomRequest.m */; };
+		004D112F1B2AFDD700EDF576 /* LycDialogView.m in Sources */ = {isa = PBXBuildFile; fileRef = 004D112E1B2AFDD700EDF576 /* LycDialogView.m */; };
 		005BADB71B1ACB8300B4B69D /* ApiJsonHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 005BADB61B1ACB8300B4B69D /* ApiJsonHelper.m */; };
 		005F5FE01B22AFF7004B9FA0 /* LycTableCellViewDefault2.xib in Resources */ = {isa = PBXBuildFile; fileRef = 005F5FDF1B22AFF7004B9FA0 /* LycTableCellViewDefault2.xib */; };
 		005F5FE31B22B0A1004B9FA0 /* LycTableCellViewDefault2.m in Sources */ = {isa = PBXBuildFile; fileRef = 005F5FE21B22B0A1004B9FA0 /* LycTableCellViewDefault2.m */; };
+		0068C5661B318E7600C42163 /* LycAutoScrollView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0068C5651B318E7600C42163 /* LycAutoScrollView.xib */; };
+		0068C5691B318FA600C42163 /* LycScrollCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0068C5681B318FA600C42163 /* LycScrollCollectionViewCell.m */; };
+		0068C56C1B31928C00C42163 /* WealthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0068C56B1B31928C00C42163 /* WealthViewController.m */; };
 		00B796A71B19C13900BA879F /* Local_FlowType.m in Sources */ = {isa = PBXBuildFile; fileRef = 00B796A61B19C13900BA879F /* Local_FlowType.m */; };
 		00B796AA1B19C13A00BA879F /* Local_FeeItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 00B796A91B19C13A00BA879F /* Local_FeeItem.m */; };
 		00B796B41B19C75300BA879F /* API_FeeItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 00B796B31B19C75300BA879F /* API_FeeItem.m */; };
@@ -41,6 +45,15 @@
 		5D08C4831B0482FC00C24712 /* mouse.png in Resources */ = {isa = PBXBuildFile; fileRef = 5D08C47B1B0482FC00C24712 /* mouse.png */; };
 		5D08C4841B0482FC00C24712 /* rabbit.png in Resources */ = {isa = PBXBuildFile; fileRef = 5D08C47C1B0482FC00C24712 /* rabbit.png */; };
 		5D08C4881B049BC900C24712 /* DateFormatterHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D08C4871B049BC900C24712 /* DateFormatterHelper.m */; };
+		5D2639561B2E64DF0061E060 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 5D2639551B2E64DF0061E060 /* Settings.bundle */; };
+		5D2639591B2E7B780061E060 /* UserCenterLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D2639581B2E7B780061E060 /* UserCenterLoginViewController.m */; };
+		5D33B7411B2972DA00D15562 /* UserCenterIndexViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D33B7401B2972DA00D15562 /* UserCenterIndexViewController.m */; };
+		5D33B7481B297C6C00D15562 /* tab_usercenter@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5D33B7471B297C6C00D15562 /* tab_usercenter@1x.png */; };
+		5D33B74A1B297D8A00D15562 /* tab_usercenter@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5D33B7491B297D8A00D15562 /* tab_usercenter@2x.png */; };
+		5D33B74D1B297E5300D15562 /* tabzhangdan@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5D33B74B1B297E5300D15562 /* tabzhangdan@1x.png */; };
+		5D33B74E1B297E5300D15562 /* tabzhangdan@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5D33B74C1B297E5300D15562 /* tabzhangdan@2x.png */; };
+		5D33B7511B297F1600D15562 /* tab_caifu@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5D33B74F1B297F1600D15562 /* tab_caifu@1x.png */; };
+		5D33B7521B297F1600D15562 /* tab_caifu@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5D33B7501B297F1600D15562 /* tab_caifu@2x.png */; };
 		5D3861891B05C01300844721 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D3861881B05C01300844721 /* SystemConfiguration.framework */; };
 		5D3861921B05D2B200844721 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D38618F1B05D2B200844721 /* Reachability.m */; };
 		5D3861931B05D2B200844721 /* ReachabilityHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D3861911B05D2B200844721 /* ReachabilityHelper.m */; };
@@ -74,6 +87,8 @@
 		5D3861FB1B05E8FB00844721 /* libz.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D3861FA1B05E8FB00844721 /* libz.1.dylib */; };
 		5D3861FD1B05E95000844721 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D3861FC1B05E95000844721 /* CFNetwork.framework */; };
 		5D3861FF1B05E98C00844721 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D3861FE1B05E98C00844721 /* libxml2.dylib */; };
+		5DD5AC2B1B2EB725004182D7 /* Property List.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5DD5AC2A1B2EB725004182D7 /* Property List.plist */; };
+		5DD5AC2D1B2EB803004182D7 /* CheckViewTableData.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5DD5AC2C1B2EB803004182D7 /* CheckViewTableData.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -89,11 +104,18 @@
 /* Begin PBXFileReference section */
 		000A16811B189FC8000C010B /* ASICustomRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASICustomRequest.h; sourceTree = "<group>"; };
 		000A16821B189FC8000C010B /* ASICustomRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASICustomRequest.m; sourceTree = "<group>"; };
+		004D112D1B2AFDD700EDF576 /* LycDialogView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LycDialogView.h; path = LycDialogView/LycDialogView.h; sourceTree = "<group>"; };
+		004D112E1B2AFDD700EDF576 /* LycDialogView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LycDialogView.m; path = LycDialogView/LycDialogView.m; sourceTree = "<group>"; };
 		005BADB51B1ACB8300B4B69D /* ApiJsonHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApiJsonHelper.h; sourceTree = "<group>"; };
 		005BADB61B1ACB8300B4B69D /* ApiJsonHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApiJsonHelper.m; sourceTree = "<group>"; };
 		005F5FDF1B22AFF7004B9FA0 /* LycTableCellViewDefault2.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LycTableCellViewDefault2.xib; sourceTree = "<group>"; };
 		005F5FE11B22B0A1004B9FA0 /* LycTableCellViewDefault2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LycTableCellViewDefault2.h; sourceTree = "<group>"; };
 		005F5FE21B22B0A1004B9FA0 /* LycTableCellViewDefault2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LycTableCellViewDefault2.m; sourceTree = "<group>"; };
+		0068C5651B318E7600C42163 /* LycAutoScrollView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LycAutoScrollView.xib; path = LycScrollView/LycAutoScrollView.xib; sourceTree = "<group>"; };
+		0068C5671B318FA600C42163 /* LycScrollCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LycScrollCollectionViewCell.h; path = LycScrollView/LycScrollCollectionViewCell.h; sourceTree = "<group>"; };
+		0068C5681B318FA600C42163 /* LycScrollCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LycScrollCollectionViewCell.m; path = LycScrollView/LycScrollCollectionViewCell.m; sourceTree = "<group>"; };
+		0068C56A1B31928C00C42163 /* WealthViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WealthViewController.h; sourceTree = "<group>"; };
+		0068C56B1B31928C00C42163 /* WealthViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WealthViewController.m; sourceTree = "<group>"; };
 		00B796A51B19C13900BA879F /* Local_FlowType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Local_FlowType.h; sourceTree = "<group>"; };
 		00B796A61B19C13900BA879F /* Local_FlowType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Local_FlowType.m; sourceTree = "<group>"; };
 		00B796A81B19C13A00BA879F /* Local_FeeItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Local_FeeItem.h; sourceTree = "<group>"; };
@@ -144,6 +166,17 @@
 		5D08C4861B049BC900C24712 /* DateFormatterHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DateFormatterHelper.h; sourceTree = "<group>"; };
 		5D08C4871B049BC900C24712 /* DateFormatterHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DateFormatterHelper.m; sourceTree = "<group>"; };
 		5D08C48A1B049DF400C24712 /* AppConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppConfiguration.h; sourceTree = "<group>"; };
+		5D2639551B2E64DF0061E060 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
+		5D2639571B2E7B780061E060 /* UserCenterLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserCenterLoginViewController.h; sourceTree = "<group>"; };
+		5D2639581B2E7B780061E060 /* UserCenterLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserCenterLoginViewController.m; sourceTree = "<group>"; };
+		5D33B73F1B2972DA00D15562 /* UserCenterIndexViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserCenterIndexViewController.h; sourceTree = "<group>"; };
+		5D33B7401B2972DA00D15562 /* UserCenterIndexViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserCenterIndexViewController.m; sourceTree = "<group>"; };
+		5D33B7471B297C6C00D15562 /* tab_usercenter@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tab_usercenter@1x.png"; sourceTree = "<group>"; };
+		5D33B7491B297D8A00D15562 /* tab_usercenter@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tab_usercenter@2x.png"; sourceTree = "<group>"; };
+		5D33B74B1B297E5300D15562 /* tabzhangdan@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tabzhangdan@1x.png"; sourceTree = "<group>"; };
+		5D33B74C1B297E5300D15562 /* tabzhangdan@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tabzhangdan@2x.png"; sourceTree = "<group>"; };
+		5D33B74F1B297F1600D15562 /* tab_caifu@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tab_caifu@1x.png"; sourceTree = "<group>"; };
+		5D33B7501B297F1600D15562 /* tab_caifu@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tab_caifu@2x.png"; sourceTree = "<group>"; };
 		5D3861881B05C01300844721 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		5D38618E1B05D2B200844721 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		5D38618F1B05D2B200844721 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
@@ -211,6 +244,8 @@
 		5D3861FA1B05E8FB00844721 /* libz.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.dylib; path = usr/lib/libz.1.dylib; sourceTree = SDKROOT; };
 		5D3861FC1B05E95000844721 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		5D3861FE1B05E98C00844721 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
+		5DD5AC2A1B2EB725004182D7 /* Property List.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Property List.plist"; sourceTree = "<group>"; };
+		5DD5AC2C1B2EB803004182D7 /* CheckViewTableData.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = CheckViewTableData.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -235,6 +270,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		004D112C1B2AFD8700EDF576 /* LycDialogView */ = {
+			isa = PBXGroup;
+			children = (
+				004D112D1B2AFDD700EDF576 /* LycDialogView.h */,
+				004D112E1B2AFDD700EDF576 /* LycDialogView.m */,
+			);
+			name = LycDialogView;
+			sourceTree = "<group>";
+		};
+		0068C5641B318E3B00C42163 /* LycScrollView */ = {
+			isa = PBXGroup;
+			children = (
+				0068C5651B318E7600C42163 /* LycAutoScrollView.xib */,
+				0068C5671B318FA600C42163 /* LycScrollCollectionViewCell.h */,
+				0068C5681B318FA600C42163 /* LycScrollCollectionViewCell.m */,
+			);
+			name = LycScrollView;
+			sourceTree = "<group>";
+		};
 		00B796A31B19C11F00BA879F /* LocalModel */ = {
 			isa = PBXGroup;
 			children = (
@@ -305,6 +359,7 @@
 				5D08C4301B04746900C24712 /* Supporting Files */,
 				5D08C4631B0474E100C24712 /* ViewModels */,
 				5D08C4641B0474E100C24712 /* Views */,
+				5D2639551B2E64DF0061E060 /* Settings.bundle */,
 			);
 			path = FamilyManagerApp;
 			sourceTree = "<group>";
@@ -381,6 +436,10 @@
 		5D08C45D1B0474E100C24712 /* UserCenterControllers */ = {
 			isa = PBXGroup;
 			children = (
+				5D33B73F1B2972DA00D15562 /* UserCenterIndexViewController.h */,
+				5D33B7401B2972DA00D15562 /* UserCenterIndexViewController.m */,
+				5D2639571B2E7B780061E060 /* UserCenterLoginViewController.h */,
+				5D2639581B2E7B780061E060 /* UserCenterLoginViewController.m */,
 			);
 			path = UserCenterControllers;
 			sourceTree = "<group>";
@@ -388,6 +447,8 @@
 		5D08C45E1B0474E100C24712 /* WealthControllers */ = {
 			isa = PBXGroup;
 			children = (
+				0068C56A1B31928C00C42163 /* WealthViewController.h */,
+				0068C56B1B31928C00C42163 /* WealthViewController.m */,
 			);
 			path = WealthControllers;
 			sourceTree = "<group>";
@@ -395,6 +456,7 @@
 		5D08C45F1B0474E100C24712 /* DataLib */ = {
 			isa = PBXGroup;
 			children = (
+				5DD5AC291B2EB70C004182D7 /* plistData */,
 				5D08C4601B0474E100C24712 /* localDataSource */,
 			);
 			path = DataLib;
@@ -456,6 +518,8 @@
 		5D08C4651B0474E100C24712 /* CustomView */ = {
 			isa = PBXGroup;
 			children = (
+				0068C5641B318E3B00C42163 /* LycScrollView */,
+				004D112C1B2AFD8700EDF576 /* LycDialogView */,
 				5D08C46C1B047CFB00C24712 /* LycTableCellView */,
 				5D08C46B1B047CB200C24712 /* BookKeepingView */,
 			);
@@ -517,6 +581,7 @@
 		5D08C4741B0482E100C24712 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				5D33B7421B297B6E00D15562 /* tabImages */,
 				5D08C4751B0482FC00C24712 /* 123.png */,
 				5D08C4761B0482FC00C24712 /* 321.png */,
 				5D08C4771B0482FC00C24712 /* dog.png */,
@@ -539,6 +604,19 @@
 				005BADB61B1ACB8300B4B69D /* ApiJsonHelper.m */,
 			);
 			path = commonLib;
+			sourceTree = "<group>";
+		};
+		5D33B7421B297B6E00D15562 /* tabImages */ = {
+			isa = PBXGroup;
+			children = (
+				5D33B74F1B297F1600D15562 /* tab_caifu@1x.png */,
+				5D33B7501B297F1600D15562 /* tab_caifu@2x.png */,
+				5D33B74B1B297E5300D15562 /* tabzhangdan@1x.png */,
+				5D33B74C1B297E5300D15562 /* tabzhangdan@2x.png */,
+				5D33B7491B297D8A00D15562 /* tab_usercenter@2x.png */,
+				5D33B7471B297C6C00D15562 /* tab_usercenter@1x.png */,
+			);
+			name = tabImages;
 			sourceTree = "<group>";
 		};
 		5D3861871B05BFBE00844721 /* Frameworks */ = {
@@ -709,6 +787,15 @@
 			path = S3;
 			sourceTree = "<group>";
 		};
+		5DD5AC291B2EB70C004182D7 /* plistData */ = {
+			isa = PBXGroup;
+			children = (
+				5DD5AC2C1B2EB803004182D7 /* CheckViewTableData.plist */,
+				5DD5AC2A1B2EB725004182D7 /* Property List.plist */,
+			);
+			name = plistData;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -789,18 +876,28 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0068C5661B318E7600C42163 /* LycAutoScrollView.xib in Resources */,
+				5D33B7511B297F1600D15562 /* tab_caifu@1x.png in Resources */,
+				5D33B7521B297F1600D15562 /* tab_caifu@2x.png in Resources */,
+				5D33B74D1B297E5300D15562 /* tabzhangdan@1x.png in Resources */,
 				5D08C47F1B0482FC00C24712 /* dog.png in Resources */,
 				5D08C4821B0482FC00C24712 /* frog.png in Resources */,
 				5D08C47E1B0482FC00C24712 /* 321.png in Resources */,
 				00E8BA4D1B1F1F30009C390C /* Main.storyboard in Resources */,
+				5DD5AC2D1B2EB803004182D7 /* CheckViewTableData.plist in Resources */,
 				5D08C4801B0482FC00C24712 /* duck.png in Resources */,
 				5D08C4721B0480C300C24712 /* LycTableCellViewDefault.xib in Resources */,
+				5D33B74A1B297D8A00D15562 /* tab_usercenter@2x.png in Resources */,
 				5D08C4841B0482FC00C24712 /* rabbit.png in Resources */,
 				5D08C4441B04746900C24712 /* LaunchScreen.xib in Resources */,
+				5D2639561B2E64DF0061E060 /* Settings.bundle in Resources */,
 				5D08C4811B0482FC00C24712 /* elephant.png in Resources */,
 				5D08C4411B04746900C24712 /* Images.xcassets in Resources */,
 				5D08C4831B0482FC00C24712 /* mouse.png in Resources */,
+				5D33B7481B297C6C00D15562 /* tab_usercenter@1x.png in Resources */,
 				5D08C47D1B0482FC00C24712 /* 123.png in Resources */,
+				5D33B74E1B297E5300D15562 /* tabzhangdan@2x.png in Resources */,
+				5DD5AC2B1B2EB725004182D7 /* Property List.plist in Resources */,
 				005F5FE01B22AFF7004B9FA0 /* LycTableCellViewDefault2.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -842,6 +939,7 @@
 				000A16831B189FC8000C010B /* ASICustomRequest.m in Sources */,
 				5D3861921B05D2B200844721 /* Reachability.m in Sources */,
 				5D3861EB1B05E6C400844721 /* ASIWebPageRequest.m in Sources */,
+				5D33B7411B2972DA00D15562 /* UserCenterIndexViewController.m in Sources */,
 				00E4DE051B227FD300DB62FD /* Local_UserBank.m in Sources */,
 				5D08C46F1B047D5600C24712 /* LycTableCellViewDefault.m in Sources */,
 				5D3861F61B05E6C400844721 /* ASIS3ObjectRequest.m in Sources */,
@@ -849,6 +947,7 @@
 				5D3861A11B05D99100844721 /* GCDAsyncSocket.m in Sources */,
 				5D08C4331B04746900C24712 /* main.m in Sources */,
 				5D3861E71B05E6C400844721 /* ASIFormDataRequest.m in Sources */,
+				004D112F1B2AFDD700EDF576 /* LycDialogView.m in Sources */,
 				5D3861EE1B05E6C400844721 /* ASICloudFilesContainerRequest.m in Sources */,
 				00E4DE021B227F6C00DB62FD /* Local_UserBankDAO.m in Sources */,
 				00E8BA421B1F1EBE009C390C /* BKViewController.m in Sources */,
@@ -856,10 +955,13 @@
 				00B796A71B19C13900BA879F /* Local_FlowType.m in Sources */,
 				5D3861E51B05E6C400844721 /* ASIDataDecompressor.m in Sources */,
 				00E8BA431B1F1EBE009C390C /* CheckFeeItemViewController.m in Sources */,
+				0068C5691B318FA600C42163 /* LycScrollCollectionViewCell.m in Sources */,
 				5D3861E91B05E6C400844721 /* ASIInputStream.m in Sources */,
 				5D3861F51B05E6C400844721 /* ASIS3BucketRequest.m in Sources */,
 				5D3861EA1B05E6C400844721 /* ASINetworkQueue.m in Sources */,
+				5D2639591B2E7B780061E060 /* UserCenterLoginViewController.m in Sources */,
 				5D3861E81B05E6C400844721 /* ASIHTTPRequest.m in Sources */,
+				0068C56C1B31928C00C42163 /* WealthViewController.m in Sources */,
 				5D3861F71B05E6C400844721 /* ASIS3Request.m in Sources */,
 				5D3861A41B05D99100844721 /* AsyncUdpSocket.m in Sources */,
 				005F5FE31B22B0A1004B9FA0 /* LycTableCellViewDefault2.m in Sources */,
@@ -989,6 +1091,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Rui Wu (TKH9TJ82BJ)";
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1007,6 +1110,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,

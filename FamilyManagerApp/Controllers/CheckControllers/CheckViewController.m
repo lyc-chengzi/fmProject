@@ -11,6 +11,7 @@
 #import "AppConfiguration.h"
 #import "ApiJsonHelper.h"
 #import "DateFormatterHelper.h"
+#import "BKViewController.h"
 
 #import "ASIFormDataRequest.h"
 #import "Local_FeeItem.h"
@@ -23,16 +24,37 @@
 {
     //最后一次更新基础数据的时间
     NSString *_lastUpdateBaseDataTimeStr;
-    NSMutableArray *_feeItemList;
-    NSMutableData *_requestData;
     dispatch_queue_t sQueue;//串行队列
     dispatch_queue_t cQueue;//并发队列
+    
+    //table数据
+    NSArray *tableData;
 }
 
 @end
 
 @implementation CheckViewController
 @synthesize queue = _queue;
+
+- (IBAction)btnLeft_click:(id)sender
+{
+    LYCLog(@"打印内存泄漏情况：");
+    LYCLog(@"_B_controller:,%@",_B_controller);
+    LYCLog(@"_B_keepType:,%@",_B_keepType);
+    LYCLog(@"_B_checkFeeItem:,%@",_B_checkFeeItem);
+    
+    /*
+    //LYCLog(@"_B_flowTypeList:,%@",_B_flowTypeList);
+    //LYCLog(@"_B_feeItemList:,%@",_B_feeItemList);
+    //LYCLog(@"_B_checkFlowType:,%@",_B_checkFlowType);
+    //LYCLog(@"_B_applyDate:,%@",_B_applyDate);
+    //LYCLog(@"_B_tapGesture:,%@",_B_tapGesture);
+    //LYCLog(@"_B_applyRemark:,%@",_B_applyRemark);
+    LYCLog(@"_B_inUserBank:,%@",_B_inUserBank);
+    LYCLog(@"_B_outUserBank:,%@",_B_outUserBank);
+     LYCLog(@"_B_flowTypeController:,%@",_B_flowTypeController);
+     */
+}
 //property queue的get方法
 -(NSOperationQueue *)queue
 {
@@ -45,9 +67,7 @@
 -(void)viewDidLoad
 {
     [super viewDidLoad];
-    //NSLog(@"viewDidLoad时的NSThread Info:%@",[NSThread currentThread]);
-    self.tableView1.dataSource = self;
-    _requestData = [[NSMutableData alloc] init];
+    
     
     //1、检查是否需要更新基础数据
     AppDelegate *app = [[UIApplication sharedApplication] delegate];
@@ -56,12 +76,11 @@
     }
     else
     {
-        NSLog(@"网络未连接，基础数据不会更新！");
+        LYCLog(@"网络未连接，基础数据不会更新！");
     }
-    
-    
-    //2、加载费用科目
-    [self getFeeItemAction];
+    //从plist文件夹在table的数据
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"CheckViewTableData" ofType:@"plist"];
+    tableData = [NSArray arrayWithContentsOfFile:path];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -69,36 +88,54 @@
     // Dispose of any resources that can be recreated.
 }
 
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return tableData.count;
+}
+
+-(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    return [[tableData objectAtIndex:section] objectForKey:@"sectionName"];
+}
+
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return _feeItemList.count;
+    return [[[tableData objectAtIndex:section] objectForKey:@"sectionRows"] count];
 }
+/*
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    if (section == 0) {
+        return 5;
+    }
+    return 10;
+}*/
+
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *cellID = @"cellID";
+    static NSString *cellID = @"defaultCell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
-    if (!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
-    }
-    Local_FeeItem *fi = _feeItemList[indexPath.row];
-    cell.textLabel.text = fi.feeItemName;
+    
+    UILabel *lbl = (UILabel *)[cell viewWithTag:1];
+    lbl.text = [[[tableData objectAtIndex:indexPath.section] objectForKey:@"sectionRows"] objectAtIndex:indexPath.row];
+    
     return cell;
 }
 
-
-
-
-
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 44;
+}
 /*******************************************************检查是否需要更新基础数据**********************************************************************/
 
 //检查是否需要更新主数据
 -(void)checkNeedUpdateBaseData
 {
     //新建一个线程，检查是否需要更新主数据
-    NSString *requestFeeItemURL = [__fm_serverIP stringByAppendingString:__fm_apiPath_getBaseUpdateTime];
+    NSString *requestFeeItemURL = [__fm_userDefaults_serverIP stringByAppendingString:__fm_apiPath_getBaseUpdateTime];
     ASIFormDataRequest *requestUpdateTime= [ASIFormDataRequest requestWithURL:[NSURL URLWithString:requestFeeItemURL]];
-    requestUpdateTime.name = @"检查是否需要更新主数据";
+    //requestUpdateTime.name = @"检查是否需要更新主数据";
     requestUpdateTime.delegate = self;
     requestUpdateTime.shouldAttemptPersistentConnection = YES;
     requestUpdateTime.requestMethod = @"POST";
@@ -119,8 +156,9 @@
     ApiJsonHelper *jh = [[ApiJsonHelper alloc] initWithData:resultData requestName:@"获取基础数据更新时间点"];
     if (jh.bSuccess) {
         //请求成功
-        NSLog(@"请求到得时间点为：%@",[jh.jsonObj objectForKey:@"updateDate"]);
-        NSDate *updateDate = [[DateFormatterHelper getBasicFormatter] dateFromString:[jh.jsonObj objectForKey:@"updateDate"]];
+        NSString *stringUpdateDate = [jh.jsonObj objectForKey:@"updateDate"];
+        LYCLog(@"请求到得时间点为：%@", stringUpdateDate);
+        NSDate *updateDate = [[DateFormatterHelper getBasicFormatter] dateFromString:stringUpdateDate];
         //获取上次更新的时间
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
         _lastUpdateBaseDataTimeStr = [defaults stringForKey:__fm_defaults_baseDataGetDate_Key];
@@ -133,18 +171,18 @@
             //如果存在,将上次基础数据更新时间配置 转换为NSDate类型数据
             lastUpdateTime = [[DateFormatterHelper getBasicFormatter] dateFromString:_lastUpdateBaseDataTimeStr];
         }
-        NSLog(@"%@",_lastUpdateBaseDataTimeStr);
+        LYCLog(@"%@",_lastUpdateBaseDataTimeStr);
         
         if ([lastUpdateTime compare:updateDate] == NSOrderedAscending) {
-            NSLog(@"需要更新");
+            LYCLog(@"需要更新");
             //如果需要更新，调用 loadBaseData 方法
             [self loadBaseData];
         }else{
-            NSLog(@"不需要更新");
+            LYCLog(@"不需要更新");
         }
         
     }else{
-        NSLog(@"接口返回false，请求失败");
+        LYCLog(@"接口返回false，请求失败");
     }
     
     //释放 ApiJsonHelper 的 jsonObj对象
@@ -155,12 +193,12 @@
 //下载基础数据（费用科目、资金类型）到本地
 -(void)loadBaseData
 {
-    
+    NSString *serverIP = __fm_userDefaults_serverIP;
     //创建两个任务
     //第一个任务，下载资金类型
-    NSString *requestURL = [__fm_serverIP stringByAppendingString:__fm_apiPath_getFlowType];
+    NSString *requestURL = [serverIP stringByAppendingString:__fm_apiPath_getFlowType];
     ASIFormDataRequest *requestFlowType= [ASIFormDataRequest requestWithURL:[NSURL URLWithString:requestURL]];
-    requestFlowType.name = @"下载资金类型";
+    //requestFlowType.name = @"下载资金类型";
     requestFlowType.delegate = self;
     requestFlowType.shouldAttemptPersistentConnection = YES;
     requestFlowType.requestMethod = @"POST";
@@ -170,9 +208,9 @@
     [self.queue addOperation:requestFlowType];
     
     //第二个任务，下载费用科目
-    NSString *requestFeeItemURL = [__fm_serverIP stringByAppendingString:__fm_apiPath_getFeeItem];
+    NSString *requestFeeItemURL = [serverIP stringByAppendingString:__fm_apiPath_getFeeItem];
     ASIFormDataRequest *requestFeeItem= [ASIFormDataRequest requestWithURL:[NSURL URLWithString:requestFeeItemURL]];
-    requestFeeItem.name = @"下载费用科目";
+    //requestFeeItem.name = @"下载费用科目";
     requestFeeItem.delegate = self;
     requestFeeItem.shouldAttemptPersistentConnection = YES;
     requestFeeItem.requestMethod = @"POST";
@@ -195,7 +233,7 @@
         Local_FlowTypeDAO *lftDao = [[Local_FlowTypeDAO alloc] init];
         [lftDao deleteAllFlowType];//先清空历史数据
         [lftDao addFlowTypes:ah.jsonObj];
-        NSLog(@"资金类型添加后的数量：%lu",(unsigned long)[[lftDao getAllFlowTypes] count]);
+        LYCLog(@"资金类型添加后的数量：%lu",(unsigned long)[[lftDao getAllFlowTypes] count]);
     }
     ah.jsonObj = nil;
 }
@@ -210,7 +248,7 @@
         Local_FeeItemDAO *lftDao = [[Local_FeeItemDAO alloc] init];
         [lftDao deleteAllFeeItems];//先清空历史数据
         [lftDao addFeeItems:ah.jsonObj];
-        NSLog(@"费用科目添加后的数量：%lu",(unsigned long)[[lftDao getAllFeeItems] count]);
+        LYCLog(@"费用科目添加后的数量：%lu",(unsigned long)[[lftDao getAllFeeItems] count]);
         
         [self updateBaseDateGetDate];
     }
@@ -230,26 +268,12 @@
 {
     NSError *errors = requests.error;
     
-    NSLog(@"*******failed*******,result string is %@",errors);
+    LYCLog(@"*******failed*******,result string is %@",errors);
     if (errors.code == 1) {
-        NSLog(@"[%@]:网络未连接",requests.name);
+        LYCLog(@"网络未连接");
     }
     if (errors.code == 2) {
-        NSLog(@"[%@]:连接超时",requests.name);
-    }
-}
-
-//获取所有费用科目
--(void)getFeeItemAction
-{
-
-    Local_FeeItemDAO *feeDao = [[Local_FeeItemDAO alloc] init];
-    NSArray *feeList = [feeDao getAllFeeItems];
-    if (feeList == nil) {
-        NSLog(@"本地数据库中没有数据");
-    }else {
-        NSLog(@"一共有%d条数据！",(int)(feeList.count));
-        _feeItemList = [feeList mutableCopy];
+        LYCLog(@"连接超时");
     }
 }
 

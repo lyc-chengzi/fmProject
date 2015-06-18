@@ -8,6 +8,7 @@
 
 #import "ApiJsonHelper.h"
 #import "AppConfiguration.h"
+#import <Foundation/Foundation.h>
 
 @implementation ApiJsonHelper
 
@@ -27,12 +28,11 @@
         //如果转换没有报错
         if (!error) {
             //将获得的json返回给相应属性
-            BOOL isSuccess =[jsonResult objectForKey:__fm_apiJsonKey_bSuccess];
-            _bSuccess = isSuccess;
+            _bSuccess = [[jsonResult objectForKey:__fm_apiJsonKey_bSuccess] boolValue];
             _message = [jsonResult objectForKey:__fm_apiJsonKey_message];
             _jsonObj = [jsonResult objectForKey:__fm_apiJsonKey_jsonObj];
         }else{
-            NSLog(@"%@，在转换json数据时发生错误；%@", tishi, error);
+            LYCLog(@"%@，在转换json数据时发生错误；%@", tishi, error);
         }
     }
     return self;

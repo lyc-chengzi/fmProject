@@ -16,7 +16,7 @@
 +(void)testWebservice
 {
     //请求地址
-    NSString *requestURL = [__fm_serverIP stringByAppendingString:@"/webservice/basedataservice.asmx"];
+    NSString *requestURL = [__fm_userDefaults_serverIP stringByAppendingString:@"/webservice/basedataservice.asmx"];
     
     //soap头信息
     NSString *soapHeader = [NSString stringWithFormat:@"<?xml version=\"1.0\" encoding=\"utf-8\"?><soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"><soap:Body><GetFlowType xmlns=\"http://tempuri.org/BaseData/\"><typeID>0</typeID></GetFlowType></soap:Body></soap:Envelope>"];
@@ -31,7 +31,7 @@
 }
 +(void)testRequestUrl
 {
-    NSString *requestURL = [__fm_serverIP stringByAppendingString:@"/baseDataapi/getFeeItemlist"];
+    NSString *requestURL = [__fm_userDefaults_serverIP stringByAppendingString:@"/baseDataapi/getFeeItemlist"];
     NSLog(@"requestUrl is %@",requestURL);
     ASIFormDataRequest *re= [ASIFormDataRequest requestWithURL:[NSURL URLWithString:requestURL]];
     re.delegate = self;

@@ -9,6 +9,7 @@
 #import "CheckUserBankViewController.h"
 #import "Local_UserBank.h"
 #import "Local_UserBankDAO.h"
+#import "AppConfiguration.h"
 
 @interface CheckUserBankViewController ()
 
@@ -24,7 +25,8 @@
     [self.navigationItem setRightBarButtonItem:btnRight];
     
     Local_UserBankDAO *dao = [[Local_UserBankDAO alloc] init];
-    self.userBankList = [dao getUserBanksByUserID:13];
+    NSInteger userID = [[NSUserDefaults standardUserDefaults] integerForKey:__fm_defaultsKey_loginUser_ID];
+    self.userBankList = [dao getUserBanksByUserID:(int)userID];
     self.table1.dataSource = self;
     self.table1.delegate = self;
 }

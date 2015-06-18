@@ -16,6 +16,7 @@
 #import "CheckFlowTypeViewController.h"
 #import "CheckFeeItemViewController.h"
 #import "CheckUserBankViewController.h"
+#import "ApiJsonHelper.h"
 
 #import "Local_FeeItemDAO.h"
 #import "Local_FlowTypeDAO.h"
@@ -38,6 +39,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.DatePickerBox.translatesAutoresizingMaskIntoConstraints = NO;
+    self.dataPicker.translatesAutoresizingMaskIntoConstraints = NO;
+    
     self.automaticallyAdjustsScrollViewInsets = NO;
     // Do any additional setup after loading the view.
     _arrayMoney = [NSArray arrayWithObjects:@"金额",@"备注", nil];
@@ -47,7 +52,7 @@
     self.tableview1.dataSource = self;
     self.tableview1.delegate = self;
     
-    
+    _dialogView = [[LycDialogView alloc] initWithTitle:@"正在加载" andSuperView:self.view];
     //设置导航条
     UIBarButtonItem *btnRight = [[UIBarButtonItem alloc] initWithTitle:@"提交"
                                                          style:UIBarButtonItemStylePlain target:self action:@selector(submit)];
@@ -90,8 +95,17 @@
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    NSLog(@"记账页面收到内存警告！！！！");
+    LYCLog(@"记账页面收到内存警告！！！！");
     [self disposeResource];
+}
+
+-(void)dealloc
+{
+    LYCLog(@"记账页面被销毁了");
+    LYCLog(@"keepType -- %@",_keepType);
+    _keepType = nil;     //记账类型
+    _checkFeeItem = nil;    //选择的费用科目
+    _dialogView = nil;
 }
 
 - (UIStatusBarStyle)preferredStatusBarStyle
@@ -100,13 +114,20 @@
 }
 
 - (IBAction)btnOKDate_Click:(id)sender {
-    [self setTheApplyDate:[_shortDateFormatter stringFromDate:self.dataPicker.date]];
-    self.datePickerBottomConstraint.constant = -220;
+    self.datePickerBottomConstraint.constant = -50;
+    [UIView animateWithDuration:0.3 animations:^(void){
+        [self.view layoutIfNeeded];
+    }];
     _isShowDatePicker = NO;
+    
+    [self setTheApplyDate:[_shortDateFormatter stringFromDate:self.dataPicker.date]];
 }
 
 - (IBAction)btnCancelDate_Click:(id)sender {
-    self.datePickerBottomConstraint.constant = -220;
+    self.datePickerBottomConstraint.constant = -50;
+    [UIView animateWithDuration:0.3 animations:^(void){
+        [self.view layoutIfNeeded];
+    }];
     _isShowDatePicker = NO;
 }
 
@@ -230,7 +251,7 @@
             //加载完数据后在主线程要执行的代码
             //隐藏等待窗口
             dispatch_async(dispatch_get_main_queue(), ^(void){
-                NSLog(@"在主线程中应该要隐藏等待窗口");
+                
             });
             
         });
@@ -248,13 +269,14 @@
 
 -(void)disposeResource
 {
-    NSLog(@"释放资源");
+    LYCLog(@"释放资源");
     _flowTypeController = nil;  //释放选择资金类型controller
     _checkFlowType = nil;       //释放已选资金类型
     _checkFeeItem = nil;        //释放已选费用科目
     _inUserBank = nil;          //释放已选入账银行
     _outUserBank = nil;         //释放已选出账银行
     _applyRemark = nil;         //释放备注信息
+    _keepType = nil;
     //[self disposeDatePicker];   //释放日期选择控件
     //释放轻击table隐藏键盘 手势检测器
     [self.tableview1 removeGestureRecognizer:_tapGesture];
@@ -266,54 +288,60 @@
 -(void)submit
 {
     AppDelegate *app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    
+    //获取app参数
+    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+    BOOL isLogin = [ud boolForKey:__fm_defaultsKey_loginUser_Status];
+
+    NSString *warnTitle;
+    NSString *warnInfo;
     if (app.isConnectNet == NO) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"网络未连接" message:@"当前版本必须联网才能记账！"
-                              delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
-        [alert show];
+        warnTitle = @"网络未连接";
+        warnInfo = @"当前版本必须联网才能记账！";
+    }
+    else if (isLogin == NO){
+        warnTitle = @"您还未登陆";
+        warnInfo = @"当前版本必须登陆后才能记账！";
+    }
+    else if (self.applyDate == nil) {
+        warnTitle = @"请填写完整信息";
+        warnInfo = @"记账日期必须选择！";
+    }
+    else if (self.keepType == nil) {
+        warnTitle = @"请填写完整信息";
+        warnInfo = @"记账类型必须选择！";
+    }
+    else if (self.checkFlowType == nil) {
+        warnTitle = @"请填写完整信息";
+        warnInfo = @"资金类型必须选择！";
+    }
+    else if ([self.checkFlowType.inOutType isEqual:@"out"] && self.checkFeeItem == nil) {
+        warnTitle = @"请填写完整信息";
+        warnInfo = @"支出记账必须选择费用科目！";
+    }
+    else if (self.applyMoney <= 0) {
+        warnTitle = @"请填写完整信息";
+        warnInfo = @"请填写正确的金额，必须大于0！";
+    }
+    //如果有警告信息，提示框弹出，终止提交操作
+    if (warnTitle != nil) {
+        UIAlertView *warnAlert = [[UIAlertView alloc] initWithTitle:warnTitle message:warnInfo delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+        [warnAlert show];
         return;
     }
     
-    if (self.applyDate == nil) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"请填写完整信息" message:@"记账日期必须选择"
-                              delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
-        [alert show];
-        return;
-    }
-    if (self.keepType == nil) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"请填写完整信息" message:@"记账类型必须选择"
-                              delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
-        [alert show];
-        return;
-    }
-    if (self.checkFlowType == nil) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"请填写完整信息" message:@"资金类型必须选择"
-                              delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
-        [alert show];
-        return;
-    }
-    if ([self.checkFlowType.inOutType isEqual:@"out"] && self.checkFeeItem == nil) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"请填写完整信息" message:@"支出记账必须选择费用科目"
-                              delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
-        [alert show];
-        return;
-    }
+    [_dialogView showDialog];
     
-    if (self.applyMoney <= 0) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"请填写完整信息" message:@"请填写正确的金额，必须大于0"
-                              delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
-        [alert show];
-        return;
-    }
-    
+    NSInteger userID = [ud integerForKey:__fm_defaultsKey_loginUser_ID];
     //现金记账
     if ([self.keepType isEqualToString:__fm_KPTypeOfCash_String]) {
-        NSString *requestURL = [__fm_serverIP stringByAppendingString:__fm_apiPath_doCashAccounting];
+        NSString *requestURL = [__fm_userDefaults_serverIP stringByAppendingString:__fm_apiPath_doCashAccounting];
         ASIFormDataRequest *request= [ASIFormDataRequest requestWithURL:[NSURL URLWithString:requestURL]];
         request.tag = 100;
         request.delegate = self;
         request.shouldAttemptPersistentConnection = YES;
         request.requestMethod = @"POST";
-        [request addPostValue:[NSNumber numberWithInt:13] forKey:@"userID"];
+        [request addPostValue:[NSNumber numberWithInteger:userID] forKey:@"userID"];
         [request addPostValue:self.applyDate forKey:@"ApplyDate"];
         [request addPostValue:self.checkFlowType.flowTypeID forKey:@"FlowTypeID"];
         //如果是现金收入，费用项目传空字符串
@@ -329,6 +357,7 @@
         }
         else
         {
+            [_dialogView hideDialog];
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"记账错误" message:@"请重新选择资金类型"
                                                       delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
             [alert show];
@@ -343,13 +372,13 @@
     //银行记账
     else if ([self.keepType isEqualToString:__fm_KPTypeOfBank_String])
     {
-        NSString *requestURL = [__fm_serverIP stringByAppendingString:__fm_apiPath_doBankAccounting];
+        NSString *requestURL = [__fm_userDefaults_serverIP stringByAppendingString:__fm_apiPath_doBankAccounting];
         ASIFormDataRequest *request= [ASIFormDataRequest requestWithURL:[NSURL URLWithString:requestURL]];
         request.tag = 200;
         request.delegate = self;
         request.shouldAttemptPersistentConnection = YES;
         request.requestMethod = @"POST";
-        [request addPostValue:[NSNumber numberWithInt:13] forKey:@"userID"];
+        [request addPostValue:[NSNumber numberWithInteger:userID] forKey:@"userID"];
         [request addPostValue:self.applyDate forKey:@"ApplyDate"];
         [request addPostValue:self.checkFlowType.flowTypeID forKey:@"FlowTypeID"];
         [request addPostValue:[NSNumber numberWithDouble:self.applyMoney] forKey:@"money"];
@@ -370,6 +399,7 @@
         }
         else
         {
+            [_dialogView hideDialog];
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"记账错误" message:@"请重新选择资金类型"
                                                       delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
             [alert show];
@@ -383,13 +413,13 @@
     //转账
     else if ([self.keepType isEqualToString:__fm_KPTypeOfChange_String])
     {
-        NSString *requestURL = [__fm_serverIP stringByAppendingString:__fm_apiPath_doZhuanZhang];
+        NSString *requestURL = [__fm_userDefaults_serverIP stringByAppendingString:__fm_apiPath_doZhuanZhang];
         ASIFormDataRequest *request= [ASIFormDataRequest requestWithURL:[NSURL URLWithString:requestURL]];
         request.tag = 300;
         request.delegate = self;
         request.shouldAttemptPersistentConnection = YES;
         request.requestMethod = @"POST";
-        [request addPostValue:[NSNumber numberWithInt:13] forKey:@"userID"];
+        [request addPostValue:[NSNumber numberWithInteger:userID] forKey:@"userID"];
         [request addPostValue:self.applyDate forKey:@"ApplyDate"];
         [request addPostValue:self.checkFlowType.flowTypeID forKey:@"FlowTypeID"];
         [request addPostValue:[NSNumber numberWithInt:0] forKey:@"feeItemID"];
@@ -412,6 +442,7 @@
         }
         else
         {
+            [_dialogView hideDialog];
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"记账错误" message:@"请重新选择资金类型"
                                                            delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
             [alert show];
@@ -423,6 +454,7 @@
         [request startAsynchronous];
     }
     else{
+        [_dialogView hideDialog];
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"记账错误" message:@"请重新选择一个记账类型"
                                    delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
         [alert show];
@@ -431,9 +463,11 @@
 
 -(void)bookKeepFinished:(ASIHTTPRequest *) request
 {
+    [_dialogView hideDialog];
     NSString *bkType = @"记账成功";
-    NSLog(@"返回的字符串:%@",[request responseString]);
-    if ([[request responseString] containsString:@"bSuccess\":true"] ) {
+    NSData *responseData = [request responseData];
+    ApiJsonHelper *aj = [[ApiJsonHelper alloc] initWithData:responseData requestName:bkType];
+    if (aj.bSuccess == YES) {
         if (request.tag == 100)
         {
             bkType = @"现金记账成功";
@@ -460,30 +494,22 @@
             bkType = @"转账记账失败";
         }
     }
-    
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:bkType message:[request responseString]
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:bkType message:aj.message
                                               delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
     [alert show];
 }
 
 -(void)bookKeepFailed:(ASIHTTPRequest *) request
 {
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"记账失败" message:[request responseString]
+    [_dialogView hideDialog];
+    NSString *responseString = [request responseString];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"记账失败" message:responseString
                           delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
     [alert show];
 }
 
 
 #pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-    if ([segue.identifier isEqual: @"jumpToCheckFeeItemPage"]) {
-        [(CheckFeeItemViewController *)[segue destinationViewController] setDelegate:self];
-    }
-}
 
 /*********************tableView代理********************/
 
@@ -575,11 +601,17 @@
     if (indexPath.section == 0 && indexPath.row == 0) {
         //[self showDatePicker];
         if (_isShowDatePicker == NO) {
-            [self.datePickerBottomConstraint setConstant:0];
+            [self.datePickerBottomConstraint setConstant:200];
+            [UIView animateWithDuration:0.3 animations:^(void){
+                [self.view layoutIfNeeded];
+            }];
             _isShowDatePicker = YES;
         }else
         {
-            [self.datePickerBottomConstraint setConstant:-220];
+            [self.datePickerBottomConstraint setConstant:-50];
+            [UIView animateWithDuration:0.3 animations:^(void){
+                [self.view layoutIfNeeded];
+            }];
             _isShowDatePicker = NO;
         }
         
@@ -598,11 +630,9 @@
         //UIStoryboard *sbMain = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         CheckFlowTypeViewController *cv = [self.storyboard instantiateViewControllerWithIdentifier:@"checkFeeItemNib"];
         cv.delegate = self;
-        
         dispatch_async(dispatch_get_main_queue(), ^(void){
             [self presentViewController:cv animated:YES completion:nil];
         });
-        //[self performSegueWithIdentifier:@"jumpToCheckFeeItemPage" sender:@"checkFeeItem"];
     }
     //如果点击费用科目，跳转到费用科目选择页面
     else if (indexPath.section == 1) {
@@ -667,6 +697,7 @@
 -(void)setTheKeepType:(NSString *) kType
 {
     _keepType = kType;
+    //self.ccontroller.B_keepType = self.keepType;
     LycTableCellViewDefault *cell = (LycTableCellViewDefault *)[self.tableview1 cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
     cell.lblValue.text = kType;
 }
@@ -683,6 +714,7 @@
 -(void)setTheCheckFeeItem:(Local_FeeItem *) lfi
 {
     _checkFeeItem = lfi;
+    //self.ccontroller.B_checkFeeItem = self.checkFeeItem;
     LycTableCellViewDefault *cell = (LycTableCellViewDefault *)[self.tableview1 cellForRowAtIndexPath:[NSIndexPath indexPathForRow:3 inSection:0]];
     cell.lblValue.text = lfi.feeItemName;
 }
@@ -781,18 +813,18 @@
         _datePickerContainer.translatesAutoresizingMaskIntoConstraints = NO;
         [self.view addSubview:_datePickerContainer];
     }
-    if (!_datePicker) {
+    if (!_mydatePicker) {
         NSDate *now = [NSDate date];
-        _datePicker = [[UIDatePicker alloc] initWithFrame:CGRectMake(0, 30, _screenFrame.size.width, 150)];
-        _datePicker.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
-        _datePicker.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
-        _datePicker.datePickerMode = UIDatePickerModeDate;
-        _datePicker.date = now;
-        _datePicker.tag = 22;
-        _datePicker.minimumDate = [now dateByAddingTimeInterval:-60*60*24*30 ];
-        _datePicker.maximumDate = now;
+        _mydatePicker = [[UIDatePicker alloc] initWithFrame:CGRectMake(0, 30, _screenFrame.size.width, 150)];
+        _mydatePicker.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
+        _mydatePicker.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
+        _mydatePicker.datePickerMode = UIDatePickerModeDate;
+        _mydatePicker.date = now;
+        _mydatePicker.tag = 22;
+        _mydatePicker.minimumDate = [now dateByAddingTimeInterval:-60*60*24*30 ];
+        _mydatePicker.maximumDate = now;
         //[_datePicker addTarget:self action:@selector(datePickerChanged) forControlEvents:UIControlEventValueChanged];
-        [_datePickerContainer addSubview:_datePicker];
+        [_datePickerContainer addSubview:_mydatePicker];
     }
     if (!_cancelDatePicker) {
         _cancelDatePicker = [[UIButton alloc] initWithFrame:CGRectMake(0, 10, 100, 30)];
@@ -819,7 +851,7 @@
 //(不使用)
 -(void)okDatePickerClick
 {
-    [self setTheApplyDate:[_shortDateFormatter stringFromDate:_datePicker.date]];
+    [self setTheApplyDate:[_shortDateFormatter stringFromDate:_mydatePicker.date]];
     [self showDatePicker];
 }
 //(不使用)
@@ -847,8 +879,8 @@
 -(void)disposeDatePicker
 {
     /*销毁日期选择器相关view*/
-    [_datePicker removeFromSuperview];
-    _datePicker = nil;
+    [_mydatePicker removeFromSuperview];
+    _mydatePicker = nil;
     [_okDatePicker removeFromSuperview];
     _okDatePicker = nil;
     [_cancelDatePicker removeFromSuperview];

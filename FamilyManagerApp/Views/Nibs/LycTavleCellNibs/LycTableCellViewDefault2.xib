@@ -14,14 +14,11 @@
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="aVa-72-SNn" id="S0h-3Y-Gfs">
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" tag="1" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="dog.png" translatesAutoresizingMaskIntoConstraints="NO" id="Qnw-pF-UaB">
-                        <rect key="frame" x="10" y="5" width="34" height="34"/>
-                    </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gWb-UI-IaO">
-                        <rect key="frame" x="48" y="12" width="38" height="21"/>
+                        <rect key="frame" x="18" y="10" width="80" height="21"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="K3a-7M-T6x"/>
-                            <constraint firstAttribute="width" relation="lessThanOrEqual" constant="130" id="Q4t-Ae-jY3"/>
+                            <constraint firstAttribute="width" constant="80" id="Q4t-Ae-jY3"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -34,7 +31,7 @@
                             <constraint firstAttribute="width" constant="120" id="ALE-Fo-0Cb"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OhF-fY-ZkI">
@@ -51,9 +48,9 @@
                 <constraints>
                     <constraint firstItem="dNr-ca-Rxt" firstAttribute="trailing" secondItem="S0h-3Y-Gfs" secondAttribute="trailingMargin" id="MBx-mH-fnO"/>
                     <constraint firstAttribute="trailingMargin" secondItem="dNr-ca-Rxt" secondAttribute="trailing" id="NmP-46-Zmr"/>
-                    <constraint firstAttribute="centerY" secondItem="gWb-UI-IaO" secondAttribute="centerY" constant="-2" id="TJU-gq-oBR"/>
+                    <constraint firstAttribute="centerY" secondItem="gWb-UI-IaO" secondAttribute="centerY" id="TJU-gq-oBR"/>
                     <constraint firstAttribute="centerY" secondItem="dNr-ca-Rxt" secondAttribute="centerY" constant="-1" id="b68-t0-LPD"/>
-                    <constraint firstItem="gWb-UI-IaO" firstAttribute="leading" secondItem="S0h-3Y-Gfs" secondAttribute="leadingMargin" constant="40" id="cvF-06-COk"/>
+                    <constraint firstItem="gWb-UI-IaO" firstAttribute="leading" secondItem="S0h-3Y-Gfs" secondAttribute="leadingMargin" constant="10" id="cvF-06-COk"/>
                     <constraint firstAttribute="bottomMargin" secondItem="OhF-fY-ZkI" secondAttribute="bottom" constant="-5" id="eer-ho-Uwd"/>
                     <constraint firstItem="OhF-fY-ZkI" firstAttribute="trailing" secondItem="dNr-ca-Rxt" secondAttribute="trailing" id="nmF-Lb-tGd"/>
                     <constraint firstItem="dNr-ca-Rxt" firstAttribute="top" secondItem="S0h-3Y-Gfs" secondAttribute="topMargin" constant="-2" id="qna-SH-6qh"/>
@@ -66,7 +63,6 @@
                 </variation>
             </tableViewCellContentView>
             <connections>
-                <outlet property="imgView" destination="Qnw-pF-UaB" id="eRJ-Ff-cBy"/>
                 <outlet property="lblTitle" destination="gWb-UI-IaO" id="n4T-Io-n7L"/>
                 <outlet property="lblValueBottom" destination="OhF-fY-ZkI" id="X2M-A7-qOg"/>
                 <outlet property="lblValueTop" destination="dNr-ca-Rxt" id="kgt-HO-DWZ"/>
@@ -74,7 +70,4 @@
             <point key="canvasLocation" x="386" y="196.5"/>
         </tableViewCell>
     </objects>
-    <resources>
-        <image name="dog.png" width="48" height="48"/>
-    </resources>
 </document>

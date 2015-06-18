@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="Y3f-o1-a0I" customClass="LycScrollCollectionViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="100"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="100"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dog.png" translatesAutoresizingMaskIntoConstraints="NO" id="mC1-ZC-ym7">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="100"/>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.29999999999999999" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bd3-tJ-Wmw">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="30"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="30" id="5S5-oc-DFO"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            </view>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="mC1-ZC-ym7" secondAttribute="trailing" id="6Df-3x-8Uc"/>
+                <constraint firstItem="mC1-ZC-ym7" firstAttribute="leading" secondItem="Y3f-o1-a0I" secondAttribute="leading" id="LRw-0z-h5s"/>
+                <constraint firstAttribute="bottom" secondItem="mC1-ZC-ym7" secondAttribute="bottom" id="YPu-v5-s8E"/>
+                <constraint firstItem="bd3-tJ-Wmw" firstAttribute="top" secondItem="Y3f-o1-a0I" secondAttribute="top" id="YXv-pl-J1c"/>
+                <constraint firstItem="mC1-ZC-ym7" firstAttribute="top" secondItem="Y3f-o1-a0I" secondAttribute="top" id="kMu-or-cHh"/>
+                <constraint firstAttribute="trailing" secondItem="bd3-tJ-Wmw" secondAttribute="trailing" id="pUL-Sr-1oh"/>
+                <constraint firstItem="bd3-tJ-Wmw" firstAttribute="leading" secondItem="Y3f-o1-a0I" secondAttribute="leading" id="zaG-0C-660"/>
+            </constraints>
+            <size key="customSize" width="432" height="86"/>
+            <connections>
+                <outlet property="imgIcon" destination="mC1-ZC-ym7" id="RLG-kJ-Pq4"/>
+                <outlet property="lblTItle" destination="bd3-tJ-Wmw" id="h0B-do-dD6"/>
+            </connections>
+            <point key="canvasLocation" x="611" y="365"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="dog.png" width="48" height="48"/>
+    </resources>
+</document>

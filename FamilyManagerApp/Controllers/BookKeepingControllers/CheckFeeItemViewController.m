@@ -57,10 +57,13 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-    NSLog(@"选择费用科目页面收到了内存赢告！！！");
+    LYCLog(@"选择费用科目页面收到了内存赢告！！！");
 }
 
 - (IBAction)btnCancle_click:(id)sender {
+    _firstFeeItem = nil;
+    _secondFeeItem = nil;
+    _feeItemRelation = nil;
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
