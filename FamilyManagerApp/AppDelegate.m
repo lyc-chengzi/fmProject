@@ -26,7 +26,7 @@
     [self checkSettingBundle];//检查配置信息是否有默认值
     /***********设置状态栏***********/
     application.statusBarStyle = UIStatusBarStyleLightContent;
-    
+    self.window.backgroundColor = [UIColor whiteColor];
     /***********设置导航条背景色和标题颜色***********/
     UINavigationBar *shareNB = [UINavigationBar appearance];
     [shareNB setBarTintColor:__fm_Global_color_blue];//设置背景色

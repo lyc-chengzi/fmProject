@@ -36,30 +36,28 @@
 
 @implementation BKViewController
 
-
+/*********************View生命周期监听**********************/
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    self.DatePickerBox.translatesAutoresizingMaskIntoConstraints = NO;
-    self.dataPicker.translatesAutoresizingMaskIntoConstraints = NO;
-    
+    //初始化一些view的样式
     self.automaticallyAdjustsScrollViewInsets = NO;
-    // Do any additional setup after loading the view.
+    self.DatePickerBox.hidden = YES;
+    _dialogView = [[LycDialogView alloc] initWithTitle:@"正在加载" andSuperView:self.view];
+    
+    //设置table的数据源并初始化数据
     _arrayMoney = [NSArray arrayWithObjects:@"金额",@"备注", nil];
     _isRegistNib = NO;
     _shortDateFormatter = [DateFormatterHelper getShortDateFormatter];
+    _applyDate = [_shortDateFormatter stringFromDate:[NSDate date]];
     [self loadTableViewData];
     self.tableview1.dataSource = self;
     self.tableview1.delegate = self;
     
-    _dialogView = [[LycDialogView alloc] initWithTitle:@"正在加载" andSuperView:self.view];
     //设置导航条
     UIBarButtonItem *btnRight = [[UIBarButtonItem alloc] initWithTitle:@"提交"
                                                          style:UIBarButtonItemStylePlain target:self action:@selector(submit)];
     [btnRight setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor ]} forState:UIControlStateNormal];
     self.navigationItem.rightBarButtonItem = btnRight;
-    
-    _applyDate = [_shortDateFormatter stringFromDate:[NSDate date]];
     
     //初始化控制器属性
     //初始化资金类型
@@ -71,14 +69,14 @@
                                                 forKeys:@[__fm_KPTypeOfCash_String,__fm_KPTypeOfBank_String,__fm_KPTypeOfChange_String]];
     
     [self loadBaseData];
+    
+    //注册键盘事件监听
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardAppearHandler:) name:UIKeyboardDidChangeFrameNotification object:nil];
 }
 
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    //页面将要显示时，重新加载可能被释放掉的对象
-    //[self initDatePicker];
-    
     if (_tapGesture == nil) {
         //轻点手势
         UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyBoard)];
@@ -90,7 +88,6 @@
 }
 -(void)viewWillDisappear:(BOOL)animated
 {
-    //[self disposeDatePicker];
     [super viewWillDisappear:animated];
 }
 - (void)didReceiveMemoryWarning {
@@ -106,31 +103,24 @@
     _keepType = nil;     //记账类型
     _checkFeeItem = nil;    //选择的费用科目
     _dialogView = nil;
-}
-
-- (UIStatusBarStyle)preferredStatusBarStyle
-{
-    return UIStatusBarStyleLightContent;
+    //清除本控制器监听的通知
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (IBAction)btnOKDate_Click:(id)sender {
-    self.datePickerBottomConstraint.constant = -50;
-    [UIView animateWithDuration:0.3 animations:^(void){
-        [self.view layoutIfNeeded];
-    }];
-    _isShowDatePicker = NO;
+    [self hideDatePickerBox];
     
     [self setTheApplyDate:[_shortDateFormatter stringFromDate:self.dataPicker.date]];
 }
 
 - (IBAction)btnCancelDate_Click:(id)sender {
-    self.datePickerBottomConstraint.constant = -50;
-    [UIView animateWithDuration:0.3 animations:^(void){
-        [self.view layoutIfNeeded];
-    }];
-    _isShowDatePicker = NO;
+    [self hideDatePickerBox];
 }
 
+/*********************View生命周期监听**********************/
+
+
+/*********************私有方法*********************/
 -(void)loadTableViewData
 {
     _arraybase = [NSMutableArray arrayWithObjects:@"记账日期",@"记账类型",@"资金流动类型",@"费用科目",nil];
@@ -259,11 +249,50 @@
     }
 }
 
+//键盘出现、隐藏通知
+-(void)keyboardAppearHandler:(NSNotificationCenter *) noti
+{
+    NSDictionary *notInfo = [noti valueForKey:@"userInfo"];
+    CGRect keyBoardRect = [notInfo[@"UIKeyboardFrameEndUserInfoKey"] CGRectValue];
+    CGFloat duration = [notInfo[@"UIKeyboardAnimationDurationUserInfoKey"] doubleValue];
+    [UIView animateWithDuration:duration animations:^{
+        self.view.transform = CGAffineTransformMakeTranslation(0, keyBoardRect.origin.y - self.view.frame.size.height);
+    }];
+}
+
+//隐藏日期选择box
+-(void)hideDatePickerBox
+{
+    self.datePickerBottomConstraint.constant = -50;
+    [UIView animateWithDuration:0.3 animations:^(void){
+        [self.view layoutIfNeeded];
+    } completion:^(BOOL finished) {
+        if (finished) {
+            self.DatePickerBox.hidden = YES;
+        }
+    }];
+    
+    _isShowDatePicker = NO;
+}
+
+//显示日期选择box
+-(void)showDatePickerBox
+{
+    self.DatePickerBox.hidden = NO;
+    [self.datePickerBottomConstraint setConstant:200];
+    [UIView animateWithDuration:0.3 animations:^(void){
+        [self.view layoutIfNeeded];
+    }];
+    _isShowDatePicker = YES;
+}
+
 //隐藏键盘
 -(void)hideKeyBoard
 {
+    /*
     UITableViewCell *cell = [self.tableview1 cellForRowAtIndexPath:[NSIndexPath indexPathForRow:_isEditTextIndex inSection:2]];
-    [[cell viewWithTag:302] resignFirstResponder];
+    [[cell viewWithTag:302] resignFirstResponder];*/
+    [self.view endEditing:YES];
     [_tapGesture setEnabled:NO];
 }
 
@@ -461,6 +490,7 @@
     }
 }
 
+//记账完成回调函数
 -(void)bookKeepFinished:(ASIHTTPRequest *) request
 {
     [_dialogView hideDialog];
@@ -499,6 +529,7 @@
     [alert show];
 }
 
+//记账失败回调函数
 -(void)bookKeepFailed:(ASIHTTPRequest *) request
 {
     [_dialogView hideDialog];
@@ -601,19 +632,8 @@
     if (indexPath.section == 0 && indexPath.row == 0) {
         //[self showDatePicker];
         if (_isShowDatePicker == NO) {
-            [self.datePickerBottomConstraint setConstant:200];
-            [UIView animateWithDuration:0.3 animations:^(void){
-                [self.view layoutIfNeeded];
-            }];
-            _isShowDatePicker = YES;
-        }else
-        {
-            [self.datePickerBottomConstraint setConstant:-50];
-            [UIView animateWithDuration:0.3 animations:^(void){
-                [self.view layoutIfNeeded];
-            }];
-            _isShowDatePicker = NO;
-        }
+            [self showDatePickerBox];
+        }else { [self hideDatePickerBox]; }
         
     }
     //点击记账类型cell，跳转到选择资金类型页面
