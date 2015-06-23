@@ -102,14 +102,11 @@
 {
     return [[[tableData objectAtIndex:section] objectForKey:@"sectionRows"] count];
 }
-/*
+
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    if (section == 0) {
-        return 5;
-    }
-    return 10;
-}*/
+    return 30;
+}
 
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -118,7 +115,8 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
     
     UILabel *lbl = (UILabel *)[cell viewWithTag:1];
-    lbl.text = [[[tableData objectAtIndex:indexPath.section] objectForKey:@"sectionRows"] objectAtIndex:indexPath.row];
+    NSDictionary *rowEntity = [[[tableData objectAtIndex:indexPath.section] objectForKey:@"sectionRows"] objectAtIndex:indexPath.row];
+    lbl.text = rowEntity[@"rowTitle"];
     
     return cell;
 }
@@ -127,6 +125,17 @@
 {
     return 44;
 }
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSDictionary *rowEntity = [[[tableData objectAtIndex:indexPath.section] objectForKey:@"sectionRows"] objectAtIndex:indexPath.row];
+    if ([[rowEntity objectForKey:@"isPush"] boolValue] == YES) {
+        UIViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:[rowEntity objectForKey:@"pushVCID"]];
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+}
+
+
 /*******************************************************检查是否需要更新基础数据**********************************************************************/
 
 //检查是否需要更新主数据
