@@ -90,6 +90,8 @@
         NSArray *labelConstraintsH = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[lblTitle]-|" options:0 metrics:nil views:@{@"lblTitle":self.lblTitle}];
         [self addConstraints:labelConstraintsH];
         [self addConstraints:labelConstraintsV];
+        
+        [self hideDialog];
     }
     return self;
 }

@@ -47,6 +47,10 @@
 		5D08C4881B049BC900C24712 /* DateFormatterHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D08C4871B049BC900C24712 /* DateFormatterHelper.m */; };
 		5D2639561B2E64DF0061E060 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 5D2639551B2E64DF0061E060 /* Settings.bundle */; };
 		5D2639591B2E7B780061E060 /* UserCenterLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D2639581B2E7B780061E060 /* UserCenterLoginViewController.m */; };
+		5D3369F41B3A783B00115330 /* ApplyMainViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D3369F31B3A783B00115330 /* ApplyMainViewModel.m */; };
+		5D3369FA1B3A934000115330 /* NSDate+LYCDate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D3369F91B3A934000115330 /* NSDate+LYCDate.m */; };
+		5D3369FD1B3A9A2100115330 /* ApplySub_OLViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D3369FC1B3A9A2100115330 /* ApplySub_OLViewController.m */; };
+		5D336A001B3A9D2B00115330 /* ApplySubViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D3369FF1B3A9D2B00115330 /* ApplySubViewModel.m */; };
 		5D33B7411B2972DA00D15562 /* UserCenterIndexViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D33B7401B2972DA00D15562 /* UserCenterIndexViewController.m */; };
 		5D33B7481B297C6C00D15562 /* tab_usercenter@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5D33B7471B297C6C00D15562 /* tab_usercenter@1x.png */; };
 		5D33B74A1B297D8A00D15562 /* tab_usercenter@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5D33B7491B297D8A00D15562 /* tab_usercenter@2x.png */; };
@@ -170,6 +174,14 @@
 		5D2639551B2E64DF0061E060 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		5D2639571B2E7B780061E060 /* UserCenterLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserCenterLoginViewController.h; sourceTree = "<group>"; };
 		5D2639581B2E7B780061E060 /* UserCenterLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserCenterLoginViewController.m; sourceTree = "<group>"; };
+		5D3369F21B3A783B00115330 /* ApplyMainViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplyMainViewModel.h; sourceTree = "<group>"; };
+		5D3369F31B3A783B00115330 /* ApplyMainViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApplyMainViewModel.m; sourceTree = "<group>"; };
+		5D3369F81B3A934000115330 /* NSDate+LYCDate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+LYCDate.h"; sourceTree = "<group>"; };
+		5D3369F91B3A934000115330 /* NSDate+LYCDate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+LYCDate.m"; sourceTree = "<group>"; };
+		5D3369FB1B3A9A2100115330 /* ApplySub_OLViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplySub_OLViewController.h; sourceTree = "<group>"; };
+		5D3369FC1B3A9A2100115330 /* ApplySub_OLViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApplySub_OLViewController.m; sourceTree = "<group>"; };
+		5D3369FE1B3A9D2B00115330 /* ApplySubViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplySubViewModel.h; sourceTree = "<group>"; };
+		5D3369FF1B3A9D2B00115330 /* ApplySubViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApplySubViewModel.m; sourceTree = "<group>"; };
 		5D33B73F1B2972DA00D15562 /* UserCenterIndexViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserCenterIndexViewController.h; sourceTree = "<group>"; };
 		5D33B7401B2972DA00D15562 /* UserCenterIndexViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserCenterIndexViewController.m; sourceTree = "<group>"; };
 		5D33B7471B297C6C00D15562 /* tab_usercenter@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tab_usercenter@1x.png"; sourceTree = "<group>"; };
@@ -309,6 +321,10 @@
 		00B796A41B19C11F00BA879F /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				5D3369F21B3A783B00115330 /* ApplyMainViewModel.h */,
+				5D3369F31B3A783B00115330 /* ApplyMainViewModel.m */,
+				5D3369FE1B3A9D2B00115330 /* ApplySubViewModel.h */,
+				5D3369FF1B3A9D2B00115330 /* ApplySubViewModel.m */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -425,6 +441,8 @@
 				5D3861A81B05DC9800844721 /* CheckViewController.m */,
 				5D5899711B39408D003508DF /* ApplyMain_OLViewController.h */,
 				5D5899721B39408D003508DF /* ApplyMain_OLViewController.m */,
+				5D3369FB1B3A9A2100115330 /* ApplySub_OLViewController.h */,
+				5D3369FC1B3A9A2100115330 /* ApplySub_OLViewController.m */,
 			);
 			path = CheckControllers;
 			sourceTree = "<group>";
@@ -598,6 +616,8 @@
 				5D08C48A1B049DF400C24712 /* AppConfiguration.h */,
 				005BADB51B1ACB8300B4B69D /* ApiJsonHelper.h */,
 				005BADB61B1ACB8300B4B69D /* ApiJsonHelper.m */,
+				5D3369F81B3A934000115330 /* NSDate+LYCDate.h */,
+				5D3369F91B3A934000115330 /* NSDate+LYCDate.m */,
 			);
 			path = commonLib;
 			sourceTree = "<group>";
@@ -908,6 +928,7 @@
 				00E4DE081B2284F400DB62FD /* CheckUserBankViewController.m in Sources */,
 				005BADB71B1ACB8300B4B69D /* ApiJsonHelper.m in Sources */,
 				5D3861EC1B05E6C400844721 /* ASICloudFilesCDNRequest.m in Sources */,
+				5D3369FD1B3A9A2100115330 /* ApplySub_OLViewController.m in Sources */,
 				5D3861E61B05E6C400844721 /* ASIDownloadCache.m in Sources */,
 				00E8BA491B1F1EEB009C390C /* Local_FeeItemDAO.m in Sources */,
 				5D3861E41B05E6C400844721 /* ASIDataCompressor.m in Sources */,
@@ -919,11 +940,13 @@
 				5D3861A31B05D99100844721 /* AsyncSocket.m in Sources */,
 				5D3861F41B05E6C400844721 /* ASIS3BucketObject.m in Sources */,
 				5D3861F01B05E6C400844721 /* ASICloudFilesObject.m in Sources */,
+				5D3369F41B3A783B00115330 /* ApplyMainViewModel.m in Sources */,
 				5D3861931B05D2B200844721 /* ReachabilityHelper.m in Sources */,
 				5D3861E31B05E6C400844721 /* ASIAuthenticationDialog.m in Sources */,
 				5D3861F21B05E6C400844721 /* ASICloudFilesRequest.m in Sources */,
 				5D5899731B39408D003508DF /* ApplyMain_OLViewController.m in Sources */,
 				00E4DE011B227F6C00DB62FD /* Local_BaseDAO.m in Sources */,
+				5D3369FA1B3A934000115330 /* NSDate+LYCDate.m in Sources */,
 				00E8BA441B1F1EBE009C390C /* CheckFlowTypeViewController.m in Sources */,
 				00B796B41B19C75300BA879F /* API_FeeItem.m in Sources */,
 				000A16831B189FC8000C010B /* ASICustomRequest.m in Sources */,
@@ -960,6 +983,7 @@
 				5D3861F11B05E6C400844721 /* ASICloudFilesObjectRequest.m in Sources */,
 				00E8BA4A1B1F1EEB009C390C /* Local_FlowTypeDAO.m in Sources */,
 				5D3861EF1B05E6C400844721 /* ASICloudFilesContainerXMLParserDelegate.m in Sources */,
+				5D336A001B3A9D2B00115330 /* ApplySubViewModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

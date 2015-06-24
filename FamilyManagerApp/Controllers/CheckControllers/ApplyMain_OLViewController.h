@@ -7,11 +7,18 @@
 //
 
 #import <UIKit/UIKit.h>
+@class LycDialogView;
 
-@interface ApplyMain_OLViewController : UITableViewController
+@interface ApplyMain_OLViewController : UIViewController<NSURLConnectionDelegate,UITableViewDataSource, UITableViewDelegate>
 {
     dispatch_queue_t cQueue; //定义一个并行队列
+    NSOperationQueue *_nsq;//队列
 }
+@property (weak, nonatomic) IBOutlet UITableView *table;
+
+//加载框
+@property (strong, nonatomic) LycDialogView *dialogView;
+
 //账单数据
 @property (strong, nonatomic) NSMutableArray *applyMainList;
 @end

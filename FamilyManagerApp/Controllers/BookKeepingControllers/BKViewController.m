@@ -11,12 +11,10 @@
 #import "AppDelegate.h"
 #import "LycTableCellViewDefault.h"
 #import "LycTableCellViewDefault2.h"
-#import "DateFormatterHelper.h"
 #import "ASIFormDataRequest.h"
 #import "CheckFlowTypeViewController.h"
 #import "CheckFeeItemViewController.h"
 #import "CheckUserBankViewController.h"
-#import "ApiJsonHelper.h"
 
 #import "Local_FeeItemDAO.h"
 #import "Local_FlowTypeDAO.h"
@@ -199,7 +197,6 @@
 
 -(void)loadBaseData
 {
-    [self.dialogView showDialog:@"正在加载请稍候再试。。。。"];
     //加载所有基础数据
     //加载资金类型数据
     if (!sQueue) {
