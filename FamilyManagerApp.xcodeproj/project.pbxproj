@@ -352,16 +352,14 @@
 				5D08C4731B0482E100C24712 /* AppResource */,
 				5D08C4851B049B8900C24712 /* commonLib */,
 				5D08C4591B0474E100C24712 /* Controllers */,
+				5D08C4641B0474E100C24712 /* Views */,
+				5D08C4611B0474E100C24712 /* Models */,
 				5D08C45F1B0474E100C24712 /* DataLib */,
-				5D3861871B05BFBE00844721 /* Frameworks */,
+				5D08C4621B0474E100C24712 /* NetWorkLib */,
+				5D08C4301B04746900C24712 /* Supporting Files */,
 				5D08C4401B04746900C24712 /* Images.xcassets */,
 				5D08C4421B04746900C24712 /* LaunchScreen.xib */,
 				00E8BA4B1B1F1F30009C390C /* Main.storyboard */,
-				5D08C4611B0474E100C24712 /* Models */,
-				5D08C4621B0474E100C24712 /* NetWorkLib */,
-				5D08C4301B04746900C24712 /* Supporting Files */,
-				5D08C4631B0474E100C24712 /* ViewModels */,
-				5D08C4641B0474E100C24712 /* Views */,
 				5D2639551B2E64DF0061E060 /* Settings.bundle */,
 			);
 			path = FamilyManagerApp;
@@ -503,13 +501,6 @@
 			path = NetWorkLib;
 			sourceTree = "<group>";
 		};
-		5D08C4631B0474E100C24712 /* ViewModels */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = ViewModels;
-			sourceTree = "<group>";
-		};
 		5D08C4641B0474E100C24712 /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -622,13 +613,6 @@
 				5D33B7471B297C6C00D15562 /* tab_usercenter@1x.png */,
 			);
 			name = tabImages;
-			sourceTree = "<group>";
-		};
-		5D3861871B05BFBE00844721 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		5D38618D1B05D27000844721 /* Reachability */ = {

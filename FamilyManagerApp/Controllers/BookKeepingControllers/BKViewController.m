@@ -199,6 +199,7 @@
 
 -(void)loadBaseData
 {
+    [self.dialogView showDialog:@"正在加载请稍候再试。。。。"];
     //加载所有基础数据
     //加载资金类型数据
     if (!sQueue) {
@@ -359,7 +360,7 @@
         return;
     }
     
-    [_dialogView showDialog];
+    [_dialogView showDialog:nil];
     
     NSInteger userID = [ud integerForKey:__fm_defaultsKey_loginUser_ID];
     //现金记账
