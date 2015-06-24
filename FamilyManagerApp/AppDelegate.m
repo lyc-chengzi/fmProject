@@ -61,7 +61,7 @@
         [requestUB addPostValue:[NSNumber numberWithInteger:userID] forKey:@"userid"];
         [requestUB setDidFinishSelector:@selector(requestFinishGetUserBank:)];
         [requestUB setDidFailSelector:@selector(requestDidFailedCallBack:)];
-        [requestUB startSynchronous];
+        [requestUB startAsynchronous];
     }
     return YES;
 }
