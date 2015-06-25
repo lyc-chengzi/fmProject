@@ -12,7 +12,10 @@
 #import "LycDialogView.h"
 #import "ApplyMainViewModel.h"
 #import "ApplySubViewModel.h"
+#import "LycApplySubCellAutoHeight.h"
+#import "LycApplySubCell.h"
 
+#define applySubCellDefaultHeight 120.0 //默认高度120
 @implementation ApplySub_OLViewController
 
 -(void)viewDidLoad
@@ -21,11 +24,17 @@
     self.dialogView = [[LycDialogView alloc] initWithTitle:@"正在加载" andSuperView:self.view isModal:NO];
     _applySubList = [[NSMutableArray alloc] init];
     _nsq = [[NSOperationQueue alloc] init];
-    
-    //加载账单数据
-    [self loadData];
+    _isNeedLoadData = YES;
 }
 
+-(void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    if (_isNeedLoadData == YES) {
+        //加载账单数据
+        [self loadData];
+    }
+}
 
 //提示错误信息
 -(void)showErrorInfo:(NSString *) text
@@ -73,6 +82,7 @@
                 [_applySubList removeAllObjects];
                 for (int i = 0; i < [aj.jsonObj count]; i++) {
                     NSDictionary *dic = [aj.jsonObj objectAtIndex:i];
+                    //给实体赋值
                     ApplySubViewModel *sub = [[ApplySubViewModel alloc] init];
                     sub.applyMainID = (int)[dic[@"ApplyMainID"] integerValue];
                     sub.applySubID = (int)[dic[@"ApplySubID"] integerValue];
@@ -93,10 +103,15 @@
                     sub.cAdd = [dic objectForKey:@"CAdd"];
                     sub.createDate = [dic objectForKey:@"CreateDate"];
                     
-                    [_applySubList addObject:sub];
+                    LycApplySubCellAutoHeight *lycCell = [[LycApplySubCellAutoHeight alloc] init];
+                    lycCell.applySubModel = sub;
+                    [_applySubList addObject:lycCell];
+                    
+                    //计算cell的高度
                 }
             }
             NSBlockOperation *op = [NSBlockOperation blockOperationWithBlock:^{
+                _isNeedLoadData = NO;
                 [self.table reloadData];
                 [self.dialogView hideDialog];
             }];
@@ -118,32 +133,25 @@
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"base"];
-    ApplySubViewModel *sub = _applySubList[indexPath.row];
-    UILabel *lblCashOrBank = (UILabel *)[cell viewWithTag:1];
-    UILabel *lblFlowType = (UILabel *)[cell viewWithTag:2];
-    UILabel *lblInOut = (UILabel *)[cell viewWithTag:3];
-    UILabel *lblMoney = (UILabel *)[cell viewWithTag:4];
-    UILabel *lblAdd = (UILabel *)[cell viewWithTag:5];
-    lblCashOrBank.text = sub.cashOrBank == 0 ? @"现金业务" : @"银行业务";
-    lblFlowType.text = sub.flowTypeName;
-    if ([sub.inOutType isEqualToString:@"in"]) {
-        lblInOut.text = @"收入";
-        lblInOut.textColor = [UIColor colorWithRed:0.2 green:0.7 blue:0.4 alpha:1];
-    }else if ([sub.inOutType isEqualToString:@"out"]) {
-        lblInOut.text = [NSString stringWithFormat:@"支出-%@",sub.feeItemName];
-        lblInOut.textColor = [UIColor colorWithRed:1 green:0 blue:0 alpha:1];
-    }else {
-        lblInOut.text = sub.inOutType;
-    }
-    lblMoney.text = [NSString stringWithFormat:@"¥%@", sub.iMoney];
-    lblAdd.text = sub.cAdd;
+    LycApplySubCell *cell = [[LycApplySubCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"lycCell"];
+    LycApplySubCellAutoHeight *cellFrame = _applySubList[indexPath.row];
+    [cell setCellValue:cellFrame];
     return cell;
 }
 
+
+
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 80;
+    if (self.applySubList.count == 0) {
+        LYCLog(@"height-----44");
+        return 44;
+    }else {
+        
+        LycApplySubCellAutoHeight *lycCell = [self.applySubList objectAtIndex:indexPath.row];
+        LYCLog(@"height-----%f",lycCell.cellHeight);
+        return lycCell.cellHeight;
+    }
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {

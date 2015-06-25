@@ -12,6 +12,7 @@
 @interface ApplySub_OLViewController : UIViewController<UITableViewDataSource, UITableViewDelegate>
 {
     NSOperationQueue *_nsq;//队列
+    BOOL _isNeedLoadData;
 }
 @property (weak, nonatomic) IBOutlet UICollectionView *collection;
 @property (weak, nonatomic) IBOutlet UITableView *table;

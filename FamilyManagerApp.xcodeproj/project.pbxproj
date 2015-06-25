@@ -91,6 +91,8 @@
 		5D3861FB1B05E8FB00844721 /* libz.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D3861FA1B05E8FB00844721 /* libz.1.dylib */; };
 		5D3861FD1B05E95000844721 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D3861FC1B05E95000844721 /* CFNetwork.framework */; };
 		5D3861FF1B05E98C00844721 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D3861FE1B05E98C00844721 /* libxml2.dylib */; };
+		5D4405881B3BE221009058EA /* LycApplySubCellAutoHeight.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D4405871B3BE221009058EA /* LycApplySubCellAutoHeight.m */; };
+		5D44058B1B3C0251009058EA /* LycApplySubCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D44058A1B3C0251009058EA /* LycApplySubCell.m */; };
 		5D5899731B39408D003508DF /* ApplyMain_OLViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D5899721B39408D003508DF /* ApplyMain_OLViewController.m */; };
 		5DD5AC2B1B2EB725004182D7 /* Property List.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5DD5AC2A1B2EB725004182D7 /* Property List.plist */; };
 		5DD5AC2D1B2EB803004182D7 /* CheckViewTableData.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5DD5AC2C1B2EB803004182D7 /* CheckViewTableData.plist */; };
@@ -257,6 +259,10 @@
 		5D3861FA1B05E8FB00844721 /* libz.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.dylib; path = usr/lib/libz.1.dylib; sourceTree = SDKROOT; };
 		5D3861FC1B05E95000844721 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		5D3861FE1B05E98C00844721 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
+		5D4405861B3BE221009058EA /* LycApplySubCellAutoHeight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LycApplySubCellAutoHeight.h; sourceTree = "<group>"; };
+		5D4405871B3BE221009058EA /* LycApplySubCellAutoHeight.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LycApplySubCellAutoHeight.m; sourceTree = "<group>"; };
+		5D4405891B3C0251009058EA /* LycApplySubCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LycApplySubCell.h; sourceTree = "<group>"; };
+		5D44058A1B3C0251009058EA /* LycApplySubCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LycApplySubCell.m; sourceTree = "<group>"; };
 		5D5899711B39408D003508DF /* ApplyMain_OLViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplyMain_OLViewController.h; sourceTree = "<group>"; };
 		5D5899721B39408D003508DF /* ApplyMain_OLViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApplyMain_OLViewController.m; sourceTree = "<group>"; };
 		5DD5AC2A1B2EB725004182D7 /* Property List.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Property List.plist"; sourceTree = "<group>"; };
@@ -569,6 +575,10 @@
 				005F5FE21B22B0A1004B9FA0 /* LycTableCellViewDefault2.m */,
 				5D08C46D1B047D5600C24712 /* LycTableCellViewDefault.h */,
 				5D08C46E1B047D5600C24712 /* LycTableCellViewDefault.m */,
+				5D4405861B3BE221009058EA /* LycApplySubCellAutoHeight.h */,
+				5D4405871B3BE221009058EA /* LycApplySubCellAutoHeight.m */,
+				5D4405891B3C0251009058EA /* LycApplySubCell.h */,
+				5D44058A1B3C0251009058EA /* LycApplySubCell.m */,
 			);
 			path = LycTableCellView;
 			sourceTree = "<group>";
@@ -961,6 +971,7 @@
 				5D08C4331B04746900C24712 /* main.m in Sources */,
 				5D3861E71B05E6C400844721 /* ASIFormDataRequest.m in Sources */,
 				004D112F1B2AFDD700EDF576 /* LycDialogView.m in Sources */,
+				5D4405881B3BE221009058EA /* LycApplySubCellAutoHeight.m in Sources */,
 				5D3861EE1B05E6C400844721 /* ASICloudFilesContainerRequest.m in Sources */,
 				00E4DE021B227F6C00DB62FD /* Local_UserBankDAO.m in Sources */,
 				00E8BA421B1F1EBE009C390C /* BKViewController.m in Sources */,
@@ -984,6 +995,7 @@
 				00E8BA4A1B1F1EEB009C390C /* Local_FlowTypeDAO.m in Sources */,
 				5D3861EF1B05E6C400844721 /* ASICloudFilesContainerXMLParserDelegate.m in Sources */,
 				5D336A001B3A9D2B00115330 /* ApplySubViewModel.m in Sources */,
+				5D44058B1B3C0251009058EA /* LycApplySubCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
