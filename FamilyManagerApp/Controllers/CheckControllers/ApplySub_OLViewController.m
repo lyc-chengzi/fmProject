@@ -126,6 +126,7 @@
 }
 
 
+/*************************UITableView 代理设置************************/
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return 1;
@@ -156,5 +157,26 @@
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return self.applySubList.count;
+}
+
+/*************************UICollectionView 代理设置************************/
+-(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
+{
+    return self.applyMainList.count;
+}
+
+-(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    static NSString *cellID = @"applyMain";
+    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:cellID forIndexPath:indexPath];
+    ApplyMainViewModel *main = [self.applyMainList objectAtIndex:indexPath.row];
+    UILabel *lblDate = (UILabel *)[cell viewWithTag:1];
+    UILabel *lblInMoney = (UILabel *)[cell viewWithTag:2];
+    UILabel *lblOutMoney = (UILabel *)[cell viewWithTag:3];
+    lblDate.text = main.applyDate;
+    lblInMoney.text = [NSString stringWithFormat:@"收入: ¥%@",main.applyInMoney];
+    lblOutMoney.text = [NSString stringWithFormat:@"支出: ¥%@",main.applyInMoney];
+    
+    return cell;
 }
 @end

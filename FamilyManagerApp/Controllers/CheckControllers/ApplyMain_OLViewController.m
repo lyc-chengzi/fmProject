@@ -160,6 +160,8 @@
     ApplyMainViewModel *main = [self.applyMainList objectAtIndex:indexPath.row];
     ApplySub_OLViewController *solvc = [self.storyboard instantiateViewControllerWithIdentifier:@"applysub_olID"];
     solvc.currentMain = main;
+    solvc.applyMainList = self.applyMainList;
+    solvc.currentMainIndex = (int)indexPath.row;
     [self.navigationController pushViewController:solvc animated:YES];
 }
 
