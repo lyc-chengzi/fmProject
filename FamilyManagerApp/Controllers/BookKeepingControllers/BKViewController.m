@@ -69,7 +69,7 @@
     [self loadBaseData];
     
     //注册键盘事件监听
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardAppearHandler:) name:UIKeyboardDidChangeFrameNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardAppearHandler:) name:UIKeyboardWillChangeFrameNotification object:nil];
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -253,8 +253,15 @@
     NSDictionary *notInfo = [noti valueForKey:@"userInfo"];
     CGRect keyBoardRect = [notInfo[@"UIKeyboardFrameEndUserInfoKey"] CGRectValue];
     CGFloat duration = [notInfo[@"UIKeyboardAnimationDurationUserInfoKey"] doubleValue];
+    
+    CGFloat moveSize = keyBoardRect.origin.y - self.view.frame.size.height;
+    LYCLog(@"######%f",moveSize);
+    if (moveSize < 0) {
+        moveSize += 100;
+    }
     [UIView animateWithDuration:duration animations:^{
-        self.view.transform = CGAffineTransformMakeTranslation(0, keyBoardRect.origin.y - self.view.frame.size.height);
+        
+        self.view.transform = CGAffineTransformMakeTranslation(0, moveSize);
     }];
 }
 
