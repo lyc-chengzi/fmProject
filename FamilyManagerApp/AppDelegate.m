@@ -99,7 +99,6 @@
         Local_UserBankDAO *ubDao = [[Local_UserBankDAO alloc] init];
         [ubDao deleteAllUserBanksWithUserID:(int)userID];
         [ubDao addUserBanks:ah.jsonObj toUserID:(int)userID];
-        LYCLog(@"程序启动任务1：更新userbank数据完成；");
     }
     ah.jsonObj = nil;
 }

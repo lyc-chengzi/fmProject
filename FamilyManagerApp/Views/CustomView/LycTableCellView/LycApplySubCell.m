@@ -15,6 +15,8 @@
 {
     self = [super initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier];
     if (self) {
+        self.selectionStyle = UITableViewCellSelectionStyleNone;
+        
         //添加记账类型
         self.lblCashOrBank = [[UILabel alloc] init];
         self.lblCashOrBank.font = [UIFont systemFontOfSize:15];
@@ -29,6 +31,7 @@
         
         //添加记账金额
         self.lblMoney = [[UILabel alloc] init];
+        self.lblMoney.textAlignment = NSTextAlignmentRight;
         self.lblMoney.textColor = [UIColor colorWithRed:0.33 green:0.7 blue:0.95 alpha:1.0];
         [self.contentView addSubview:self.lblMoney];
         
@@ -47,7 +50,7 @@
         //添加备注信息
         self.lblAdd = [[UILabel alloc] init];
         self.lblAdd.font = [UIFont systemFontOfSize:13];
-        self.lblAdd.textColor = [UIColor darkGrayColor];
+        self.lblAdd.textColor = [UIColor blackColor];
         self.lblAdd.numberOfLines = 2;
         [self.contentView addSubview:self.lblAdd];
         

@@ -14,6 +14,9 @@
 #import "ApplySub_OLViewController.h"
 
 @interface ApplyMain_OLViewController ()
+{
+    BOOL _isNeedLoadData;//是否需要加载数据
+}
 
 @end
 
@@ -29,13 +32,21 @@
     UIBarButtonItem *backBtn = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
     [self.navigationItem setBackBarButtonItem:backBtn];
     
-    //加载账单数据
-    [self loadData];
+    _isNeedLoadData = YES;
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    if (_isNeedLoadData == YES) {
+        //加载账单数据
+        [self loadData];
+    }
 }
 
 //提示错误信息
@@ -61,7 +72,7 @@
     NSString *serverIP = __fm_userDefaults_serverIP;
     NSURL *url = [NSURL URLWithString:[serverIP stringByAppendingString:__fm_apiPath_queryApplyMain]];
     //创建请求
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url cachePolicy:0 timeoutInterval:30];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url cachePolicy:0 timeoutInterval:15];
     request.HTTPMethod = @"POST";
     //默认加载当前月的数据
     NSDate *now = [NSDate date];
@@ -110,6 +121,7 @@
                 }
             }
             NSBlockOperation *op = [NSBlockOperation blockOperationWithBlock:^{
+                _isNeedLoadData = NO;
                 [self.table reloadData];
                 [self.dialogView hideDialog];
             }];

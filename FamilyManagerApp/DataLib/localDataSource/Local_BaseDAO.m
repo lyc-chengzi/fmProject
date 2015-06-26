@@ -8,6 +8,7 @@
 
 #import "Local_BaseDAO.h"
 #import <CoreData/CoreData.h>
+#import "AppConfiguration.h"
 
 @implementation Local_BaseDAO
 @synthesize appDelegate = _appDelegate;
@@ -68,7 +69,7 @@
     }
     NSError *error;
     if (![self.appDelegate.managedObjectContext save:&error]) {
-        NSLog(@"全部删除实体：[%@]时出现错误：%@,%@", entityName, error, [error userInfo]);
+        LYCLog(@"全部删除实体：[%@]时出现错误：%@,%@", entityName, error, [error userInfo]);
     }
 }
 
@@ -82,7 +83,7 @@
     }
     NSError *error;
     if (![self.appDelegate.managedObjectContext save:&error]) {
-        NSLog(@"全部删除实体：[%@]时出现错误：%@,%@", entityName, error, [error userInfo]);
+        LYCLog(@"全部删除实体：[%@]时出现错误：%@,%@", entityName, error, [error userInfo]);
     }
 }
 
@@ -92,7 +93,7 @@
     NSArray *array = nil;
     array = [self getAllEntities:entityName withPredicate:predicate andOrderBy:nil];
     if (!array) {
-        NSLog(@"查询没有数据！");
+        LYCLog(@"查询没有数据！");
         return nil;
     }else {
         return [array firstObject];

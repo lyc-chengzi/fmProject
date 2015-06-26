@@ -39,7 +39,7 @@
         _cellHeight += _flowTypeFrame.size.height;
         
         //3. 设置金额的frame
-        _iMoneyFrame = CGRectMake(210, _applySubFrame_yBegin, 170, 20);
+        _iMoneyFrame = CGRectMake(130, _applySubFrame_yBegin, 170, 20);
     }
     return self;
 }

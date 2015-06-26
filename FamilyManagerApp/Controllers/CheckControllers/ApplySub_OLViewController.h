@@ -12,10 +12,10 @@
 @interface ApplySub_OLViewController : UIViewController<UITableViewDataSource, UITableViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate>
 {
     NSOperationQueue *_nsq;//队列
-    BOOL _isNeedLoadData;
+    BOOL _isRegistCollectionCell;
 }
-@property (weak, nonatomic) IBOutlet UICollectionView *collection;//账单主信息展示 collection
-@property (weak, nonatomic) IBOutlet UITableView *table;//账单明细信息展示 table
+@property (weak, nonatomic) IBOutlet UICollectionView *collectionMain;//账单主信息展示 collection
+@property (weak, nonatomic) IBOutlet UITableView *tableSub;//账单明细信息展示 table
 @property (nonatomic) int currentMainIndex;//当前主信息的下标
 
 @property (weak, nonatomic) NSMutableArray *applyMainList;

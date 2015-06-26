@@ -527,56 +527,27 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" pagingEnabled="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="TBL-au-Hhj">
-                                <rect key="frame" x="0.0" y="10" width="320" height="70"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="OUo-74-ezk">
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="tgm-HP-bfd">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="70"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="70" id="c8l-n6-jhC"/>
+                                </constraints>
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="g3Z-aF-WcR">
                                     <size key="itemSize" width="320" height="70"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
-                                <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="applyMain" id="2is-0L-LsA">
-                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="70"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="230" translatesAutoresizingMaskIntoConstraints="NO" id="SNl-tY-JQz" userLabel="收入">
-                                                    <rect key="frame" x="15" y="40" width="130" height="20"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" red="0.17487815230000001" green="0.754" blue="0.4612908127" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" tag="3" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="230" translatesAutoresizingMaskIntoConstraints="NO" id="JX1-1h-InQ" userLabel="支出">
-                                                    <rect key="frame" x="175" y="40" width="130" height="20"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="108" translatesAutoresizingMaskIntoConstraints="NO" id="Qg3-Wy-lHZ" userLabel="日期">
-                                                    <rect key="frame" x="105" y="12" width="108" height="30"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        </view>
-                                        <color key="backgroundColor" red="0.83720374617737003" green="0.83480265672782872" blue="0.76801176058715592" alpha="1" colorSpace="calibratedRGB"/>
-                                        <size key="customSize" width="320" height="70"/>
-                                    </collectionViewCell>
-                                </cells>
+                                <cells/>
                                 <connections>
-                                    <outlet property="dataSource" destination="hAM-aw-bjT" id="S6n-cm-4Lg"/>
-                                    <outlet property="delegate" destination="hAM-aw-bjT" id="z5S-Tx-Kvf"/>
+                                    <outlet property="dataSource" destination="hAM-aw-bjT" id="dan-bU-7Tc"/>
+                                    <outlet property="delegate" destination="hAM-aw-bjT" id="nmI-Nj-FLy"/>
                                 </connections>
                             </collectionView>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="yyC-Vf-sA7">
-                                <rect key="frame" x="0.0" y="110" width="320" height="394"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" translatesAutoresizingMaskIntoConstraints="NO" id="yyC-Vf-sA7">
+                                <rect key="frame" x="0.0" y="70" width="320" height="434"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="base" rowHeight="44" id="4Fp-Wc-hO5">
                                         <autoresizingMask key="autoresizingMask"/>
@@ -626,11 +597,20 @@
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="yyC-Vf-sA7" secondAttribute="trailing" constant="-16" id="HDr-uC-mKh"/>
+                            <constraint firstItem="yyC-Vf-sA7" firstAttribute="top" secondItem="nMO-Gn-lAl" secondAttribute="bottom" constant="70" id="TQM-8p-cVF"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="tgm-HP-bfd" secondAttribute="trailing" constant="-16" id="Zwp-zi-Y5D"/>
+                            <constraint firstItem="tgm-HP-bfd" firstAttribute="top" secondItem="nMO-Gn-lAl" secondAttribute="bottom" id="qsD-L7-e2p"/>
+                            <constraint firstItem="yyC-Vf-sA7" firstAttribute="leading" secondItem="5DA-g6-eHi" secondAttribute="leadingMargin" constant="-16" id="vJQ-fl-h0L"/>
+                            <constraint firstItem="tgm-HP-bfd" firstAttribute="leading" secondItem="5DA-g6-eHi" secondAttribute="leadingMargin" constant="-16" id="wib-U1-dOB"/>
+                            <constraint firstItem="kIR-1i-id5" firstAttribute="top" secondItem="yyC-Vf-sA7" secondAttribute="bottom" id="zW4-N5-fXX"/>
+                        </constraints>
                     </view>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
                     <connections>
-                        <outlet property="collection" destination="TBL-au-Hhj" id="U2I-uk-jc2"/>
-                        <outlet property="table" destination="yyC-Vf-sA7" id="ZKV-9l-AiP"/>
+                        <outlet property="collectionMain" destination="tgm-HP-bfd" id="ucF-qT-Sfp"/>
+                        <outlet property="tableSub" destination="yyC-Vf-sA7" id="K3w-Z0-IbE"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="I2q-zH-fhO" userLabel="First Responder" sceneMemberID="firstResponder"/>

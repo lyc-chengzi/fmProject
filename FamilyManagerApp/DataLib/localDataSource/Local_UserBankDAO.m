@@ -8,6 +8,7 @@
 
 #import "Local_UserBankDAO.h"
 #import "Local_UserBank.h"
+#import "AppConfiguration.h"
 
 @implementation Local_UserBankDAO
 -(instancetype)init
@@ -40,10 +41,10 @@
     }
     NSError *error;
     if ([self.appDelegate.managedObjectContext save:&error]) {
-        NSLog(@"添加成功");
+        LYCLog(@"添加成功");
     }else
     {
-        NSLog(@"保存时出现错误：%@,%@",error,[error userInfo]);
+        LYCLog(@"保存时出现错误：%@,%@",error,[error userInfo]);
     }
     return result;
 }
@@ -79,7 +80,6 @@
 //清空某一个用户银行信息
 -(void) deleteAllUserBanksWithUserID:(int) userID
 {
-    NSLog(@"准备删除用户：[%i]下所有银行信息",userID);
     //查询条件
     NSPredicate *whereUserID = [NSPredicate predicateWithFormat:@"userID = %i",userID];
     [self deleteSomeEntities:_entityName withPredicate:whereUserID];

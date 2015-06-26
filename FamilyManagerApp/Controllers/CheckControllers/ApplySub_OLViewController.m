@@ -14,26 +14,23 @@
 #import "ApplySubViewModel.h"
 #import "LycApplySubCellAutoHeight.h"
 #import "LycApplySubCell.h"
+#import "LYCApplyMainCollectionView.h"
 
 #define applySubCellDefaultHeight 120.0 //默认高度120
 @implementation ApplySub_OLViewController
 
 -(void)viewDidLoad
 {
+    self.automaticallyAdjustsScrollViewInsets = NO;
     //初始化等待框
     self.dialogView = [[LycDialogView alloc] initWithTitle:@"正在加载" andSuperView:self.view isModal:NO];
     _applySubList = [[NSMutableArray alloc] init];
     _nsq = [[NSOperationQueue alloc] init];
-    _isNeedLoadData = YES;
-}
-
--(void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
-    if (_isNeedLoadData == YES) {
-        //加载账单数据
-        [self loadData];
-    }
+    //加载账单数据
+    [self loadData];
+    
+    //加载用户选择的主表信息
+    [self.collectionMain selectItemAtIndexPath:[NSIndexPath indexPathForItem:self.currentMainIndex inSection:0] animated:NO scrollPosition:UICollectionViewScrollPositionLeft];
 }
 
 //提示错误信息
@@ -54,7 +51,7 @@
     NSString *serverIP = __fm_userDefaults_serverIP;
     NSURL *url = [NSURL URLWithString:[serverIP stringByAppendingString:__fm_apiPath_queryApplySub]];
     //创建请求
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url cachePolicy:0 timeoutInterval:30];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url cachePolicy:0 timeoutInterval:15];
     request.HTTPMethod = @"POST";
     NSString *values = [NSString stringWithFormat:@"userID=%d&applymainid=%d",
                         (int)userID,
@@ -111,8 +108,8 @@
                 }
             }
             NSBlockOperation *op = [NSBlockOperation blockOperationWithBlock:^{
-                _isNeedLoadData = NO;
-                [self.table reloadData];
+
+                [self.tableSub reloadData];
                 [self.dialogView hideDialog];
             }];
             [[NSOperationQueue mainQueue] addOperation:op];
@@ -145,12 +142,9 @@
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (self.applySubList.count == 0) {
-        LYCLog(@"height-----44");
         return 44;
     }else {
-        
         LycApplySubCellAutoHeight *lycCell = [self.applySubList objectAtIndex:indexPath.row];
-        LYCLog(@"height-----%f",lycCell.cellHeight);
         return lycCell.cellHeight;
     }
 }
@@ -168,15 +162,37 @@
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *cellID = @"applyMain";
-    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:cellID forIndexPath:indexPath];
+    if (_isRegistCollectionCell == NO) {
+        UINib *nib = [UINib nibWithNibName:@"LYCApplyMainCollectionView" bundle:nil];
+        [collectionView registerNib:nib forCellWithReuseIdentifier:cellID];
+        _isRegistCollectionCell = YES;
+    }
+    LYCApplyMainCollectionView *cell = [collectionView dequeueReusableCellWithReuseIdentifier:cellID forIndexPath:indexPath];
     ApplyMainViewModel *main = [self.applyMainList objectAtIndex:indexPath.row];
-    UILabel *lblDate = (UILabel *)[cell viewWithTag:1];
-    UILabel *lblInMoney = (UILabel *)[cell viewWithTag:2];
-    UILabel *lblOutMoney = (UILabel *)[cell viewWithTag:3];
-    lblDate.text = main.applyDate;
-    lblInMoney.text = [NSString stringWithFormat:@"收入: ¥%@",main.applyInMoney];
-    lblOutMoney.text = [NSString stringWithFormat:@"支出: ¥%@",main.applyInMoney];
+    
+    cell.lblDate.text = main.applyDate;
+    cell.lblInMoney.text = [NSString stringWithFormat:@"收入: ¥%@",main.applyInMoney];
+    cell.lblOutMoney.text = [NSString stringWithFormat:@"支出: ¥%@",main.applyOutMoney];
     
     return cell;
 }
+
+//滚动事件停止时
+-(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
+{
+    if ([scrollView isKindOfClass:[UICollectionView class]]) {
+        CGPoint contentOffset = scrollView.contentOffset;
+        CGFloat width = scrollView.frame.size.width;
+        //计算滚动后的pageindex，重新加载数据
+        int pageIndex = (int)(contentOffset.x / width);
+        if (self.currentMainIndex != pageIndex) {
+            self.currentMainIndex = pageIndex;
+            self.currentMain = self.applyMainList[self.currentMainIndex];
+            [self loadData];
+        }
+    }
+    
+}
+
+
 @end
