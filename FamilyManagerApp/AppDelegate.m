@@ -26,7 +26,7 @@
     [self checkSettingBundle];//检查配置信息是否有默认值
     /***********设置状态栏***********/
     application.statusBarStyle = UIStatusBarStyleLightContent;
-    
+    self.window.backgroundColor = [UIColor whiteColor];
     /***********设置导航条背景色和标题颜色***********/
     UINavigationBar *shareNB = [UINavigationBar appearance];
     [shareNB setBarTintColor:__fm_Global_color_blue];//设置背景色
@@ -61,7 +61,7 @@
         [requestUB addPostValue:[NSNumber numberWithInteger:userID] forKey:@"userid"];
         [requestUB setDidFinishSelector:@selector(requestFinishGetUserBank:)];
         [requestUB setDidFailSelector:@selector(requestDidFailedCallBack:)];
-        [requestUB startSynchronous];
+        [requestUB startAsynchronous];
     }
     return YES;
 }
@@ -99,7 +99,6 @@
         Local_UserBankDAO *ubDao = [[Local_UserBankDAO alloc] init];
         [ubDao deleteAllUserBanksWithUserID:(int)userID];
         [ubDao addUserBanks:ah.jsonObj toUserID:(int)userID];
-        LYCLog(@"程序启动任务1：更新userbank数据完成；");
     }
     ah.jsonObj = nil;
 }

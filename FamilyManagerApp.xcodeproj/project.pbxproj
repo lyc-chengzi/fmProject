@@ -47,6 +47,10 @@
 		5D08C4881B049BC900C24712 /* DateFormatterHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D08C4871B049BC900C24712 /* DateFormatterHelper.m */; };
 		5D2639561B2E64DF0061E060 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 5D2639551B2E64DF0061E060 /* Settings.bundle */; };
 		5D2639591B2E7B780061E060 /* UserCenterLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D2639581B2E7B780061E060 /* UserCenterLoginViewController.m */; };
+		5D3369F41B3A783B00115330 /* ApplyMainViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D3369F31B3A783B00115330 /* ApplyMainViewModel.m */; };
+		5D3369FA1B3A934000115330 /* NSDate+LYCDate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D3369F91B3A934000115330 /* NSDate+LYCDate.m */; };
+		5D3369FD1B3A9A2100115330 /* ApplySub_OLViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D3369FC1B3A9A2100115330 /* ApplySub_OLViewController.m */; };
+		5D336A001B3A9D2B00115330 /* ApplySubViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D3369FF1B3A9D2B00115330 /* ApplySubViewModel.m */; };
 		5D33B7411B2972DA00D15562 /* UserCenterIndexViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D33B7401B2972DA00D15562 /* UserCenterIndexViewController.m */; };
 		5D33B7481B297C6C00D15562 /* tab_usercenter@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5D33B7471B297C6C00D15562 /* tab_usercenter@1x.png */; };
 		5D33B74A1B297D8A00D15562 /* tab_usercenter@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5D33B7491B297D8A00D15562 /* tab_usercenter@2x.png */; };
@@ -87,6 +91,11 @@
 		5D3861FB1B05E8FB00844721 /* libz.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D3861FA1B05E8FB00844721 /* libz.1.dylib */; };
 		5D3861FD1B05E95000844721 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D3861FC1B05E95000844721 /* CFNetwork.framework */; };
 		5D3861FF1B05E98C00844721 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D3861FE1B05E98C00844721 /* libxml2.dylib */; };
+		5D4405881B3BE221009058EA /* LycApplySubCellAutoHeight.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D4405871B3BE221009058EA /* LycApplySubCellAutoHeight.m */; };
+		5D44058B1B3C0251009058EA /* LycApplySubCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D44058A1B3C0251009058EA /* LycApplySubCell.m */; };
+		5D4D1A941B3CF4D10028943D /* LYCApplyMainCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D4D1A931B3CF4D10028943D /* LYCApplyMainCollectionView.m */; };
+		5D4D1A961B3CF4F20028943D /* LYCApplyMainCollectionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5D4D1A951B3CF4F20028943D /* LYCApplyMainCollectionView.xib */; };
+		5D5899731B39408D003508DF /* ApplyMain_OLViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D5899721B39408D003508DF /* ApplyMain_OLViewController.m */; };
 		5DD5AC2B1B2EB725004182D7 /* Property List.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5DD5AC2A1B2EB725004182D7 /* Property List.plist */; };
 		5DD5AC2D1B2EB803004182D7 /* CheckViewTableData.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5DD5AC2C1B2EB803004182D7 /* CheckViewTableData.plist */; };
 /* End PBXBuildFile section */
@@ -169,6 +178,14 @@
 		5D2639551B2E64DF0061E060 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		5D2639571B2E7B780061E060 /* UserCenterLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserCenterLoginViewController.h; sourceTree = "<group>"; };
 		5D2639581B2E7B780061E060 /* UserCenterLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserCenterLoginViewController.m; sourceTree = "<group>"; };
+		5D3369F21B3A783B00115330 /* ApplyMainViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplyMainViewModel.h; sourceTree = "<group>"; };
+		5D3369F31B3A783B00115330 /* ApplyMainViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApplyMainViewModel.m; sourceTree = "<group>"; };
+		5D3369F81B3A934000115330 /* NSDate+LYCDate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+LYCDate.h"; sourceTree = "<group>"; };
+		5D3369F91B3A934000115330 /* NSDate+LYCDate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+LYCDate.m"; sourceTree = "<group>"; };
+		5D3369FB1B3A9A2100115330 /* ApplySub_OLViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplySub_OLViewController.h; sourceTree = "<group>"; };
+		5D3369FC1B3A9A2100115330 /* ApplySub_OLViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApplySub_OLViewController.m; sourceTree = "<group>"; };
+		5D3369FE1B3A9D2B00115330 /* ApplySubViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplySubViewModel.h; sourceTree = "<group>"; };
+		5D3369FF1B3A9D2B00115330 /* ApplySubViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApplySubViewModel.m; sourceTree = "<group>"; };
 		5D33B73F1B2972DA00D15562 /* UserCenterIndexViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserCenterIndexViewController.h; sourceTree = "<group>"; };
 		5D33B7401B2972DA00D15562 /* UserCenterIndexViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserCenterIndexViewController.m; sourceTree = "<group>"; };
 		5D33B7471B297C6C00D15562 /* tab_usercenter@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tab_usercenter@1x.png"; sourceTree = "<group>"; };
@@ -244,6 +261,15 @@
 		5D3861FA1B05E8FB00844721 /* libz.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.dylib; path = usr/lib/libz.1.dylib; sourceTree = SDKROOT; };
 		5D3861FC1B05E95000844721 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		5D3861FE1B05E98C00844721 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
+		5D4405861B3BE221009058EA /* LycApplySubCellAutoHeight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LycApplySubCellAutoHeight.h; sourceTree = "<group>"; };
+		5D4405871B3BE221009058EA /* LycApplySubCellAutoHeight.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LycApplySubCellAutoHeight.m; sourceTree = "<group>"; };
+		5D4405891B3C0251009058EA /* LycApplySubCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LycApplySubCell.h; sourceTree = "<group>"; };
+		5D44058A1B3C0251009058EA /* LycApplySubCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LycApplySubCell.m; sourceTree = "<group>"; };
+		5D4D1A921B3CF4D10028943D /* LYCApplyMainCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LYCApplyMainCollectionView.h; path = LycScrollView/LYCApplyMainCollectionView.h; sourceTree = "<group>"; };
+		5D4D1A931B3CF4D10028943D /* LYCApplyMainCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LYCApplyMainCollectionView.m; path = LycScrollView/LYCApplyMainCollectionView.m; sourceTree = "<group>"; };
+		5D4D1A951B3CF4F20028943D /* LYCApplyMainCollectionView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LYCApplyMainCollectionView.xib; path = LycScrollView/LYCApplyMainCollectionView.xib; sourceTree = "<group>"; };
+		5D5899711B39408D003508DF /* ApplyMain_OLViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplyMain_OLViewController.h; sourceTree = "<group>"; };
+		5D5899721B39408D003508DF /* ApplyMain_OLViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApplyMain_OLViewController.m; sourceTree = "<group>"; };
 		5DD5AC2A1B2EB725004182D7 /* Property List.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Property List.plist"; sourceTree = "<group>"; };
 		5DD5AC2C1B2EB803004182D7 /* CheckViewTableData.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = CheckViewTableData.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -285,6 +311,9 @@
 				0068C5651B318E7600C42163 /* LycAutoScrollView.xib */,
 				0068C5671B318FA600C42163 /* LycScrollCollectionViewCell.h */,
 				0068C5681B318FA600C42163 /* LycScrollCollectionViewCell.m */,
+				5D4D1A921B3CF4D10028943D /* LYCApplyMainCollectionView.h */,
+				5D4D1A931B3CF4D10028943D /* LYCApplyMainCollectionView.m */,
+				5D4D1A951B3CF4F20028943D /* LYCApplyMainCollectionView.xib */,
 			);
 			name = LycScrollView;
 			sourceTree = "<group>";
@@ -306,6 +335,10 @@
 		00B796A41B19C11F00BA879F /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				5D3369F21B3A783B00115330 /* ApplyMainViewModel.h */,
+				5D3369F31B3A783B00115330 /* ApplyMainViewModel.m */,
+				5D3369FE1B3A9D2B00115330 /* ApplySubViewModel.h */,
+				5D3369FF1B3A9D2B00115330 /* ApplySubViewModel.m */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -349,16 +382,14 @@
 				5D08C4731B0482E100C24712 /* AppResource */,
 				5D08C4851B049B8900C24712 /* commonLib */,
 				5D08C4591B0474E100C24712 /* Controllers */,
+				5D08C4641B0474E100C24712 /* Views */,
+				5D08C4611B0474E100C24712 /* Models */,
 				5D08C45F1B0474E100C24712 /* DataLib */,
-				5D3861871B05BFBE00844721 /* Frameworks */,
+				5D08C4621B0474E100C24712 /* NetWorkLib */,
+				5D08C4301B04746900C24712 /* Supporting Files */,
 				5D08C4401B04746900C24712 /* Images.xcassets */,
 				5D08C4421B04746900C24712 /* LaunchScreen.xib */,
 				00E8BA4B1B1F1F30009C390C /* Main.storyboard */,
-				5D08C4611B0474E100C24712 /* Models */,
-				5D08C4621B0474E100C24712 /* NetWorkLib */,
-				5D08C4301B04746900C24712 /* Supporting Files */,
-				5D08C4631B0474E100C24712 /* ViewModels */,
-				5D08C4641B0474E100C24712 /* Views */,
 				5D2639551B2E64DF0061E060 /* Settings.bundle */,
 			);
 			path = FamilyManagerApp;
@@ -422,6 +453,10 @@
 			children = (
 				5D3861A71B05DC9800844721 /* CheckViewController.h */,
 				5D3861A81B05DC9800844721 /* CheckViewController.m */,
+				5D5899711B39408D003508DF /* ApplyMain_OLViewController.h */,
+				5D5899721B39408D003508DF /* ApplyMain_OLViewController.m */,
+				5D3369FB1B3A9A2100115330 /* ApplySub_OLViewController.h */,
+				5D3369FC1B3A9A2100115330 /* ApplySub_OLViewController.m */,
 			);
 			path = CheckControllers;
 			sourceTree = "<group>";
@@ -498,13 +533,6 @@
 			path = NetWorkLib;
 			sourceTree = "<group>";
 		};
-		5D08C4631B0474E100C24712 /* ViewModels */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = ViewModels;
-			sourceTree = "<group>";
-		};
 		5D08C4641B0474E100C24712 /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -555,6 +583,10 @@
 				005F5FE21B22B0A1004B9FA0 /* LycTableCellViewDefault2.m */,
 				5D08C46D1B047D5600C24712 /* LycTableCellViewDefault.h */,
 				5D08C46E1B047D5600C24712 /* LycTableCellViewDefault.m */,
+				5D4405861B3BE221009058EA /* LycApplySubCellAutoHeight.h */,
+				5D4405871B3BE221009058EA /* LycApplySubCellAutoHeight.m */,
+				5D4405891B3C0251009058EA /* LycApplySubCell.h */,
+				5D44058A1B3C0251009058EA /* LycApplySubCell.m */,
 			);
 			path = LycTableCellView;
 			sourceTree = "<group>";
@@ -602,6 +634,8 @@
 				5D08C48A1B049DF400C24712 /* AppConfiguration.h */,
 				005BADB51B1ACB8300B4B69D /* ApiJsonHelper.h */,
 				005BADB61B1ACB8300B4B69D /* ApiJsonHelper.m */,
+				5D3369F81B3A934000115330 /* NSDate+LYCDate.h */,
+				5D3369F91B3A934000115330 /* NSDate+LYCDate.m */,
 			);
 			path = commonLib;
 			sourceTree = "<group>";
@@ -617,13 +651,6 @@
 				5D33B7471B297C6C00D15562 /* tab_usercenter@1x.png */,
 			);
 			name = tabImages;
-			sourceTree = "<group>";
-		};
-		5D3861871B05BFBE00844721 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		5D38618D1B05D27000844721 /* Reachability */ = {
@@ -885,6 +912,7 @@
 				5D08C47E1B0482FC00C24712 /* 321.png in Resources */,
 				00E8BA4D1B1F1F30009C390C /* Main.storyboard in Resources */,
 				5DD5AC2D1B2EB803004182D7 /* CheckViewTableData.plist in Resources */,
+				5D4D1A961B3CF4F20028943D /* LYCApplyMainCollectionView.xib in Resources */,
 				5D08C4801B0482FC00C24712 /* duck.png in Resources */,
 				5D08C4721B0480C300C24712 /* LycTableCellViewDefault.xib in Resources */,
 				5D33B74A1B297D8A00D15562 /* tab_usercenter@2x.png in Resources */,
@@ -919,6 +947,7 @@
 				00E4DE081B2284F400DB62FD /* CheckUserBankViewController.m in Sources */,
 				005BADB71B1ACB8300B4B69D /* ApiJsonHelper.m in Sources */,
 				5D3861EC1B05E6C400844721 /* ASICloudFilesCDNRequest.m in Sources */,
+				5D3369FD1B3A9A2100115330 /* ApplySub_OLViewController.m in Sources */,
 				5D3861E61B05E6C400844721 /* ASIDownloadCache.m in Sources */,
 				00E8BA491B1F1EEB009C390C /* Local_FeeItemDAO.m in Sources */,
 				5D3861E41B05E6C400844721 /* ASIDataCompressor.m in Sources */,
@@ -930,10 +959,13 @@
 				5D3861A31B05D99100844721 /* AsyncSocket.m in Sources */,
 				5D3861F41B05E6C400844721 /* ASIS3BucketObject.m in Sources */,
 				5D3861F01B05E6C400844721 /* ASICloudFilesObject.m in Sources */,
+				5D3369F41B3A783B00115330 /* ApplyMainViewModel.m in Sources */,
 				5D3861931B05D2B200844721 /* ReachabilityHelper.m in Sources */,
 				5D3861E31B05E6C400844721 /* ASIAuthenticationDialog.m in Sources */,
 				5D3861F21B05E6C400844721 /* ASICloudFilesRequest.m in Sources */,
+				5D5899731B39408D003508DF /* ApplyMain_OLViewController.m in Sources */,
 				00E4DE011B227F6C00DB62FD /* Local_BaseDAO.m in Sources */,
+				5D3369FA1B3A934000115330 /* NSDate+LYCDate.m in Sources */,
 				00E8BA441B1F1EBE009C390C /* CheckFlowTypeViewController.m in Sources */,
 				00B796B41B19C75300BA879F /* API_FeeItem.m in Sources */,
 				000A16831B189FC8000C010B /* ASICustomRequest.m in Sources */,
@@ -948,6 +980,8 @@
 				5D08C4331B04746900C24712 /* main.m in Sources */,
 				5D3861E71B05E6C400844721 /* ASIFormDataRequest.m in Sources */,
 				004D112F1B2AFDD700EDF576 /* LycDialogView.m in Sources */,
+				5D4405881B3BE221009058EA /* LycApplySubCellAutoHeight.m in Sources */,
+				5D4D1A941B3CF4D10028943D /* LYCApplyMainCollectionView.m in Sources */,
 				5D3861EE1B05E6C400844721 /* ASICloudFilesContainerRequest.m in Sources */,
 				00E4DE021B227F6C00DB62FD /* Local_UserBankDAO.m in Sources */,
 				00E8BA421B1F1EBE009C390C /* BKViewController.m in Sources */,
@@ -970,6 +1004,8 @@
 				5D3861F11B05E6C400844721 /* ASICloudFilesObjectRequest.m in Sources */,
 				00E8BA4A1B1F1EEB009C390C /* Local_FlowTypeDAO.m in Sources */,
 				5D3861EF1B05E6C400844721 /* ASICloudFilesContainerXMLParserDelegate.m in Sources */,
+				5D336A001B3A9D2B00115330 /* ApplySubViewModel.m in Sources */,
+				5D44058B1B3C0251009058EA /* LycApplySubCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6751" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="applyMain" id="F6J-le-JIB" customClass="LYCApplyMainCollectionView">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="70"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="70"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TpG-ty-V1B" userLabel="日期">
+                        <rect key="frame" x="110" y="14" width="100" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="100" id="ED7-AC-aAY"/>
+                            <constraint firstAttribute="height" constant="20" id="hHm-mg-Yiy"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qZE-jq-EHs" userLabel="收入">
+                        <rect key="frame" x="10" y="42" width="120" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="20" id="kt7-tt-cYQ"/>
+                            <constraint firstAttribute="width" constant="120" id="qtG-HX-LuX"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" red="0.17487815230000001" green="0.754" blue="0.4612908127" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vo5-g3-DHs" userLabel="支出">
+                        <rect key="frame" x="190" y="42" width="120" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="120" id="034-Il-Zcm"/>
+                            <constraint firstAttribute="height" constant="20" id="usJ-8f-dB4"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            </view>
+            <color key="backgroundColor" red="1" green="0.86016339279999998" blue="0.68796522230000001" alpha="1" colorSpace="calibratedRGB"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="vo5-g3-DHs" secondAttribute="trailing" constant="10" id="7bS-JF-wZ5"/>
+                <constraint firstItem="qZE-jq-EHs" firstAttribute="leading" secondItem="F6J-le-JIB" secondAttribute="leading" constant="10" id="9dZ-WT-ZRx"/>
+                <constraint firstAttribute="bottom" secondItem="qZE-jq-EHs" secondAttribute="bottom" constant="8" id="ENs-xi-Quv"/>
+                <constraint firstAttribute="bottom" secondItem="vo5-g3-DHs" secondAttribute="bottom" constant="8" id="Y54-jF-Yoe"/>
+                <constraint firstItem="TpG-ty-V1B" firstAttribute="top" secondItem="F6J-le-JIB" secondAttribute="top" constant="14" id="anh-S1-qRR"/>
+                <constraint firstAttribute="centerX" secondItem="TpG-ty-V1B" secondAttribute="centerX" id="mNv-ax-teT"/>
+            </constraints>
+            <connections>
+                <outlet property="lblDate" destination="TpG-ty-V1B" id="wTy-YV-0ic"/>
+                <outlet property="lblInMoney" destination="qZE-jq-EHs" id="fN4-OX-8vi"/>
+                <outlet property="lblOutMoney" destination="vo5-g3-DHs" id="tDB-IG-JI6"/>
+            </connections>
+            <point key="canvasLocation" x="347" y="287"/>
+        </collectionViewCell>
+    </objects>
+</document>

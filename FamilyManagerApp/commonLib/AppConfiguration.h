@@ -9,6 +9,10 @@
 #ifndef FamilyManagerApp_AppConfiguration_h
 #define FamilyManagerApp_AppConfiguration_h
 
+#import "DateFormatterHelper.h"
+#import "ApiJsonHelper.h"
+#import "NSDate+LYCDate.h"
+
 //调试sql命令：-com.apple.CoreData.SQLDebug 1
 #ifdef DEBUG
     #define LYCLog(...) NSLog(__VA_ARGS__)
@@ -87,5 +91,7 @@
 #define __fm_apiPath_doBankAccounting @"/applyapi/DoBankAccounting" //银行记账接口
 #define __fm_apiPath_doZhuanZhang @"/applyapi/DoZhuanZhang" //转账记账接口
 #define __fm_apiPath_doLogin @"/userinfoapi/UserLogin" //登陆接口
+#define __fm_apiPath_queryApplyMain @"/ApplyQueryAPI/GetApplyMainList" //查询账单主表数据
+#define __fm_apiPath_queryApplySub @"/ApplyQueryAPI/GetApplySubList" //查询账单子表数据
 
 #endif

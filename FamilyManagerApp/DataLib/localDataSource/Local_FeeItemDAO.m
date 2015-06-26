@@ -9,6 +9,7 @@
 #import "Local_FeeItemDAO.h"
 #import "Local_FeeItem.h"
 #import "API_FeeItem.h"
+#import "AppConfiguration.h"
 
 @implementation Local_FeeItemDAO
 
@@ -42,10 +43,10 @@
     NSError *error;
     if ([self.appDelegate.managedObjectContext save:&error]) {
         //NSLog(@"添加成功,添加的实体的feeItemName是：%@",fee.feeItemName);
-        NSLog(@"添加成功");
+        LYCLog(@"添加成功");
     }else
     {
-        NSLog(@"保存时出现错误：%@,%@",error,[error userInfo]);
+        LYCLog(@"保存时出现错误：%@,%@",error,[error userInfo]);
     }
     return result;
 }

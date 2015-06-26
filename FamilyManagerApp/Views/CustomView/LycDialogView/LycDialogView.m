@@ -36,7 +36,6 @@
     if (self) {
         //设置默认透明度
         self.viewAlpha = 0.75;
-        self.labelTitle = title;
         self.isModalView = isM;
         //如果是模态模式
         if (self.isModalView) {
@@ -67,30 +66,32 @@
         self.backgroundColor = [UIColor blackColor];
         
         //4.添加一个加载控件
-        UIActivityIndicatorView *loadView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-        loadView.translatesAutoresizingMaskIntoConstraints = NO;
-        [loadView startAnimating];
-        [self addSubview:loadView];
+        self.loadView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+        self.loadView.translatesAutoresizingMaskIntoConstraints = NO;
+        [self addSubview:self.loadView];
         //添加布局约束
-        NSLayoutConstraint *loadViewXCon = [NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:loadView attribute:NSLayoutAttributeCenterX multiplier:1 constant:0];
-        NSLayoutConstraint *loadViewYCon = [NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:loadView attribute:NSLayoutAttributeCenterY multiplier:1 constant:10];
+        NSLayoutConstraint *loadViewXCon = [NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self.loadView attribute:NSLayoutAttributeCenterX multiplier:1 constant:0];
+        NSLayoutConstraint *loadViewYCon = [NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:self.loadView attribute:NSLayoutAttributeCenterY multiplier:1 constant:10];
         [self addConstraints:@[loadViewXCon, loadViewYCon]];
         
         
         //5.添加一个label显示提示信息
-        UILabel *label = [[UILabel alloc] init];
-        label.translatesAutoresizingMaskIntoConstraints = NO;
-        label.textColor = [UIColor whiteColor];
-        label.text = self.labelTitle;
-        label.font = [UIFont systemFontOfSize:10];
-        label.textAlignment = NSTextAlignmentCenter;
-        [self addSubview:label];
+        self.lblTitle = [[UILabel alloc] init];
+        self.lblTitle.translatesAutoresizingMaskIntoConstraints = NO;
+        self.lblTitle.textColor = [UIColor whiteColor];
+        self.lblTitle.text = [title copy];
+        self.lblTitle.font = [UIFont systemFontOfSize:10];
+        self.lblTitle.textAlignment = NSTextAlignmentCenter;
+        self.lblTitle.numberOfLines = 0;
+        [self addSubview:self.lblTitle];
         
         //添加布局约束
-        NSArray *labelConstraintsV = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-60-[label(==20)]" options:0 metrics:nil views:NSDictionaryOfVariableBindings(label)];
-        NSArray *labelConstraintsH = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[label]-|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(label)];
+        NSArray *labelConstraintsV = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-60-[lblTitle(>=20)]" options:0 metrics:nil views:@{@"lblTitle":self.lblTitle}];
+        NSArray *labelConstraintsH = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[lblTitle]-|" options:0 metrics:nil views:@{@"lblTitle":self.lblTitle}];
         [self addConstraints:labelConstraintsH];
         [self addConstraints:labelConstraintsV];
+        
+        [self hideDialog];
     }
     return self;
 }
@@ -99,7 +100,7 @@
 -(NSLayoutConstraint *)widthConstraint
 {
     if (!_widthConstraint) {
-        _widthConstraint = [NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:0 multiplier:1 constant:80];
+        _widthConstraint = [NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:0 multiplier:1 constant:90];
     }
     return _widthConstraint;
 }
@@ -139,8 +140,12 @@
     [self.superview addConstraints:@[self.xConstraint, self.yConstraint]];
 }
 
--(void)showDialog
+-(void)showDialog:(NSString *) title
 {
+    if (title != nil && title.length > 0) {
+        self.lblTitle.text = [title copy];
+    }
+    [self.loadView startAnimating];
     if (self.isModalView) {
         self.superview.hidden = NO;
     }
@@ -148,10 +153,12 @@
     {
         self.hidden = NO;
     }
+    
 }
 
 -(void)hideDialog
 {
+    [self.loadView stopAnimating];
     if (self.isModalView) {
         self.superview.hidden = YES;
     }

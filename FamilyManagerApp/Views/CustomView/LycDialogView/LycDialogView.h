@@ -11,7 +11,8 @@
 @interface LycDialogView : UIView
 
 @property (nonatomic) BOOL isModalView; //是否模态窗口
-@property (nonatomic, copy) NSString *labelTitle;//提示的内容
+@property (nonatomic, strong) UIActivityIndicatorView *loadView; //菊花控件
+@property (nonatomic, strong) UILabel *lblTitle; //提示文字Label
 @property (nonatomic, readonly, strong) NSLayoutConstraint *widthConstraint; //宽度约束
 @property (nonatomic, readonly, strong) NSLayoutConstraint *heightConstraint; //高度约束
 @property (nonatomic, readonly, strong) NSLayoutConstraint *xConstraint; //x坐标约束
@@ -22,6 +23,6 @@
 //使用者自己选择是否开启模态模式
 -(instancetype)initWithTitle:(NSString *) title andSuperView:(UIView *) sView isModal:(BOOL) isM;
 
--(void)showDialog;
+-(void)showDialog:(NSString *)title;
 -(void)hideDialog;
 @end
