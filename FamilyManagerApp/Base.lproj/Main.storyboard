@@ -66,17 +66,17 @@
         <!--记账-->
         <scene sceneID="QzI-FG-8Jz">
             <objects>
-                <viewController wantsFullScreenLayout="YES" automaticallyAdjustsScrollViewInsets="NO" modalTransitionStyle="flipHorizontal" hidesBottomBarWhenPushed="YES" id="eq4-Ft-RxH" customClass="BKViewController" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" hidesBottomBarWhenPushed="YES" id="eq4-Ft-RxH" customClass="BKViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="KZf-mZ-eDL"/>
                         <viewControllerLayoutGuide type="bottom" id="gtV-P6-Lb1"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Y1S-qd-miY">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" translatesAutoresizingMaskIntoConstraints="NO" id="OGa-zY-JJs">
-                                <rect key="frame" x="0.0" y="64" width="320" height="455"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="455"/>
                                 <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="moneyCell" rowHeight="44" id="2av-fU-98m">
@@ -108,7 +108,7 @@
                                 </prototypes>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pey-eG-PWN" userLabel="DataPickerBox">
-                                <rect key="frame" x="0.0" y="569" width="320" height="200"/>
+                                <rect key="frame" x="0.0" y="505" width="320" height="200"/>
                                 <subviews>
                                     <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="QJw-TF-5dD">
                                         <rect key="frame" x="0.0" y="38" width="320" height="162"/>
@@ -173,10 +173,10 @@
             </objects>
             <point key="canvasLocation" x="266" y="-1004.9999999999999"/>
         </scene>
-        <!--Check Flow Type View Controller-->
+        <!--选择资金类型-->
         <scene sceneID="OQO-dj-5lP">
             <objects>
-                <viewController storyboardIdentifier="checkflowtypeNib" hidesBottomBarWhenPushed="YES" id="FwW-s7-MCo" customClass="CheckFlowTypeViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="checkflowtypeNib" title="选择资金类型" hidesBottomBarWhenPushed="YES" id="FwW-s7-MCo" customClass="CheckFlowTypeViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="xAg-3f-zmn"/>
                         <viewControllerLayoutGuide type="bottom" id="IOA-IH-2dH"/>
@@ -199,10 +199,10 @@
             </objects>
             <point key="canvasLocation" x="772" y="-1004"/>
         </scene>
-        <!--Check Fee Item View Controller-->
+        <!--选择费用科目-->
         <scene sceneID="9gz-1Z-NBE">
             <objects>
-                <viewController storyboardIdentifier="checkFeeItemNib" modalTransitionStyle="flipHorizontal" id="n4C-6V-2YK" customClass="CheckFeeItemViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="checkFeeItemNib" title="选择费用科目" id="n4C-6V-2YK" customClass="CheckFeeItemViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="g7e-CI-Gbe"/>
                         <viewControllerLayoutGuide type="bottom" id="S8v-DA-3ZS"/>
@@ -271,10 +271,10 @@
             </objects>
             <point key="canvasLocation" x="1572" y="-1004"/>
         </scene>
-        <!--Check User Bank View Controller-->
+        <!--选择用户银行信息-->
         <scene sceneID="8ct-lJ-jKB">
             <objects>
-                <viewController storyboardIdentifier="checkUserBankNib" hidesBottomBarWhenPushed="YES" id="E2Y-HI-YCw" customClass="CheckUserBankViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="checkUserBankNib" title="选择用户银行信息" hidesBottomBarWhenPushed="YES" id="E2Y-HI-YCw" customClass="CheckUserBankViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="QL4-Sb-JGx"/>
                         <viewControllerLayoutGuide type="bottom" id="Et2-wY-SIo"/>
@@ -395,7 +395,7 @@
             <objects>
                 <tableViewController id="8nv-ml-PpJ" customClass="CheckViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="uWv-2h-K0O">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
                         <prototypes>
@@ -426,6 +426,7 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LkW-6N-dtA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -489,9 +490,6 @@
                                                     <color key="textColor" red="0.41176470590000003" green="0.41176470590000003" blue="0.41176470590000003" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="dog.png" translatesAutoresizingMaskIntoConstraints="NO" id="jlC-cf-W5Q">
-                                                    <rect key="frame" x="91" y="8" width="66" height="38"/>
-                                                </imageView>
                                             </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -796,10 +794,10 @@
             </objects>
             <point key="canvasLocation" x="266" y="1814.9999999999998"/>
         </scene>
-        <!--User Center Login View Controller-->
+        <!--登陆页面-->
         <scene sceneID="g6v-Mj-S8D">
             <objects>
-                <viewController id="tOg-pY-1rd" customClass="UserCenterLoginViewController" sceneMemberID="viewController">
+                <viewController title="登陆页面" id="tOg-pY-1rd" customClass="UserCenterLoginViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="d0O-Tq-oqb"/>
                         <viewControllerLayoutGuide type="bottom" id="GfI-MT-nDD"/>
@@ -822,7 +820,7 @@
                                         </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" red="0.31575893129999999" green="0.67770787109999997" blue="0.93330285899999998" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.089244214174617725" green="0.71441706452507636" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="64" id="fgI-ts-L3K"/>
                                 </constraints>
@@ -960,7 +958,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="dog.png" width="48" height="48"/>
         <image name="tab_caifu.png" width="24" height="24"/>
         <image name="tab_usercenter.png" width="24" height="24"/>
         <image name="tabzhangdan.png" width="24" height="24"/>

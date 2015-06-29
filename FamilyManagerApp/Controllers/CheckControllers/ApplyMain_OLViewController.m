@@ -33,7 +33,6 @@
     UIBarButtonItem *backBtn = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
     [self.navigationItem setBackBarButtonItem:backBtn];
     _isNeedLoadData = YES;
-    self.navigationController.navigationBar.translucent = NO;
     
     //设置table的填充
     UIEdgeInsets tableInset = UIEdgeInsetsMake(64, 0, 0, 0);
@@ -46,9 +45,17 @@
     // Dispose of any resources that can be recreated.
 }
 
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    self.navigationController.navigationBar.translucent = YES;
+    //self.navigationController.navigationBar.alpha = 0.87;
+}
+
 -(void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
+    
     if (_isNeedLoadData == YES) {
         //加载账单数据
         [self loadData];
@@ -88,7 +95,8 @@
     NSString *monthStr = month < 10 ? [NSString stringWithFormat:@"%d-0%d", year, month] : [NSString stringWithFormat:@"%d-%d", year, month];
     NSString *values = [NSString stringWithFormat:@"userID=%d&startTime=%@&endTime=%@",
                             (int)userID,
-                            [NSString stringWithFormat:@"%@-01", monthStr],
+                            //[NSString stringWithFormat:@"%@-01", monthStr],
+                            @"2015-05-01",
                             [NSString stringWithFormat:@"%@-%d", monthStr, day]];
     request.HTTPBody = [values dataUsingEncoding:NSUTF8StringEncoding];
     
