@@ -28,11 +28,17 @@
     //初始化等待框
     self.dialogView = [[LycDialogView alloc] initWithTitle:@"正在加载" andSuperView:self.view isModal:NO];
     _applyMainList = [[NSMutableArray alloc] init];
+    _totalApply = [[NSMutableDictionary alloc] initWithObjects:@[@"0.00", @"0.00"] forKeys:@[@"totalIn", @"totalOut"]];
     _nsq = [[NSOperationQueue alloc] init];
     UIBarButtonItem *backBtn = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
     [self.navigationItem setBackBarButtonItem:backBtn];
-    
     _isNeedLoadData = YES;
+    self.navigationController.navigationBar.translucent = NO;
+    
+    //设置table的填充
+    UIEdgeInsets tableInset = UIEdgeInsetsMake(64, 0, 0, 0);
+    self.table.contentInset = tableInset;
+    self.table.scrollIndicatorInsets = tableInset;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -105,8 +111,16 @@
             ApiJsonHelper *aj = [[ApiJsonHelper alloc] initWithData:data requestName:@"加载记账主表数据"];
             if (aj.bSuccess == YES) {
                 [_applyMainList removeAllObjects];
-                for (int i = 0; i < [aj.jsonObj count]; i++) {
-                    NSDictionary *dic = [aj.jsonObj objectAtIndex:i];
+                //账单列表数据
+                NSArray *list = [aj.jsonObj objectForKey:@"info"];
+                
+                //账单合计数据
+                NSDictionary *totalDic = [aj.jsonObj objectForKey:@"totalObj"];
+                [_totalApply setObject:totalDic[@"totalIn"] forKey:@"totalIn"];
+                [_totalApply setObject:totalDic[@"totalOut"] forKey:@"totalOut"];
+                
+                for (int i = 0; i < [list count]; i++) {
+                    NSDictionary *dic = [list objectAtIndex:i];
                     ApplyMainViewModel *apply = [[ApplyMainViewModel alloc] init];
                     apply.applyMainID = (int)[dic[@"ApplyMainID"] integerValue];
                     apply.applyUserID = (int)[dic[@"ApplyUserID"] integerValue];
@@ -139,6 +153,12 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     // Return the number of sections.
     return 1;
+}
+
+-(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    NSString *title = [NSString stringWithFormat:@"合计收入: ¥%@,  合计支出: ¥%@", _totalApply[@"totalIn"], _totalApply[@"totalOut"]];
+    return title;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {

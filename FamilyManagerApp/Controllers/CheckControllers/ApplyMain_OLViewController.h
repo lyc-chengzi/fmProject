@@ -21,4 +21,6 @@
 
 //账单数据
 @property (strong, nonatomic) NSMutableArray *applyMainList;
+
+@property (strong, nonatomic) NSMutableDictionary *totalApply; //合计
 @end
