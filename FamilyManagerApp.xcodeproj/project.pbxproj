@@ -96,6 +96,7 @@
 		5D4D1A941B3CF4D10028943D /* LYCApplyMainCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D4D1A931B3CF4D10028943D /* LYCApplyMainCollectionView.m */; };
 		5D4D1A961B3CF4F20028943D /* LYCApplyMainCollectionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5D4D1A951B3CF4F20028943D /* LYCApplyMainCollectionView.xib */; };
 		5D5899731B39408D003508DF /* ApplyMain_OLViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D5899721B39408D003508DF /* ApplyMain_OLViewController.m */; };
+		5D86FBB71B426227004ECF4B /* ApplyMainQueryModalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D86FBB61B426227004ECF4B /* ApplyMainQueryModalViewController.m */; };
 		5DD5AC2B1B2EB725004182D7 /* Property List.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5DD5AC2A1B2EB725004182D7 /* Property List.plist */; };
 		5DD5AC2D1B2EB803004182D7 /* CheckViewTableData.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5DD5AC2C1B2EB803004182D7 /* CheckViewTableData.plist */; };
 /* End PBXBuildFile section */
@@ -270,6 +271,8 @@
 		5D4D1A951B3CF4F20028943D /* LYCApplyMainCollectionView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LYCApplyMainCollectionView.xib; path = LycScrollView/LYCApplyMainCollectionView.xib; sourceTree = "<group>"; };
 		5D5899711B39408D003508DF /* ApplyMain_OLViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplyMain_OLViewController.h; sourceTree = "<group>"; };
 		5D5899721B39408D003508DF /* ApplyMain_OLViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApplyMain_OLViewController.m; sourceTree = "<group>"; };
+		5D86FBB51B426227004ECF4B /* ApplyMainQueryModalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplyMainQueryModalViewController.h; sourceTree = "<group>"; };
+		5D86FBB61B426227004ECF4B /* ApplyMainQueryModalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApplyMainQueryModalViewController.m; sourceTree = "<group>"; };
 		5DD5AC2A1B2EB725004182D7 /* Property List.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Property List.plist"; sourceTree = "<group>"; };
 		5DD5AC2C1B2EB803004182D7 /* CheckViewTableData.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = CheckViewTableData.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -457,6 +460,8 @@
 				5D5899721B39408D003508DF /* ApplyMain_OLViewController.m */,
 				5D3369FB1B3A9A2100115330 /* ApplySub_OLViewController.h */,
 				5D3369FC1B3A9A2100115330 /* ApplySub_OLViewController.m */,
+				5D86FBB51B426227004ECF4B /* ApplyMainQueryModalViewController.h */,
+				5D86FBB61B426227004ECF4B /* ApplyMainQueryModalViewController.m */,
 			);
 			path = CheckControllers;
 			sourceTree = "<group>";
@@ -950,6 +955,7 @@
 				5D3369FD1B3A9A2100115330 /* ApplySub_OLViewController.m in Sources */,
 				5D3861E61B05E6C400844721 /* ASIDownloadCache.m in Sources */,
 				00E8BA491B1F1EEB009C390C /* Local_FeeItemDAO.m in Sources */,
+				5D86FBB71B426227004ECF4B /* ApplyMainQueryModalViewController.m in Sources */,
 				5D3861E41B05E6C400844721 /* ASIDataCompressor.m in Sources */,
 				5D08C4361B04746900C24712 /* AppDelegate.m in Sources */,
 				5D3861A21B05D99100844721 /* GCDAsyncUdpSocket.m in Sources */,
