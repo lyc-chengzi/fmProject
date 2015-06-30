@@ -261,7 +261,6 @@
     CGFloat duration = [notInfo[@"UIKeyboardAnimationDurationUserInfoKey"] doubleValue];
     
     CGFloat moveSize = keyBoardRect.origin.y - self.view.frame.size.height;
-    LYCLog(@"######%f",moveSize);
     if (moveSize < 0) {
         moveSize += 100;
     }
