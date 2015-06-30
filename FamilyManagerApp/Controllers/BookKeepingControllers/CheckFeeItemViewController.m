@@ -27,7 +27,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [[self.view viewWithTag:101] setBackgroundColor:__fm_Global_color_blue];
-    
+    [[self.view viewWithTag:101] setAlpha:0.85];
     //处理数据
     _allFeeItems = [self.delegate getTheFeeItemList];
     _feeItemRelation = [[NSMutableDictionary alloc] init];

@@ -12,9 +12,15 @@
 #import "LycTableCellViewDefault.h"
 #import "LycTableCellViewDefault2.h"
 #import "ASIFormDataRequest.h"
+#import "CheckViewController.h"
 #import "CheckFlowTypeViewController.h"
 #import "CheckFeeItemViewController.h"
 #import "CheckUserBankViewController.h"
+#import "LycDialogView.h"
+
+#import "Local_FeeItem.h"
+#import "Local_FlowType.h"
+#import "Local_UserBank.h"
 
 #import "Local_FeeItemDAO.h"
 #import "Local_FlowTypeDAO.h"
@@ -255,7 +261,6 @@
     CGFloat duration = [notInfo[@"UIKeyboardAnimationDurationUserInfoKey"] doubleValue];
     
     CGFloat moveSize = keyBoardRect.origin.y - self.view.frame.size.height;
-    LYCLog(@"######%f",moveSize);
     if (moveSize < 0) {
         moveSize += 100;
     }

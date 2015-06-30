@@ -28,11 +28,25 @@
     //初始化等待框
     self.dialogView = [[LycDialogView alloc] initWithTitle:@"正在加载" andSuperView:self.view isModal:NO];
     _applyMainList = [[NSMutableArray alloc] init];
+    _totalApply = [[NSMutableDictionary alloc] initWithObjects:@[@"0.00", @"0.00"] forKeys:@[@"totalIn", @"totalOut"]];
     _nsq = [[NSOperationQueue alloc] init];
     UIBarButtonItem *backBtn = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
     [self.navigationItem setBackBarButtonItem:backBtn];
-    
     _isNeedLoadData = YES;
+    
+    //设置table的填充
+    UIEdgeInsets tableInset = UIEdgeInsetsMake(64, 0, 0, 0);
+    self.table.contentInset = tableInset;
+    self.table.scrollIndicatorInsets = tableInset;
+    
+    //默认加载当前月的数据
+    NSDate *now = [NSDate date];
+    int year = (int)[now getDateYear];
+    int month = (int)[now getDateMonth];
+    int day = (int)[now getDateDay];
+    NSString *monthStr = month < 10 ? [NSString stringWithFormat:@"%d-0%d", year, month] : [NSString stringWithFormat:@"%d-%d", year, month];
+    self.starTime = [NSString stringWithFormat:@"%@-01", monthStr];
+    self.endTime = [NSString stringWithFormat:@"%@-%d", monthStr, day];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -40,12 +54,28 @@
     // Dispose of any resources that can be recreated.
 }
 
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    self.navigationController.navigationBar.translucent = YES;
+    //self.navigationController.navigationBar.alpha = 0.87;
+}
+
 -(void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
+    
     if (_isNeedLoadData == YES) {
         //加载账单数据
         [self loadData];
+    }
+}
+
+//跳转事件
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:@"ModalToQuery"]) {
+        ApplyMainQueryModalViewController *a = [segue destinationViewController];
+        a.queryDelegate = self;
     }
 }
 
@@ -74,16 +104,7 @@
     //创建请求
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url cachePolicy:0 timeoutInterval:15];
     request.HTTPMethod = @"POST";
-    //默认加载当前月的数据
-    NSDate *now = [NSDate date];
-    int year = (int)[now getDateYear];
-    int month = (int)[now getDateMonth];
-    int day = (int)[now getDateDay];
-    NSString *monthStr = month < 10 ? [NSString stringWithFormat:@"%d-0%d", year, month] : [NSString stringWithFormat:@"%d-%d", year, month];
-    NSString *values = [NSString stringWithFormat:@"userID=%d&startTime=%@&endTime=%@",
-                            (int)userID,
-                            [NSString stringWithFormat:@"%@-01", monthStr],
-                            [NSString stringWithFormat:@"%@-%d", monthStr, day]];
+    NSString *values = [NSString stringWithFormat:@"userID=%d&startTime=%@&endTime=%@", (int)userID, self.starTime, self.endTime];
     request.HTTPBody = [values dataUsingEncoding:NSUTF8StringEncoding];
     
     //发送请求
@@ -105,8 +126,16 @@
             ApiJsonHelper *aj = [[ApiJsonHelper alloc] initWithData:data requestName:@"加载记账主表数据"];
             if (aj.bSuccess == YES) {
                 [_applyMainList removeAllObjects];
-                for (int i = 0; i < [aj.jsonObj count]; i++) {
-                    NSDictionary *dic = [aj.jsonObj objectAtIndex:i];
+                //账单列表数据
+                NSArray *list = [aj.jsonObj objectForKey:@"info"];
+                
+                //账单合计数据
+                NSDictionary *totalDic = [aj.jsonObj objectForKey:@"totalObj"];
+                [_totalApply setObject:totalDic[@"totalIn"] forKey:@"totalIn"];
+                [_totalApply setObject:totalDic[@"totalOut"] forKey:@"totalOut"];
+                
+                for (int i = 0; i < [list count]; i++) {
+                    NSDictionary *dic = [list objectAtIndex:i];
                     ApplyMainViewModel *apply = [[ApplyMainViewModel alloc] init];
                     apply.applyMainID = (int)[dic[@"ApplyMainID"] integerValue];
                     apply.applyUserID = (int)[dic[@"ApplyUserID"] integerValue];
@@ -139,6 +168,17 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     // Return the number of sections.
     return 1;
+}
+
+-(NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section
+{
+    NSString *title = [NSString stringWithFormat:@"合计收入: ¥%@,  合计支出: ¥%@", _totalApply[@"totalIn"], _totalApply[@"totalOut"]];
+    return title;
+}
+
+-(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    return [NSString stringWithFormat:@"%@ ~ %@", self.starTime, self.endTime];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -215,4 +255,14 @@
 /*******************URLDelegate代理设置********************/
 
 
+/*******************查询条件代理设置********************/
+-(void)setApplyMainQueryTime:(NSString *)startTime andEndTime:(NSString *)endTime
+{
+    self.starTime = startTime;
+    self.endTime = endTime;
+}
+-(void)willDismissViewController:(UIViewController *)vc
+{
+    _isNeedLoadData = YES;
+}
 @end

@@ -105,13 +105,11 @@
 -(void)requestDidFailedCallBack:(ASIHTTPRequest *) requests
 {
     NSError *errors = requests.error;
-    NSLog(@"failed,result string is %@",errors);
+    LYCLog(@"failed,result string is %@",errors);
     if (errors.code == 1) {
-        //NSLog(@"%@:网络未连接",requests.name);
         LYCLog(@"网络未连接");
     }
     if (errors.code == 2) {
-        //NSLog(@"%@:连接超时",requests.name);
         LYCLog(@"连接超时");
     }
 }
