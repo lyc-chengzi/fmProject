@@ -7,12 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "Local_FeeItem.h"
-#import "Local_FlowType.h"
-#import "Local_UserBank.h"
-#import "CheckViewController.h"
-#import "LycDialogView.h"
-
+@class Local_FeeItem, Local_FlowType, Local_UserBank;
+@class CheckViewController, LycDialogView;
 @protocol BKViewControllerDataSourceDelegate <NSObject>
 
 //@optional
@@ -76,10 +72,12 @@
 @property (strong, nonatomic, readonly) UITapGestureRecognizer *tapGesture;//taptableview时隐藏键盘
 @property (strong, nonatomic, readonly) UIViewController *flowTypeController;   //资金类型选择页面
 
+@property (strong, nonatomic, readonly) LycDialogView *dialogView;
+
 //未测试通过
 
 @property (strong, nonatomic, readonly) NSString *keepType;     //记账类型
 @property (strong, nonatomic, readonly) Local_FeeItem *checkFeeItem;    //选择的费用科目
-@property (strong, nonatomic, readonly) LycDialogView *dialogView;
+
 
 @end
