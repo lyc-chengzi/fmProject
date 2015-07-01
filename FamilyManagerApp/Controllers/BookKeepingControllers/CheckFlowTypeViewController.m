@@ -28,7 +28,11 @@
     // Do any additional setup after loading the view.
     [self.pv setDelegate:self];
     [self.pv setDataSource:self];
-    kpList = @[__fm_KPTypeOfCash_String,__fm_KPTypeOfBank_String,__fm_KPTypeOfChange_String];
+    NSString *cashStr = [NSString stringWithFormat:@"%@", __fm_KPTypeOfCash_String];
+    NSString *bankStr = [NSString stringWithFormat:@"%@", __fm_KPTypeOfBank_String];
+    NSString *changeStr = [NSString stringWithFormat:@"%@", __fm_KPTypeOfChange_String];
+    kpList = @[cashStr, bankStr, changeStr];//这样的string会释放
+    //kpList = [NSArray arrayWithObjects:__fm_KPTypeOfCash_String, __fm_KPTypeOfBank_String, __fm_KPTypeOfChange_String, nil];  这种常量字符串好像不释放
     _selectedKP = kpList[0];
     //设置导航条
     self.navigationItem.title = @"选择资金类型";
