@@ -33,6 +33,7 @@
     UIBarButtonItem *backBtn = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
     [self.navigationItem setBackBarButtonItem:backBtn];
     _isNeedLoadData = YES;
+    [self bindRefreshControl];//加载刷新控件
     
     //设置table的填充
     UIEdgeInsets tableInset = UIEdgeInsetsMake(64, 0, 0, 0);
@@ -67,7 +68,7 @@
     
     if (_isNeedLoadData == YES) {
         //加载账单数据
-        [self loadData];
+        [self loadData:YES];
     }
 }
 
@@ -79,6 +80,20 @@
     }
 }
 
+//绑定tableview刷新控件
+-(void)bindRefreshControl
+{
+    UIRefreshControl *rc = [[UIRefreshControl alloc] init];
+    [rc addTarget:self action:(@selector(refreshControlValueChange:)) forControlEvents:UIControlEventValueChanged];
+    [self.table addSubview:rc];
+    _refreshControl = rc;
+}
+
+-(void)refreshControlValueChange:(UIRefreshControl *) rc
+{
+    [self loadData:NO];
+}
+
 //提示错误信息
 -(void)showErrorInfo:(NSString *) text
 {
@@ -87,7 +102,7 @@
 }
 
 //加载账单数据
--(void)loadData
+-(void)loadData:(BOOL) showDialog
 {
     NSUserDefaults *de = [NSUserDefaults standardUserDefaults];
     BOOL isLogin = [de boolForKey:__fm_defaultsKey_loginUser_Status];
@@ -98,7 +113,10 @@
     //获得当前登陆用户
     NSInteger userID = [de integerForKey:__fm_defaultsKey_loginUser_ID];
     
-    [self.dialogView showDialog:nil];
+    if (showDialog == YES) {
+        [self.dialogView showDialog:nil];
+    }
+    
     NSString *serverIP = __fm_userDefaults_serverIP;
     NSURL *url = [NSURL URLWithString:[serverIP stringByAppendingString:__fm_apiPath_queryApplyMain]];
     //创建请求
@@ -118,7 +136,11 @@
             }
             errorTitle = @"请求时出现错误，请稍候再试";
             [self showErrorInfo:errorTitle];
-            [self.dialogView hideDialog];
+            if (showDialog == YES) {
+                [self.dialogView hideDialog];
+            }else{
+                [self.refreshControl endRefreshing];
+            }
         }
         else
         {
@@ -152,7 +174,11 @@
             NSBlockOperation *op = [NSBlockOperation blockOperationWithBlock:^{
                 _isNeedLoadData = NO;
                 [self.table reloadData];
-                [self.dialogView hideDialog];
+                if (showDialog == YES) {
+                    [self.dialogView hideDialog];
+                }else{
+                    [self.refreshControl endRefreshing];
+                }
             }];
             [[NSOperationQueue mainQueue] addOperation:op];
         }
@@ -206,6 +232,10 @@
     return 50;
 }
 
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 30;
+}
 //点击账单信息跳转到明细页面
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {

@@ -93,7 +93,7 @@
 -(void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    [self performSelector:@selector(doTest) withObject:nil afterDelay:2];
+    //[self performSelector:@selector(doTest) withObject:nil afterDelay:2];//测试--调试内存泄漏使用
 }
 
 -(void)doTest
