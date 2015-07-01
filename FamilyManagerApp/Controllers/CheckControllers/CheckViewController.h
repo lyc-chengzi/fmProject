@@ -26,6 +26,7 @@
 
 @property (weak, nonatomic) NSString *B_keepType;     //记账类型
 @property (weak, nonatomic) Local_FeeItem *B_checkFeeItem;    //选择的费用科目
+@property (weak, nonatomic) NSArray *B_feeItemList;
 
 
 //＊／＊／＊／＊／＊排除了

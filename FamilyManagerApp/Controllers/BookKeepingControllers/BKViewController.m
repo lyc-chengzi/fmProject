@@ -74,6 +74,8 @@
     
     [self loadBaseData];
     
+    self.ccontroller = [self.navigationController.viewControllers objectAtIndex:0];//测试内存泄漏用，可删除
+    
     //注册键盘事件监听
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardAppearHandler:) name:UIKeyboardWillChangeFrameNotification object:nil];
 }
@@ -103,10 +105,6 @@
 -(void)dealloc
 {
     LYCLog(@"记账页面被销毁了");
-    LYCLog(@"keepType -- %@",_keepType);
-    _keepType = nil;     //记账类型
-    _checkFeeItem = nil;    //选择的费用科目
-    _dialogView = nil;
     //清除本控制器监听的通知
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
@@ -239,6 +237,7 @@
             Local_FeeItemDAO *fiDao = [[Local_FeeItemDAO alloc] init];
             NSArray *feeItemList = [fiDao getAllFeeItems];
             _feeItemList = feeItemList;
+            self.ccontroller.B_feeItemList = _feeItemList;//测试内存泄漏用，可删除
         });
         //加载用户银行数据
         dispatch_async(sQueue, ^(void){
@@ -727,7 +726,6 @@
 -(void)setTheKeepType:(NSString *) kType
 {
     _keepType = kType;
-    //self.ccontroller.B_keepType = self.keepType;
     LycTableCellViewDefault *cell = (LycTableCellViewDefault *)[self.tableview1 cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
     cell.lblValue.text = kType;
 }
@@ -744,7 +742,7 @@
 -(void)setTheCheckFeeItem:(Local_FeeItem *) lfi
 {
     _checkFeeItem = lfi;
-    //self.ccontroller.B_checkFeeItem = self.checkFeeItem;
+    self.ccontroller.B_checkFeeItem = self.checkFeeItem;  //测试内存泄漏用，可删除
     LycTableCellViewDefault *cell = (LycTableCellViewDefault *)[self.tableview1 cellForRowAtIndexPath:[NSIndexPath indexPathForRow:3 inSection:0]];
     cell.lblValue.text = lfi.feeItemName;
 }

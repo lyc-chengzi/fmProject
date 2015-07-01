@@ -93,6 +93,14 @@
 -(void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
+    [self performSelector:@selector(doTest) withObject:nil afterDelay:2];
+}
+
+-(void)doTest
+{
+    LYCLog(@"记账类型：%p",self.B_keepType);
+    LYCLog(@"费用科目列表：%p",self.B_feeItemList);
+    LYCLog(@"费用科目：%@", self.B_checkFeeItem);
 }
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
