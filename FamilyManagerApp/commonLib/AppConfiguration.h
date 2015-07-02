@@ -93,5 +93,6 @@
 #define __fm_apiPath_doLogin @"/userinfoapi/UserLogin" //登陆接口
 #define __fm_apiPath_queryApplyMain @"/ApplyQueryAPI/GetApplyMainList" //查询账单主表数据
 #define __fm_apiPath_queryApplySub @"/ApplyQueryAPI/GetApplySubList" //查询账单子表数据
+#define __fm_apiPath_queryZiChan @"/ApplyQueryAPI/GetTotalCaiFuInfo" //查询资产数据
 
 #endif
