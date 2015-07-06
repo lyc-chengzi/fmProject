@@ -10,16 +10,13 @@
 #import "Local_FeeItem.h"
 #import "Local_FlowType.h"
 #import "Local_UserBank.h"
-@class BKViewController;
+@class BKViewController, ASIHTTPRequest;
 
 @interface CheckViewController : UITableViewController<NSURLConnectionDelegate>
 
-- (IBAction)btnLeft_click:(id)sender;
-
-
 @property (strong,nonatomic,readonly) NSOperationQueue *queue;
 
-
+@property (weak, nonatomic, readonly) ASIHTTPRequest *applySyncRequest;
 
 
 @property (weak, nonatomic) BKViewController *B_controller;
@@ -27,6 +24,7 @@
 @property (weak, nonatomic) NSString *B_keepType;     //记账类型
 @property (weak, nonatomic) Local_FeeItem *B_checkFeeItem;    //选择的费用科目
 @property (weak, nonatomic) NSArray *B_feeItemList;
+
 
 
 //＊／＊／＊／＊／＊排除了

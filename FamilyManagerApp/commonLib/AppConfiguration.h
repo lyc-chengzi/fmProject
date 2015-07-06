@@ -90,6 +90,7 @@
 #define __fm_apiPath_doCashAccounting @"/applyapi/doCashAccounting" //现金记账接口
 #define __fm_apiPath_doBankAccounting @"/applyapi/DoBankAccounting" //银行记账接口
 #define __fm_apiPath_doZhuanZhang @"/applyapi/DoZhuanZhang" //转账记账接口
+#define __fm_apiPath_doSync @"/applyapi/SyncApplyInfo" //转账记账接口
 #define __fm_apiPath_doLogin @"/userinfoapi/UserLogin" //登陆接口
 #define __fm_apiPath_queryApplyMain @"/ApplyQueryAPI/GetApplyMainList" //查询账单主表数据
 #define __fm_apiPath_queryApplySub @"/ApplyQueryAPI/GetApplySubList" //查询账单子表数据

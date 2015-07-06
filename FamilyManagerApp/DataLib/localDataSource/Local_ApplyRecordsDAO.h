@@ -27,5 +27,7 @@
 -(void) deleteAllApplyRecordsByUserID:(int) userID;
 
 //查询某一个用户下所有本地记账信息
--(NSArray *)getEntityByUserID:(int) userID;
+-(NSArray *)getEntitiesByUserID:(int) userID;
+//查询某一个用户下所有本地记账信息
+-(NSArray *)getDictionariesByUserID:(int) userID;
 @end

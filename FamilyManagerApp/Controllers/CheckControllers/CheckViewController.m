@@ -18,6 +18,9 @@
 #import "Local_FlowTypeDAO.h"
 #import "Local_UserBankDAO.h"
 
+#import "Local_ApplyRecordsViewModel.h"
+#import "Local_ApplyRecordsDAO.h"
+
 @interface CheckViewController()<ASIHTTPRequestDelegate>
 {
     //最后一次更新基础数据的时间
@@ -143,11 +146,51 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    NSInteger rowNo = indexPath.row;
+    NSInteger sectionNo = indexPath.section;
     NSDictionary *rowEntity = [[[tableData objectAtIndex:indexPath.section] objectForKey:@"sectionRows"] objectAtIndex:indexPath.row];
-    if ([[rowEntity objectForKey:@"isPush"] boolValue] == YES) {
-        UIViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:[rowEntity objectForKey:@"pushVCID"]];
-        [self.navigationController pushViewController:vc animated:YES];
+    //同步账单
+    if (sectionNo == 1 && rowNo == 0) {
+        Local_ApplyRecordsDAO *dao = [[Local_ApplyRecordsDAO alloc] init];
+        NSArray *array = [dao getDictionariesByUserID:13];
+        NSError *error;
+        NSData *jsonData = [NSJSONSerialization dataWithJSONObject:array options:NSJSONWritingPrettyPrinted error:&error];
+        if (error != nil) {
+            [self showAlert:@"错误提示" andMessage:@"转换json出错了"];
+        }
+        else
+        {
+            NSString * result = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+            [self applySyncAction:result];
+        }
     }
+    else{
+        if ([[rowEntity objectForKey:@"isPush"] boolValue] == YES) {
+            UIViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:[rowEntity objectForKey:@"pushVCID"]];
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+    }
+}
+
+-(void)applySyncAction:(NSString *) jsonStr
+{
+    NSString *serverIP = __fm_userDefaults_serverIP;
+    //创建两个任务
+    //第一个任务，下载资金类型
+    NSString *requestURL = [serverIP stringByAppendingString:__fm_apiPath_doSync];
+    ASIFormDataRequest *request= [ASIFormDataRequest requestWithURL:[NSURL URLWithString:requestURL]];
+    _applySyncRequest = request;//将请求付给一个weak指针
+    request.shouldAttemptPersistentConnection = YES;
+    request.requestMethod = @"POST";
+    [request addPostValue:jsonStr forKey:@"jsonStr"];
+    [request setCompletionBlock:^{
+        [self showAlert:@"成功" andMessage:@"账单同步成功"];
+    }];
+    
+    [request setFailedBlock:^{
+        [self showAlert:@"失败" andMessage:@"账单同步失败"];
+    }];
+    [request startAsynchronous];
 }
 
 
@@ -299,6 +342,12 @@
     if (errors.code == 2) {
         LYCLog(@"连接超时");
     }
+}
+
+-(void)showAlert:(NSString *) title andMessage:(NSString *) message
+{
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+    [alert show];
 }
 
 @end

@@ -79,7 +79,7 @@
 }
 
 //查询某一个用户下所有本地记账信息
--(NSArray *)getEntityByUserID:(int) userID
+-(NSArray *)getEntitiesByUserID:(int) userID
 {
     //定义抓取条件
     NSPredicate * qcmd = [NSPredicate predicateWithFormat:@"userID = %d ", userID];
@@ -104,5 +104,34 @@
         [result addObject:larVM];
     }
     return result;
+}
+
+//查询某一个用户下所有本地记账信息
+-(NSArray *)getDictionariesByUserID:(int) userID
+{
+    //定义抓取条件
+    NSPredicate * qcmd = [NSPredicate predicateWithFormat:@"userID = %d ", userID];
+    //排序条件
+    NSSortDescriptor *orderApplyDate = [NSSortDescriptor sortDescriptorWithKey:@"applyDate" ascending:YES];
+    NSArray *array = [self getAllEntities:_entityName withPredicate:qcmd andOrderBy:@[orderApplyDate]];
+    NSMutableArray *result = [[NSMutableArray alloc] init];
+    for (Local_ApplyRecords *ar in array) {
+        NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+        dic[@"userID"] = ar.userID;
+        dic[@"applyDate"] = ar.applyDate;
+        dic[@"keepType"] = ar.keepType;
+        dic[@"flowTypeID"] = ar.flowTypeID;
+        dic[@"flowTypeName"] = ar.flowTypeName;
+        dic[@"inOutType"] = ar.inOutType;
+        dic[@"feeItemID"] = ar.feeItemID;
+        dic[@"feeItemName"] = ar.feeItemName == nil ? @"" : ar.feeItemName;
+        dic[@"imoney"] = ar.imoney;
+        dic[@"inUserBankID"] = ar.inUserBankID;
+        dic[@"outUserBankID"] = ar.outUserBankID;
+        dic[@"cAdd"] = ar.cAdd == nil ? @"" : ar.cAdd;
+        [result addObject:dic];
+    }
+    return result;
+
 }
 @end
