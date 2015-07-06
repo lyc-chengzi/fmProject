@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="6254" systemVersion="14C109" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="6751" systemVersion="14C109" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="Apply_main" syncable="YES">
         <attribute name="applyDate" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="createDate" optional="YES" attributeType="Date" syncable="YES"/>
@@ -9,6 +9,20 @@
     <entity name="Apply_sub" syncable="YES">
         <attribute name="flowID" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="mainID" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+    </entity>
+    <entity name="Local_ApplyRecords" representedClassName="Local_ApplyRecords" syncable="YES">
+        <attribute name="applyDate" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="cAdd" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="feeItemID" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="feeItemName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="flowTypeID" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="flowTypeName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="imoney" optional="YES" attributeType="Decimal" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="inOutType" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="inUserBankID" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="keepType" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="outUserBankID" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="userID" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
     </entity>
     <entity name="Local_FeeItem" representedClassName="Local_FeeItem" syncable="YES">
         <attribute name="feeItemClassID" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
@@ -37,5 +51,6 @@
         <element name="Local_FeeItem" positionX="-45" positionY="36" width="128" height="105"/>
         <element name="Local_FlowType" positionX="-54" positionY="18" width="128" height="103"/>
         <element name="Local_UserBank" positionX="-54" positionY="36" width="128" height="150"/>
+        <element name="Local_ApplyRecords" positionX="-54" positionY="63" width="128" height="225"/>
     </elements>
 </model>
