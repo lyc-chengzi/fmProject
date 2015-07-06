@@ -25,6 +25,10 @@
 #import "Local_FeeItemDAO.h"
 #import "Local_FlowTypeDAO.h"
 
+#import "Local_ApplyRecords.h"
+#import "Local_ApplyRecordsDAO.h"
+#import "Local_ApplyRecordsViewModel.h"
+
 @interface BKViewController ()
 {
     BOOL _isRegistNib;
@@ -49,6 +53,7 @@
     _dialogView = [[LycDialogView alloc] initWithTitle:@"正在加载" andSuperView:self.view];
     
     //设置table的数据源并初始化数据
+    _applyMoney = [NSDecimalNumber decimalNumberWithString:@"0"];
     _arrayMoney = [NSArray arrayWithObjects:@"金额",@"备注", nil];
     _isRegistNib = NO;
     _shortDateFormatter = [DateFormatterHelper getShortDateFormatter];
@@ -325,19 +330,44 @@
 //提交记账数据
 -(void)submit
 {
+    /*
+    LYCLog(@"入账银行 --- %p, ---%@", self.inUserBank, self.inUserBank == nil ? @"null" : self.inUserBank.bankName);
+    LYCLog(@"出账银行 --- %p, ---%@", self.outUserBank, self.outUserBank == nil ? @"null" : self.outUserBank.bankName);
+    return;*/
     AppDelegate *app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     
     //获取app参数
     NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
     BOOL isLogin = [ud boolForKey:__fm_defaultsKey_loginUser_Status];
 
+    //数据校验
+    BOOL valid = [self submitValid:isLogin];
+    //如果校验失败，终止提交
+    if (valid == NO) {
+        return;
+    }
+    
+    [_dialogView showDialog:nil];
+    
+    NSInteger userID = [ud integerForKey:__fm_defaultsKey_loginUser_ID];
+    
+    if (app.isConnectNet == NO) {
+        //无网络时记账到本地
+        [self submitWithNoNet:userID];
+    } else {
+        //有网络时实时记账
+        [self submitWithNet:userID];
+    }
+}
+
+//数据校验
+-(BOOL)submitValid:(BOOL) isLogin
+{
     NSString *warnTitle;
     NSString *warnInfo;
-    if (app.isConnectNet == NO) {
-        warnTitle = @"网络未连接";
-        warnInfo = @"当前版本必须联网才能记账！";
-    }
-    else if (isLogin == NO){
+    
+    //1. 检查必填信息
+    if (isLogin == NO){
         warnTitle = @"您还未登陆";
         warnInfo = @"当前版本必须登陆后才能记账！";
     }
@@ -361,16 +391,58 @@
         warnTitle = @"请填写完整信息";
         warnInfo = @"请填写正确的金额，必须大于0！";
     }
+    
     //如果有警告信息，提示框弹出，终止提交操作
     if (warnTitle != nil) {
-        UIAlertView *warnAlert = [[UIAlertView alloc] initWithTitle:warnTitle message:warnInfo delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
-        [warnAlert show];
-        return;
+        [self showAlert:warnTitle andMessage:warnInfo];
+        return NO;
     }
     
-    [_dialogView showDialog:nil];
+    //2. 检查逻辑关系
+    NSString *inoutType = self.checkFlowType.inOutType;
+    if ([inoutType isEqualToString:@"out"] && self.checkFeeItem == nil) {
+        [self showAlert:@"提示" andMessage:@"支出记账，请选择费用科目"];
+        return NO;
+    }
     
-    NSInteger userID = [ud integerForKey:__fm_defaultsKey_loginUser_ID];
+    if ([self.keepType isEqualToString:__fm_KPTypeOfBank_String]) {
+        //如果是银行收入，只选择入账银行即可
+        if ([inoutType isEqualToString:@"in"] && self.inUserBank == nil) {
+            [self showAlert:@"提示" andMessage:@"银行收入记账，请选择入账银行"];
+            return NO;
+        }
+        //如果是银行支出，只选择出账银行即可
+        else if ([inoutType isEqualToString:@"out"] && self.outUserBank == nil)
+        {
+            [self showAlert:@"提示" andMessage:@"银行支出记账，请选择出账银行"];
+            return NO;
+        }
+    }
+    
+    if ([self.keepType isEqualToString:__fm_KPTypeOfChange_String]) {
+        if ([inoutType isEqualToString: @"存钱"] && self.inUserBank == nil)
+        {
+            [self showAlert:@"提示" andMessage:@"存钱记账，请选择入账银行"];
+            return NO;
+        }
+        else if ([inoutType isEqualToString: @"取现"] && self.outUserBank == nil)
+        {
+            [self showAlert:@"提示" andMessage:@"取钱记账，请选择出账银行"];
+            return NO;
+        }
+        else if ([inoutType isEqualToString: @"内部转账"] && (self.outUserBank == nil || self.inUserBank == nil))
+        {
+            [self showAlert:@"提示" andMessage:@"内部转账，请选择入账银行 和 出账银行"];
+            return NO;
+        }
+    }
+    
+    return YES;
+}
+
+//有网络时记账方法
+-(void)submitWithNet:(NSInteger) userID
+{
     //现金记账
     if ([self.keepType isEqualToString:__fm_KPTypeOfCash_String]) {
         NSString *requestURL = [__fm_userDefaults_serverIP stringByAppendingString:__fm_apiPath_doCashAccounting];
@@ -396,12 +468,10 @@
         else
         {
             [_dialogView hideDialog];
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"记账错误" message:@"请重新选择资金类型"
-                                                      delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
-            [alert show];
+            [self showAlert:@"记账错误" andMessage:@"请重新选择资金类型！"];
             return;
         }
-        [request addPostValue:[NSNumber numberWithDouble:self.applyMoney] forKey:@"money"];
+        [request addPostValue:self.applyMoney forKey:@"money"];
         [request addPostValue:self.applyRemark forKey:@"cAdd"];
         [request setDidFinishSelector:@selector(bookKeepFinished:)];
         [request setDidFailSelector:@selector(bookKeepFailed:)];
@@ -419,7 +489,7 @@
         [request addPostValue:[NSNumber numberWithInteger:userID] forKey:@"userID"];
         [request addPostValue:self.applyDate forKey:@"ApplyDate"];
         [request addPostValue:self.checkFlowType.flowTypeID forKey:@"FlowTypeID"];
-        [request addPostValue:[NSNumber numberWithDouble:self.applyMoney] forKey:@"money"];
+        [request addPostValue:self.applyMoney forKey:@"money"];
         //如果是银行收入，只选择入账银行即可
         if ([self.checkFlowType.inOutType isEqualToString:@"in"]) {
             [request addPostValue:[NSNumber numberWithInt:0] forKey:@"feeItemID"];
@@ -438,9 +508,7 @@
         else
         {
             [_dialogView hideDialog];
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"记账错误" message:@"请重新选择资金类型"
-                                                      delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
-            [alert show];
+            [self showAlert:@"记账错误" andMessage:@"请重新选择资金类型！"];
             return;
         }
         [request addPostValue:self.applyRemark forKey:@"cAdd"];
@@ -462,7 +530,7 @@
         [request addPostValue:self.checkFlowType.flowTypeID forKey:@"FlowTypeID"];
         [request addPostValue:[NSNumber numberWithInt:0] forKey:@"feeItemID"];
         [request addPostValue:@"" forKey:@"feeItemName"];
-        [request addPostValue:[NSNumber numberWithDouble:self.applyMoney] forKey:@"money"];
+        [request addPostValue:self.applyMoney forKey:@"money"];
         if ([self.checkFlowType.inOutType isEqualToString: @"存钱"])
         {
             [request addPostValue:self.inUserBank.userBankID forKey:@"inUBID"];
@@ -481,9 +549,7 @@
         else
         {
             [_dialogView hideDialog];
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"记账错误" message:@"请重新选择资金类型"
-                                                           delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
-            [alert show];
+            [self showAlert:@"记账错误" andMessage:@"请重新选择资金类型！"];
             return;
         }
         [request addPostValue:self.applyRemark forKey:@"cAdd"];
@@ -493,10 +559,88 @@
     }
     else{
         [_dialogView hideDialog];
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"记账错误" message:@"请重新选择一个记账类型"
-                                   delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
-        [alert show];
+        [self showAlert:@"记账错误" andMessage:@"请重新选择一个记账类型！"];
     }
+}
+
+//无网络时记账方法
+-(void)submitWithNoNet:(NSInteger) userID
+{
+    
+    //先将必填信息赋值
+    Local_ApplyRecordsViewModel *car = [[Local_ApplyRecordsViewModel alloc] init];
+    car.userID = [NSNumber numberWithInteger:userID];
+    car.applyDate = self.applyDate;
+    car.keepType = self.keepType;
+    car.flowTypeID = self.checkFlowType.flowTypeID;
+    car.flowTypeName = self.checkFlowType.name;
+    car.inOutType = self.checkFlowType.inOutType;
+    car.imoney = self.applyMoney;
+    car.cAdd = self.applyRemark;
+    
+    //如果是支出，需要传入费用科目
+    if ([car.inOutType isEqualToString:@"out"]) {
+        car.feeItemID = self.checkFeeItem.feeItemID;
+        car.feeItemName = self.checkFeeItem.feeItemName;
+    }
+    
+    //现金记账
+    if ([self.keepType isEqualToString:__fm_KPTypeOfCash_String]) {
+        
+    }
+    //银行记账
+    else if ([self.keepType isEqualToString:__fm_KPTypeOfBank_String]){
+        //如果是银行收入，只选择入账银行即可
+        if ([car.inOutType isEqualToString:@"in"]) {
+            car.inUserBankID = self.inUserBank.userBankID;
+        }
+        //如果是银行支出，只选择出账银行即可
+        else if ([car.inOutType isEqualToString:@"out"])
+        {
+            car.outUserBankID = self.outUserBank.userBankID;
+        }
+    }
+    //转账
+    else if ([self.keepType isEqualToString:__fm_KPTypeOfChange_String]){
+        if ([car.inOutType isEqualToString: @"存钱"])
+        {
+            car.inUserBankID = self.inUserBank.userBankID;
+        }
+        else if ([car.inOutType isEqualToString: @"取现"])
+        {
+            car.outUserBankID = self.outUserBank.userBankID;
+        }
+        else if ([car.inOutType isEqualToString: @"内部转账"])
+        {
+            car.inUserBankID = self.inUserBank.userBankID;
+            car.outUserBankID = self.outUserBank.userBankID;
+        }
+    }
+    //记账类型错误
+    else{
+        [self showAlert:@"记账错误" andMessage:@"请重新选择一个记账类型"];
+        return;
+    }
+    
+    //将记账信息写入本地记账中
+    Local_ApplyRecordsDAO *larDao = [[Local_ApplyRecordsDAO alloc] init];
+    BOOL result = [larDao addApplyRecord:car];
+    [self.dialogView hideDialog];
+    if (result == YES) {
+        [self showAlert:@"成功" andMessage:@"记账信息已被记录到本地！"];
+    }else{
+        [self showAlert:@"警告" andMessage:@"记账到本地，操作失败！"];
+    }
+}
+
+-(void)showAlert:(NSString *) title andMessage:(NSString *) message
+{
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title
+                                              message:message
+                                              delegate:nil
+                                              cancelButtonTitle:@"确定"
+                                              otherButtonTitles:nil, nil];
+    [alert show];
 }
 
 //记账完成回调函数
@@ -585,10 +729,8 @@
     
         //给可能的value赋一个默认值
         if ([cell.lblValue.text isEqual:@""]) {
-            if (sectioinNo == 0) {
-                if (rowNo == 0) {
-                    cell.lblValue.text = [_shortDateFormatter stringFromDate:[NSDate date]];
-                }
+            if (rowNo == 0) {
+                cell.lblValue.text = [_shortDateFormatter stringFromDate:[NSDate date]];
             }
         }
         return cell;
@@ -596,6 +738,35 @@
     else if (sectioinNo == 1) {
         LycTableCellViewDefault2 *cell = (LycTableCellViewDefault2 *)[tableView dequeueReusableCellWithIdentifier:cellBankID];
         cell.lblTitle.text = [[tableData objectAtIndex:sectioinNo] objectAtIndex:rowNo];
+        cell.lblValueTop.text = @"";
+        cell.lblValueBottom.text = @"";
+        //如果显示第二行，肯定是入账银行
+        if (rowNo == 1 && self.inUserBank != nil) {
+            cell.lblValueTop.text = self.inUserBank.bankName;
+            cell.lblValueBottom.text = self.inUserBank.cardNo;
+        }
+        //第一行的情况较复杂，需要判断
+        else if(rowNo == 0) {
+            if (_arrayBank.count == 1) {
+                if([_arrayBank[0] isEqualToString:@"出账银行"] && self.outUserBank != nil)
+                {
+                    cell.lblValueTop.text = self.outUserBank.bankName;
+                    cell.lblValueBottom.text = self.outUserBank.cardNo;
+                }
+                else if ([_arrayBank[0] isEqualToString:@"入账银行"] && self.inUserBank != nil)
+                {
+                    cell.lblValueTop.text = self.inUserBank.bankName;
+                    cell.lblValueBottom.text = self.inUserBank.cardNo;
+                }
+            }
+            //显示两行中的第一行，肯定为出账银行
+            else if (_arrayBank.count == 2  && self.outUserBank != nil)
+            {
+                cell.lblValueTop.text = self.outUserBank.bankName;
+                cell.lblValueBottom.text = self.outUserBank.cardNo;
+            }
+        }
+        
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         return cell;
     }
@@ -663,7 +834,7 @@
             [self presentViewController:cv animated:YES completion:nil];
         });
     }
-    //如果点击费用科目，跳转到费用科目选择页面
+    //如果点击银行，跳转到银行选择页面
     else if (indexPath.section == 1) {
         //UIStoryboard *sbMain = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         CheckUserBankViewController *cv = [self.storyboard instantiateViewControllerWithIdentifier:@"checkUserBankNib"];
@@ -758,8 +929,8 @@
     {
         cell = (LycTableCellViewDefault2 *)[self.tableview1 cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1]];
     }
-    cell.lblValueTop.text = oub.bankName;
-    cell.lblValueBottom.text = oub.cardNo;
+    cell.lblValueTop.text = _outUserBank.bankName;
+    cell.lblValueBottom.text = _outUserBank.cardNo;
 }
 //设置入账银行
 -(void)setTheInUserBank:(Local_UserBank *) iub
@@ -773,11 +944,11 @@
     {
         cell = (LycTableCellViewDefault2 *)[self.tableview1 cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1]];
     }
-    cell.lblValueTop.text = iub.bankName;
-    cell.lblValueBottom.text = iub.cardNo;
+    cell.lblValueTop.text = _inUserBank.bankName;
+    cell.lblValueBottom.text = _inUserBank.cardNo;
 }
 //设置记账金额
--(void)setTheApplyMoney:(CGFloat) money
+-(void)setTheApplyMoney:(NSDecimalNumber *) money
 {
     _applyMoney = money;
 }
@@ -806,7 +977,7 @@
         NSIndexPath *index = [NSIndexPath indexPathForRow:_isEditTextIndex inSection:2];
         UITextField *txt = (UITextField *)[[self.tableview1 cellForRowAtIndexPath:index] viewWithTag:302];
         if (_isEditTextIndex == 0) {
-            _applyMoney = [txt.text doubleValue];
+            _applyMoney = [NSDecimalNumber decimalNumberWithString:txt.text];
         }
         else
         {

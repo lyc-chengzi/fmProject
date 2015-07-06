@@ -31,7 +31,7 @@
 //设置出账银行
 -(void)setTheOutUserBank:(Local_UserBank *) oub;
 //设置记账金额
--(void)setTheApplyMoney:(CGFloat) money;
+-(void)setTheApplyMoney:(NSDecimalNumber *) money;
 
 @end
 
@@ -64,7 +64,7 @@
 @property (strong, nonatomic) Local_UserBank *outUserBank;  //出账银行
 
 @property (nonatomic) NSString *applyRemark;//备注信息
-@property (nonatomic, readonly) CGFloat applyMoney;         //记账金额
+@property (nonatomic, readonly) NSDecimalNumber *applyMoney;         //记账金额
 
 @property (strong, nonatomic, readonly) NSMutableDictionary *flowTypeList;  //资金类型列表，按记账类型标记好了
 @property (strong, nonatomic, readonly) NSArray *feeItemList;               //费用科目列表，使用时再处理

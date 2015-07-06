@@ -85,6 +85,24 @@
     NSPredicate * qcmd = [NSPredicate predicateWithFormat:@"userID = %d ", userID];
     //排序条件
     NSSortDescriptor *orderApplyDate = [NSSortDescriptor sortDescriptorWithKey:@"applyDate" ascending:YES];
-    return [self getAllEntities:_entityName withPredicate:qcmd andOrderBy:@[orderApplyDate]];
+    NSArray *array = [self getAllEntities:_entityName withPredicate:qcmd andOrderBy:@[orderApplyDate]];
+    NSMutableArray *result = [[NSMutableArray alloc] init];
+    for (Local_ApplyRecords *ar in array) {
+        Local_ApplyRecordsViewModel *larVM = [[Local_ApplyRecordsViewModel alloc] init];
+        larVM.userID = ar.userID;
+        larVM.applyDate = ar.applyDate;
+        larVM.keepType = ar.keepType;
+        larVM.flowTypeID = ar.flowTypeID;
+        larVM.flowTypeName = ar.flowTypeName;
+        larVM.inOutType = ar.inOutType;
+        larVM.feeItemID = ar.feeItemID;
+        larVM.feeItemName = ar.feeItemName;
+        larVM.imoney = ar.imoney;
+        larVM.inUserBankID = ar.inUserBankID;
+        larVM.outUserBankID = ar.outUserBankID;
+        larVM.cAdd = ar.cAdd;
+        [result addObject:larVM];
+    }
+    return result;
 }
 @end
