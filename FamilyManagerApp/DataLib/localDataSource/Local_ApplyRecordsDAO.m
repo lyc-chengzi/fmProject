@@ -21,7 +21,7 @@
     self = [super init];
     if(self)
     {
-        _entityName = @"Local_ApplyRecordsDAO";
+        _entityName = @"Local_ApplyRecords";
     }
     
     return self;
