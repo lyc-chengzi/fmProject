@@ -577,7 +577,8 @@
     car.inOutType = self.checkFlowType.inOutType;
     car.imoney = self.applyMoney;
     car.cAdd = self.applyRemark;
-    
+    NSString *__applyID = [NSString stringWithFormat:@"%@-%u",car.applyDate, arc4random()];
+    car.applyID = __applyID;
     //如果是支出，需要传入费用科目
     if ([car.inOutType isEqualToString:@"out"]) {
         car.feeItemID = self.checkFeeItem.feeItemID;

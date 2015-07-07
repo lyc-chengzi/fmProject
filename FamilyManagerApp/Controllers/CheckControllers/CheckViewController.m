@@ -151,8 +151,18 @@
     NSDictionary *rowEntity = [[[tableData objectAtIndex:indexPath.section] objectForKey:@"sectionRows"] objectAtIndex:indexPath.row];
     //同步账单
     if (sectionNo == 1 && rowNo == 0) {
+        NSUserDefaults *de = [NSUserDefaults standardUserDefaults];
+        BOOL isLogin = [de boolForKey:__fm_defaultsKey_loginUser_Status];
+        if (isLogin == NO) {
+            [self showAlert:@"提示" andMessage:@"您还未登录，无法同步账单"];
+        }
+        NSInteger userID = [de integerForKey:__fm_defaultsKey_loginUser_ID];
         Local_ApplyRecordsDAO *dao = [[Local_ApplyRecordsDAO alloc] init];
-        NSArray *array = [dao getDictionariesByUserID:13];
+        NSArray *array = [dao getDictionariesByUserID:(int)userID];
+        if (array.count == 0) {
+            [self showAlert:@"提示" andMessage:@"本地账单为空，不需要同步"];
+            return;
+        }
         NSError *error;
         NSData *jsonData = [NSJSONSerialization dataWithJSONObject:array options:NSJSONWritingPrettyPrinted error:&error];
         if (error != nil) {
@@ -164,6 +174,7 @@
             [self applySyncAction:result];
         }
     }
+    //跳转页面
     else{
         if ([[rowEntity objectForKey:@"isPush"] boolValue] == YES) {
             UIViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:[rowEntity objectForKey:@"pushVCID"]];

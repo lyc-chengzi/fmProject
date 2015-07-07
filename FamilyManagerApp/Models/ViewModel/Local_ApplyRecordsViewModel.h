@@ -9,9 +9,10 @@
 #import <Foundation/Foundation.h>
 
 @interface Local_ApplyRecordsViewModel : NSObject
-@property (nonatomic, copy) NSString *applyID;
+
 @property (nonatomic, strong) NSNumber * userID;
 @property (nonatomic, copy) NSString * applyDate;
+@property (nonatomic, copy) NSString * applyID;
 @property (nonatomic, copy) NSString * keepType;
 @property (nonatomic, strong) NSNumber * flowTypeID;
 @property (nonatomic, copy) NSString * flowTypeName;

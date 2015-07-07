@@ -9,6 +9,7 @@
 #import "Local_ApplyRecordsViewModel.h"
 
 @implementation Local_ApplyRecordsViewModel
+@synthesize applyID = _applyID;
 -(instancetype)init
 {
     self = [super init];

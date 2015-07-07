@@ -55,7 +55,6 @@
 
 -(void)requestFinishLogin:(ASIHTTPRequest *) request
 {
-    [self.view setUserInteractionEnabled:YES];
     [self.showWait stopAnimating];
     NSData *result = [request responseData];
     ApiJsonHelper *aj = [[ApiJsonHelper alloc] initWithData:result requestName:@"登陆操作"];
@@ -73,6 +72,7 @@
         //关闭当前dialog页面
         [self btnCancel_click:nil];
     }else{
+        [self.view setUserInteractionEnabled:YES];
         CAKeyframeAnimation *leftAm = [[CAKeyframeAnimation alloc] init];
         leftAm.keyPath = @"transform.translation.x";
         leftAm.values = @[@0, @20, @-20,@0 ];
