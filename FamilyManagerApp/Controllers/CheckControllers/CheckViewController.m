@@ -18,6 +18,9 @@
 #import "Local_FlowTypeDAO.h"
 #import "Local_UserBankDAO.h"
 
+#import "Local_ApplyRecordsViewModel.h"
+#import "Local_ApplyRecordsDAO.h"
+
 @interface CheckViewController()<ASIHTTPRequestDelegate>
 {
     //最后一次更新基础数据的时间
@@ -93,6 +96,14 @@
 -(void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
+    //[self performSelector:@selector(doTest) withObject:nil afterDelay:2];//测试--调试内存泄漏使用
+}
+
+-(void)doTest
+{
+    LYCLog(@"记账类型：%p",self.B_keepType);
+    LYCLog(@"费用科目列表：%p",self.B_feeItemList);
+    LYCLog(@"费用科目：%@", self.B_checkFeeItem);
 }
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -135,11 +146,62 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    NSInteger rowNo = indexPath.row;
+    NSInteger sectionNo = indexPath.section;
     NSDictionary *rowEntity = [[[tableData objectAtIndex:indexPath.section] objectForKey:@"sectionRows"] objectAtIndex:indexPath.row];
-    if ([[rowEntity objectForKey:@"isPush"] boolValue] == YES) {
-        UIViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:[rowEntity objectForKey:@"pushVCID"]];
-        [self.navigationController pushViewController:vc animated:YES];
+    //同步账单
+    if (sectionNo == 1 && rowNo == 0) {
+        NSUserDefaults *de = [NSUserDefaults standardUserDefaults];
+        BOOL isLogin = [de boolForKey:__fm_defaultsKey_loginUser_Status];
+        if (isLogin == NO) {
+            [self showAlert:@"提示" andMessage:@"您还未登录，无法同步账单"];
+        }
+        NSInteger userID = [de integerForKey:__fm_defaultsKey_loginUser_ID];
+        Local_ApplyRecordsDAO *dao = [[Local_ApplyRecordsDAO alloc] init];
+        NSArray *array = [dao getDictionariesByUserID:(int)userID];
+        if (array.count == 0) {
+            [self showAlert:@"提示" andMessage:@"本地账单为空，不需要同步"];
+            return;
+        }
+        NSError *error;
+        NSData *jsonData = [NSJSONSerialization dataWithJSONObject:array options:NSJSONWritingPrettyPrinted error:&error];
+        if (error != nil) {
+            [self showAlert:@"错误提示" andMessage:@"转换json出错了"];
+        }
+        else
+        {
+            NSString * result = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+            [self applySyncAction:result];
+        }
     }
+    //跳转页面
+    else{
+        if ([[rowEntity objectForKey:@"isPush"] boolValue] == YES) {
+            UIViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:[rowEntity objectForKey:@"pushVCID"]];
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+    }
+}
+
+-(void)applySyncAction:(NSString *) jsonStr
+{
+    NSString *serverIP = __fm_userDefaults_serverIP;
+    //创建两个任务
+    //第一个任务，下载资金类型
+    NSString *requestURL = [serverIP stringByAppendingString:__fm_apiPath_doSync];
+    ASIFormDataRequest *request= [ASIFormDataRequest requestWithURL:[NSURL URLWithString:requestURL]];
+    _applySyncRequest = request;//将请求付给一个weak指针
+    request.shouldAttemptPersistentConnection = YES;
+    request.requestMethod = @"POST";
+    [request addPostValue:jsonStr forKey:@"jsonStr"];
+    [request setCompletionBlock:^{
+        [self showAlert:@"成功" andMessage:@"账单同步成功"];
+    }];
+    
+    [request setFailedBlock:^{
+        [self showAlert:@"失败" andMessage:@"账单同步失败"];
+    }];
+    [request startAsynchronous];
 }
 
 
@@ -291,6 +353,12 @@
     if (errors.code == 2) {
         LYCLog(@"连接超时");
     }
+}
+
+-(void)showAlert:(NSString *) title andMessage:(NSString *) message
+{
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+    [alert show];
 }
 
 @end

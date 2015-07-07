@@ -136,9 +136,9 @@
 {
     
     if (!__fm_userDefaults_serverIP) {
-        NSLog(@"没有serverIP，默认配置成：http://192.168.1.123:5555");
+        LYCLog(@"没有serverIP，默认配置成：http://192.168.1.122:5555");
         NSUserDefaults *de = [NSUserDefaults standardUserDefaults];
-        [de setValue:@"http://192.168.1.123:5555" forKey:@"string_serverip"];
+        [de setValue:@"http://192.168.1.122:5555" forKey:@"string_serverip"];
         [de synchronize];
     }
 }

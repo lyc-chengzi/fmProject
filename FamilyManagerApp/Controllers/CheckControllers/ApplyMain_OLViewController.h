@@ -16,6 +16,7 @@
     NSOperationQueue *_nsq;//队列
 }
 @property (weak, nonatomic) IBOutlet UITableView *table;
+@property (weak, nonatomic, readonly) UIRefreshControl *refreshControl;
 
 //加载框
 @property (strong, nonatomic) LycDialogView *dialogView;

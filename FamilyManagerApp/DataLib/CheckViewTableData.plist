@@ -17,11 +17,11 @@
 			</dict>
 			<dict>
 				<key>rowTitle</key>
-				<string>本地缓存账单</string>
+				<string>本地账单</string>
 				<key>isPush</key>
-				<false/>
+				<true/>
 				<key>pushVCID</key>
-				<string>none</string>
+				<string>localApplyListVCID</string>
 			</dict>
 		</array>
 	</dict>
