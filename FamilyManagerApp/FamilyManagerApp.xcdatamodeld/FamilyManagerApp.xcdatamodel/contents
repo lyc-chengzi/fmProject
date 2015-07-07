@@ -12,6 +12,7 @@
     </entity>
     <entity name="Local_ApplyRecords" representedClassName="Local_ApplyRecords" syncable="YES">
         <attribute name="applyDate" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="applyID" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="cAdd" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="feeItemID" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="feeItemName" optional="YES" attributeType="String" syncable="YES"/>
@@ -48,9 +49,9 @@
     <elements>
         <element name="Apply_main" positionX="-63" positionY="-18" width="128" height="103"/>
         <element name="Apply_sub" positionX="-54" positionY="18" width="128" height="75"/>
+        <element name="Local_ApplyRecords" positionX="-54" positionY="63" width="128" height="238"/>
         <element name="Local_FeeItem" positionX="-45" positionY="36" width="128" height="105"/>
         <element name="Local_FlowType" positionX="-54" positionY="18" width="128" height="103"/>
         <element name="Local_UserBank" positionX="-54" positionY="36" width="128" height="150"/>
-        <element name="Local_ApplyRecords" positionX="-54" positionY="63" width="128" height="225"/>
     </elements>
 </model>

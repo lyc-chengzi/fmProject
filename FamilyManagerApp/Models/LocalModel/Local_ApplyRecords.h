@@ -2,7 +2,7 @@
 //  Local_ApplyRecords.h
 //  FamilyManagerApp
 //
-//  Created by ESI on 15/7/6.
+//  Created by ESI on 15/7/7.
 //  Copyright (c) 2015年 LYC. All rights reserved.
 //
 
@@ -24,5 +24,6 @@
 @property (nonatomic, retain) NSString * keepType;
 @property (nonatomic, retain) NSNumber * outUserBankID;
 @property (nonatomic, retain) NSNumber * userID;
+@property (nonatomic, retain) NSString * applyID;
 
 @end
