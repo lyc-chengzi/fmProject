@@ -26,6 +26,9 @@
 //清空某个用户的本地记账信息
 -(void) deleteAllApplyRecordsByUserID:(int) userID;
 
+//根据记账ID删除一个本地记账信息
+-(void) deleteApplyByApplyID:(NSString *) applyID;
+
 //查询某一个用户下所有本地记账信息
 -(NSArray *)getEntitiesByUserID:(int) userID;
 //查询某一个用户下所有本地记账信息

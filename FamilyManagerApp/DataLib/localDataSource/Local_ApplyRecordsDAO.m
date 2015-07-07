@@ -33,6 +33,7 @@
     BOOL result = YES;
     
     Local_ApplyRecords *carEntity = [NSEntityDescription insertNewObjectForEntityForName:_entityName inManagedObjectContext:self.appDelegate.managedObjectContext];
+    carEntity.applyID = ar.applyID;
     carEntity.userID = ar.userID;
     carEntity.applyDate = ar.applyDate;
     carEntity.keepType = ar.keepType;
@@ -78,6 +79,14 @@
     [self deleteSomeEntities:_entityName withPredicate:qcmd];
 }
 
+//根据记账ID删除一个本地记账信息
+-(void) deleteApplyByApplyID:(NSString *) applyID
+{
+    //定义抓取条件
+    NSPredicate * qcmd = [NSPredicate predicateWithFormat:@"applyID = %@ ", applyID];
+    [self deleteSomeEntities:_entityName withPredicate:qcmd];
+}
+
 //查询某一个用户下所有本地记账信息
 -(NSArray *)getEntitiesByUserID:(int) userID
 {
@@ -89,6 +98,7 @@
     NSMutableArray *result = [[NSMutableArray alloc] init];
     for (Local_ApplyRecords *ar in array) {
         Local_ApplyRecordsViewModel *larVM = [[Local_ApplyRecordsViewModel alloc] init];
+        larVM.applyID = ar.applyID;
         larVM.userID = ar.userID;
         larVM.applyDate = ar.applyDate;
         larVM.keepType = ar.keepType;
@@ -117,6 +127,7 @@
     NSMutableArray *result = [[NSMutableArray alloc] init];
     for (Local_ApplyRecords *ar in array) {
         NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+        dic[@"applyID"] = ar.applyID;
         dic[@"userID"] = ar.userID;
         dic[@"applyDate"] = ar.applyDate;
         dic[@"keepType"] = ar.keepType;
@@ -134,4 +145,5 @@
     return result;
 
 }
+
 @end
