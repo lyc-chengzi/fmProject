@@ -14,7 +14,7 @@
 #import "Local_ApplyRecordsDAO.h"
 @interface LocalApplyListViewController()
 {
-    int _userID;
+    BOOL syncing;
 }
 @end
 
@@ -23,6 +23,7 @@
 -(void)viewDidLoad
 {
     [super viewDidLoad];
+    syncing = NO;
     //设置导航右侧按钮
     //1. 同步按钮
     UIBarButtonItem *btnSync = [[UIBarButtonItem alloc] initWithTitle:@"同步" style:UIBarButtonItemStyleBordered target:self action:@selector(syncLoaclApplyAction:)];
@@ -37,9 +38,12 @@
     if (isLogin == NO) {
         [self showAlert:@"提示" andMessage:@"您还未登录，无法同步账单"];
     }
-    _userID = (int)[de integerForKey:__fm_defaultsKey_loginUser_ID];
     Local_ApplyRecordsDAO *dao = [[Local_ApplyRecordsDAO alloc] init];
-    NSArray *array = [dao getEntitiesByUserID:_userID];
+    NSInteger userID = [self getLoginUserID];
+    if (userID == 0) {
+        return;
+    }
+    NSArray *array = [dao getEntitiesByUserID:(int)userID];
     _applyList = [array mutableCopy];
     self.tableView1.dataSource = self;
     self.tableView1.delegate = self;
@@ -63,8 +67,12 @@
         [self showAlert:@"提示" andMessage:@"编辑状态下不可以同步账单！"];
         return;
     }
+    NSInteger userID = [self getLoginUserID];
+    if (userID == 0) {
+        return;
+    }
     Local_ApplyRecordsDAO *dao = [[Local_ApplyRecordsDAO alloc] init];
-    NSArray *array = [dao getDictionariesByUserID:_userID];
+    NSArray *array = [dao getDictionariesByUserID:(int)userID];
     if (array.count == 0) {
         [self showAlert:@"提示" andMessage:@"本地账单为空，不需要同步"];
         return;
@@ -77,12 +85,28 @@
     else
     {
         NSString * result = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
-        [self applySyncAction:result];
+        if (syncing == NO) {
+            syncing = YES;
+            //向服务器发送同步请求
+            [self applySyncAction:result andUserID:(int)userID];
+        }
     }
 
 }
 
--(void)applySyncAction:(NSString *) jsonStr
+-(NSInteger) getLoginUserID
+{
+    NSUserDefaults *de = [NSUserDefaults standardUserDefaults];
+    BOOL isLogin = [de boolForKey:__fm_defaultsKey_loginUser_Status];
+    if (isLogin == NO) {
+        [self showAlert:@"提示" andMessage:@"您还未登录，无法进行相关操作"];
+        return 0;
+    }
+    NSInteger userID = [de integerForKey:__fm_defaultsKey_loginUser_ID];
+    return userID;
+}
+
+-(void)applySyncAction:(NSString *) jsonStr andUserID:(int) userID
 {
     NSString *serverIP = __fm_userDefaults_serverIP;
     //创建两个任务
@@ -94,13 +118,31 @@
     request.requestMethod = @"POST";
     [request addPostValue:jsonStr forKey:@"jsonStr"];
     [request setCompletionBlock:^{
-        [self showAlert:@"成功" andMessage:@"账单同步成功"];
+        NSData *resultData = [_syncRequest responseData];
+        ApiJsonHelper *aj = [[ApiJsonHelper alloc] initWithData:resultData requestName:@"同步本地账单"];
+        if (aj.bSuccess == YES) {
+            
+            //同步成功后清空当前用户的本地记账信息
+            [self removeAllLocalApplyByUserID:userID];
+            [self showAlert:@"成功" andMessage:@"账单同步成功，本地账单已经清空！"];
+        } else{
+            [self showAlert:@"失败" andMessage:@"账单同步失败"];
+        }
+        syncing = NO;
     }];
     
     [request setFailedBlock:^{
         [self showAlert:@"失败" andMessage:@"账单同步失败"];
+        syncing = NO;
     }];
     [request startAsynchronous];
+}
+
+//清空本地账单
+-(void)removeAllLocalApplyByUserID:(int) userID
+{
+    Local_ApplyRecordsDAO *dao = [[Local_ApplyRecordsDAO alloc] init];
+    [dao deleteAllApplyRecordsByUserID:userID];
 }
 
 //编辑导航按钮事件
