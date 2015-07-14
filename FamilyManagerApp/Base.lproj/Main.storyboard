@@ -172,6 +172,40 @@
             </objects>
             <point key="canvasLocation" x="785" y="224"/>
         </scene>
+        <!--银行资产-->
+        <scene sceneID="nlZ-xo-kUg">
+            <objects>
+                <viewController id="Fzq-IW-AnI" customClass="UserBankListViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="s4z-Fi-2Nr"/>
+                        <viewControllerLayoutGuide type="bottom" id="FsF-2N-2KJ"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="DcU-Ky-PJw">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="eXL-iS-wUh">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="FsF-2N-2KJ" firstAttribute="top" secondItem="eXL-iS-wUh" secondAttribute="bottom" id="GNN-gz-P2l"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="eXL-iS-wUh" secondAttribute="trailing" constant="-16" id="JdT-JJ-9ck"/>
+                            <constraint firstItem="eXL-iS-wUh" firstAttribute="leading" secondItem="DcU-Ky-PJw" secondAttribute="leadingMargin" constant="-16" id="dUC-zT-4Oi"/>
+                            <constraint firstItem="eXL-iS-wUh" firstAttribute="top" secondItem="s4z-Fi-2Nr" secondAttribute="bottom" constant="-64" id="omh-tU-xTw"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="银行资产" id="cHp-Ru-ZFN"/>
+                    <connections>
+                        <outlet property="tableView1" destination="eXL-iS-wUh" id="nvy-3O-x3w"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="RpP-8s-DZ6" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2854" y="1290"/>
+        </scene>
         <!--我的资产-->
         <scene sceneID="9qV-nZ-leg">
             <objects>
@@ -236,6 +270,9 @@
                                 <state key="normal" title="查看">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <segue destination="Fzq-IW-AnI" kind="push" id="TtX-IS-UKy"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
+@class Reachability;
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
@@ -19,7 +20,8 @@
 @property (readonly, strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 
 
-
+@property (readonly, strong, nonatomic) Reachability *appReachability_internet;
+@property (readonly, strong, nonatomic) Reachability *appReachability_host;
 @property (readonly, nonatomic) BOOL isConnectNet;
 
 - (void)saveContext;

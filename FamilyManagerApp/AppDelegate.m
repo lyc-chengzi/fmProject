@@ -39,13 +39,22 @@
     /***********设置导航条背景色和标题颜色***********/
     
     /********设置联网状态*******/
-    _isConnectNet = [ReachabilityHelper isConnectInternet];
+    NSString *serverIP = [NSString stringWithFormat:@"%@", __fm_userDefaults_serverIP];
+    //_appReachability_host = [Reachability reachabilityWithHostName:serverIP];
+    _appReachability_internet = [Reachability reachabilityForInternetConnection];
+        _isConnectNet = NO;
+    NetworkStatus status = [self.appReachability_internet currentReachabilityStatus];
+    switch (status) {
+        case NotReachable:
+            _isConnectNet = NO;
+            break;
+        default:
+            _isConnectNet = YES;
+            break;
+    }
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(netStateNotificationCallBack:) name:kReachabilityChangedNotification object:nil];
-    
-    NSString *serverIP = __fm_userDefaults_serverIP;
-    Reachability *reach = [Reachability reachabilityWithHostName:serverIP];
     //让reach对象开启被监听状态
-    [reach startNotifier];
+    [_appReachability_internet startNotifier];
     
     //如果联网且已登陆，更新用户银行信息
     NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
