@@ -28,6 +28,7 @@
 #import "Local_ApplyRecords.h"
 #import "Local_ApplyRecordsDAO.h"
 #import "Local_ApplyRecordsViewModel.h"
+#import "FMLoginUser.h"
 
 @interface BKViewController ()
 {
@@ -330,15 +331,11 @@
 //提交记账数据
 -(void)submit
 {
-    /*
-    LYCLog(@"入账银行 --- %p, ---%@", self.inUserBank, self.inUserBank == nil ? @"null" : self.inUserBank.bankName);
-    LYCLog(@"出账银行 --- %p, ---%@", self.outUserBank, self.outUserBank == nil ? @"null" : self.outUserBank.bankName);
-    return;*/
-    AppDelegate *app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     
-    //获取app参数
-    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
-    BOOL isLogin = [ud boolForKey:__fm_defaultsKey_loginUser_Status];
+    AppDelegate *app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    FMLoginUser *loginUser = [FMLoginUser sharedFMLoginUser];
+    
+    BOOL isLogin = loginUser.isLogin;
 
     //数据校验
     BOOL valid = [self submitValid:isLogin];
@@ -349,7 +346,7 @@
     
     [_dialogView showDialog:nil];
     
-    NSInteger userID = [ud integerForKey:__fm_defaultsKey_loginUser_ID];
+    NSInteger userID = loginUser.loginUserID;
     
     if (app.isConnectNet == NO) {
         //无网络时记账到本地

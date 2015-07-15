@@ -14,6 +14,8 @@
 #import "ApiJsonHelper.h"
 #import "Local_UserBankDAO.h"
 
+#import "FMLoginUser.h"
+
 @interface AppDelegate ()
 
 @end
@@ -57,8 +59,8 @@
     [_appReachability_internet startNotifier];
     
     //如果联网且已登陆，更新用户银行信息
-    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
-    BOOL isLogin = [ud boolForKey:__fm_defaultsKey_loginUser_Status];
+    FMLoginUser *loginUser = [FMLoginUser sharedFMLoginUser];
+    BOOL isLogin = loginUser.isLogin;
     if (_isConnectNet == YES && isLogin == YES) {
         //第1个任务，下载用户银行信息
         ASIFormDataRequest *requestUB= [ASIFormDataRequest requestWithURL:[NSURL URLWithString:[serverIP stringByAppendingString:__fm_apiPath_getUserBanks]]];
@@ -66,7 +68,7 @@
         requestUB.requestMethod = @"POST";
         requestUB.delegate = self;
         //requestUB.name = @"下载用户银行信息";
-        NSInteger userID = [ud integerForKey:__fm_defaultsKey_loginUser_ID];
+        NSInteger userID = loginUser.loginUserID;
         [requestUB addPostValue:[NSNumber numberWithInteger:userID] forKey:@"userid"];
         [requestUB setDidFinishSelector:@selector(requestFinishGetUserBank:)];
         [requestUB setDidFailSelector:@selector(requestDidFailedCallBack:)];
@@ -101,8 +103,8 @@
 //asiHttp回调函数
 -(void)requestFinishGetUserBank:(ASIHTTPRequest *) re
 {
-    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
-    NSInteger userID = [ud integerForKey:__fm_defaultsKey_loginUser_ID];
+    FMLoginUser *loginUser = [FMLoginUser sharedFMLoginUser];
+    NSInteger userID = loginUser.loginUserID;
     ApiJsonHelper *ah = [[ApiJsonHelper alloc] initWithData:[re responseData] requestName:@"获取用户银行信息"];
     if (ah.bSuccess == YES) {
         Local_UserBankDAO *ubDao = [[Local_UserBankDAO alloc] init];

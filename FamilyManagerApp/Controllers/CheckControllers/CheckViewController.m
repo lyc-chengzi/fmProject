@@ -20,6 +20,7 @@
 
 #import "Local_ApplyRecordsViewModel.h"
 #import "Local_ApplyRecordsDAO.h"
+#import "FMLoginUser.h"
 
 @interface CheckViewController()<ASIHTTPRequestDelegate>
 {
@@ -238,13 +239,14 @@
 
 -(NSInteger) getLoginUserID
 {
-    NSUserDefaults *de = [NSUserDefaults standardUserDefaults];
-    BOOL isLogin = [de boolForKey:__fm_defaultsKey_loginUser_Status];
+    FMLoginUser *loginUser = [FMLoginUser sharedFMLoginUser];
+    
+    BOOL isLogin = loginUser.isLogin;
     if (isLogin == NO) {
         [self showAlert:@"提示" andMessage:@"您还未登录，无法进行相关操作"];
         return 0;
     }
-    NSInteger userID = [de integerForKey:__fm_defaultsKey_loginUser_ID];
+    NSInteger userID = loginUser.loginUserID;
     return userID;
 }
 

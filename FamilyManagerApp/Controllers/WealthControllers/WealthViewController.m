@@ -14,6 +14,7 @@
 #import "LycDialogView.h"
 #import "ASIFormDataRequest.h"
 #import "ApiJsonHelper.h"
+#import "FMLoginUser.h"
 
 @interface WealthViewController ()
 {
@@ -56,8 +57,8 @@
 
 -(void)loadCaichan
 {
-    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
-    BOOL isLogin = [ud boolForKey:__fm_defaultsKey_loginUser_Status];
+    FMLoginUser *loginUser = [FMLoginUser sharedFMLoginUser];
+    BOOL isLogin = loginUser.isLogin;
     NSString *serverIP = __fm_userDefaults_serverIP;
     if (self.appDelegate.isConnectNet == YES && isLogin == YES) {
         [self.lycDialog showDialog:nil];
@@ -67,7 +68,7 @@
         _test_request = requestUB;
         requestUB.shouldAttemptPersistentConnection = YES;
         requestUB.requestMethod = @"POST";
-        NSInteger userID = [ud integerForKey:__fm_defaultsKey_loginUser_ID];
+        NSInteger userID = loginUser.loginUserID;
         [requestUB addPostValue:[NSNumber numberWithInteger:userID] forKey:@"userid"];
         [requestUB setFailedBlock:^{
             [self.lycDialog hideDialog];
