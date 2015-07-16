@@ -101,6 +101,7 @@
 		5D5899731B39408D003508DF /* ApplyMain_OLViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D5899721B39408D003508DF /* ApplyMain_OLViewController.m */; };
 		5D5A2DE51B574D0600E17082 /* MyLocationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D5A2DE41B574D0600E17082 /* MyLocationViewController.m */; };
 		5D5A2DE71B574D6300E17082 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D5A2DE61B574D6300E17082 /* CoreLocation.framework */; };
+		5D5A2DEA1B57A54700E17082 /* GEOTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D5A2DE91B57A54700E17082 /* GEOTestViewController.m */; };
 		5D86FBB71B426227004ECF4B /* ApplyMainQueryModalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D86FBB61B426227004ECF4B /* ApplyMainQueryModalViewController.m */; };
 		5D9590C51B562DD800EE8715 /* FMLoginUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D9590C41B562DD800EE8715 /* FMLoginUser.m */; };
 		5D9EE3261B4A47B40066329C /* Local_ApplyRecordsDAO.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D9EE3251B4A47B40066329C /* Local_ApplyRecordsDAO.m */; };
@@ -288,6 +289,8 @@
 		5D5A2DE31B574D0600E17082 /* MyLocationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyLocationViewController.h; sourceTree = "<group>"; };
 		5D5A2DE41B574D0600E17082 /* MyLocationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyLocationViewController.m; sourceTree = "<group>"; };
 		5D5A2DE61B574D6300E17082 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		5D5A2DE81B57A54700E17082 /* GEOTestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GEOTestViewController.h; sourceTree = "<group>"; };
+		5D5A2DE91B57A54700E17082 /* GEOTestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GEOTestViewController.m; sourceTree = "<group>"; };
 		5D86FBB51B426227004ECF4B /* ApplyMainQueryModalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplyMainQueryModalViewController.h; sourceTree = "<group>"; };
 		5D86FBB61B426227004ECF4B /* ApplyMainQueryModalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApplyMainQueryModalViewController.m; sourceTree = "<group>"; };
 		5D9590C31B562DD800EE8715 /* FMLoginUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMLoginUser.h; sourceTree = "<group>"; };
@@ -513,6 +516,8 @@
 				5D2639581B2E7B780061E060 /* UserCenterLoginViewController.m */,
 				5D5A2DE31B574D0600E17082 /* MyLocationViewController.h */,
 				5D5A2DE41B574D0600E17082 /* MyLocationViewController.m */,
+				5D5A2DE81B57A54700E17082 /* GEOTestViewController.h */,
+				5D5A2DE91B57A54700E17082 /* GEOTestViewController.m */,
 			);
 			path = UserCenterControllers;
 			sourceTree = "<group>";
@@ -1000,6 +1005,7 @@
 				5D9EE32B1B4A51880066329C /* Local_ApplyRecordsViewModel.m in Sources */,
 				5D3861E41B05E6C400844721 /* ASIDataCompressor.m in Sources */,
 				5D08C4361B04746900C24712 /* AppDelegate.m in Sources */,
+				5D5A2DEA1B57A54700E17082 /* GEOTestViewController.m in Sources */,
 				5D3861A21B05D99100844721 /* GCDAsyncUdpSocket.m in Sources */,
 				5D3861ED1B05E6C400844721 /* ASICloudFilesContainer.m in Sources */,
 				5D08C4391B04746900C24712 /* FamilyManagerApp.xcdatamodeld in Sources */,
