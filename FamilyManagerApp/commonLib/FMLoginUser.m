@@ -17,7 +17,6 @@
     
     //app生命周期中，只会被执行一次
     dispatch_once(&onceToken, ^{
-        LYCLog(@"初始化");
         instance = [super allocWithZone:zone];
     });
     return instance;
