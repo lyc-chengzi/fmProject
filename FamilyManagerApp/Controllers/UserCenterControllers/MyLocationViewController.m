@@ -21,6 +21,7 @@
 -(void)dealloc
 {
     LYCLog(@"我的位置页面，内存释放 --- dealloc");
+    [self.clManager stopUpdatingHeading];
 }
 
 /**
