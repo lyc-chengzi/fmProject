@@ -680,14 +680,26 @@
     [alert show];
 }
 
-//记账失败回调函数
+//在线记账失败回调函数
 -(void)bookKeepFailed:(ASIHTTPRequest *) request
 {
-    [_dialogView hideDialog];
-    NSString *responseString = [request responseString];
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"记账失败" message:responseString
-                          delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
-    [alert show];
+    [self.dialogView hideDialog];
+    UIActionSheet *as = [[UIActionSheet alloc] initWithTitle:@"在线记账失败，是否记账至本地" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:@"确定" otherButtonTitles:nil, nil];
+    as.tag=1010;
+    [as showInView:self.view];
+}
+
+#pragma mark - UIActionSheet 代理
+-(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    //处理是否记账至本地
+    if (actionSheet.tag == 1010) {
+        //记账至本地
+        if (buttonIndex == 0) {
+            FMLoginUser *user = [FMLoginUser sharedFMLoginUser];
+            [self submitWithNoNet:user.loginUserID];
+        }
+    }
 }
 
 

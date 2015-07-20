@@ -35,7 +35,7 @@
 
 @end
 
-@interface BKViewController : UIViewController<UITableViewDelegate,UITableViewDataSource,BKViewControllerDataSourceDelegate, UITextFieldDelegate>
+@interface BKViewController : UIViewController<UITableViewDelegate,UITableViewDataSource,BKViewControllerDataSourceDelegate, UITextFieldDelegate, UIActionSheetDelegate>
 {
     UIView *_datePickerContainer;
     UIDatePicker *_mydatePicker;
