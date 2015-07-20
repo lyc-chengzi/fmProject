@@ -15,14 +15,15 @@
 
 #import "Local_UserBank.h"
 #import "Local_UserBankDAO.h"
+#import "FMLoginUser.h"
 
 @implementation UserBankListViewController
 -(void)viewDidLoad
 {
     [super viewDidLoad];
     _appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
-    NSInteger userID = [ud integerForKey:__fm_defaultsKey_loginUser_ID];
+    FMLoginUser *loginUser = [FMLoginUser sharedFMLoginUser];
+    NSInteger userID = loginUser.loginUserID;
     if (self.appDelegate.isConnectNet == YES) {
         NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",__fm_userDefaults_serverIP,__fm_apiPath_getUserBanks]];
         ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];

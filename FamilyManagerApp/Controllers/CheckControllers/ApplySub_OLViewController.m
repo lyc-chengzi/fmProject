@@ -15,6 +15,7 @@
 #import "LycApplySubCellAutoHeight.h"
 #import "LycApplySubCell.h"
 #import "LYCApplyMainCollectionView.h"
+#import "FMLoginUser.h"
 
 #define applySubCellDefaultHeight 120.0 //默认高度120
 @implementation ApplySub_OLViewController
@@ -43,9 +44,9 @@
 //加载账单数据
 -(void)loadData
 {
-    NSUserDefaults *de = [NSUserDefaults standardUserDefaults];
+    FMLoginUser *loginUser = [FMLoginUser sharedFMLoginUser];
     //获得当前登陆用户
-    NSInteger userID = [de integerForKey:__fm_defaultsKey_loginUser_ID];
+    NSInteger userID = loginUser.loginUserID;
     
     [self.dialogView showDialog:nil];
     NSString *serverIP = __fm_userDefaults_serverIP;

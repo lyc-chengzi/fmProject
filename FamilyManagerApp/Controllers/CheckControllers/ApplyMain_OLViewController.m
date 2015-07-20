@@ -12,6 +12,7 @@
 #import "LycDialogView.h"
 #import "ApplyMainViewModel.h"
 #import "ApplySub_OLViewController.h"
+#import "FMLoginUser.h"
 
 @interface ApplyMain_OLViewController ()
 {
@@ -104,14 +105,14 @@
 //加载账单数据
 -(void)loadData:(BOOL) showDialog
 {
-    NSUserDefaults *de = [NSUserDefaults standardUserDefaults];
-    BOOL isLogin = [de boolForKey:__fm_defaultsKey_loginUser_Status];
+    FMLoginUser *loginUser = [FMLoginUser sharedFMLoginUser];
+    BOOL isLogin = loginUser.isLogin;
     if (isLogin == NO) {
         [self showErrorInfo:@"您还未登陆，无法查看账单信息"];
         return;
     }
     //获得当前登陆用户
-    NSInteger userID = [de integerForKey:__fm_defaultsKey_loginUser_ID];
+    NSInteger userID = loginUser.loginUserID;
     
     if (showDialog == YES) {
         [self.dialogView showDialog:nil];

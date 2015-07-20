@@ -28,6 +28,7 @@
 #import "Local_ApplyRecords.h"
 #import "Local_ApplyRecordsDAO.h"
 #import "Local_ApplyRecordsViewModel.h"
+#import "FMLoginUser.h"
 
 @interface BKViewController ()
 {
@@ -330,15 +331,11 @@
 //提交记账数据
 -(void)submit
 {
-    /*
-    LYCLog(@"入账银行 --- %p, ---%@", self.inUserBank, self.inUserBank == nil ? @"null" : self.inUserBank.bankName);
-    LYCLog(@"出账银行 --- %p, ---%@", self.outUserBank, self.outUserBank == nil ? @"null" : self.outUserBank.bankName);
-    return;*/
-    AppDelegate *app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     
-    //获取app参数
-    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
-    BOOL isLogin = [ud boolForKey:__fm_defaultsKey_loginUser_Status];
+    AppDelegate *app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    FMLoginUser *loginUser = [FMLoginUser sharedFMLoginUser];
+    
+    BOOL isLogin = loginUser.isLogin;
 
     //数据校验
     BOOL valid = [self submitValid:isLogin];
@@ -349,7 +346,7 @@
     
     [_dialogView showDialog:nil];
     
-    NSInteger userID = [ud integerForKey:__fm_defaultsKey_loginUser_ID];
+    NSInteger userID = loginUser.loginUserID;
     
     if (app.isConnectNet == NO) {
         //无网络时记账到本地
@@ -683,14 +680,26 @@
     [alert show];
 }
 
-//记账失败回调函数
+//在线记账失败回调函数
 -(void)bookKeepFailed:(ASIHTTPRequest *) request
 {
-    [_dialogView hideDialog];
-    NSString *responseString = [request responseString];
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"记账失败" message:responseString
-                          delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
-    [alert show];
+    [self.dialogView hideDialog];
+    UIActionSheet *as = [[UIActionSheet alloc] initWithTitle:@"在线记账失败，是否记账至本地" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:@"确定" otherButtonTitles:nil, nil];
+    as.tag=1010;
+    [as showInView:self.view];
+}
+
+#pragma mark - UIActionSheet 代理
+-(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    //处理是否记账至本地
+    if (actionSheet.tag == 1010) {
+        //记账至本地
+        if (buttonIndex == 0) {
+            FMLoginUser *user = [FMLoginUser sharedFMLoginUser];
+            [self submitWithNoNet:user.loginUserID];
+        }
+    }
 }
 
 

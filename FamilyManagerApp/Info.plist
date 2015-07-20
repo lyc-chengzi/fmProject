@@ -38,5 +38,7 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+	<key>CFBundleDisplayName</key>
+	<string>开心记账</string>
 </dict>
 </plist>
