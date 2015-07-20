@@ -15,9 +15,12 @@
 #import "Local_UserBankDAO.h"
 
 #import "FMLoginUser.h"
+#import <BaiduMapAPI/BMapKit.h>
 
 @interface AppDelegate ()
-
+{
+    BMKMapManager *_mapManager;
+}
 @end
 
 @implementation AppDelegate
@@ -73,6 +76,14 @@
         [requestUB setDidFinishSelector:@selector(requestFinishGetUserBank:)];
         [requestUB setDidFailSelector:@selector(requestDidFailedCallBack:)];
         [requestUB startAsynchronous];
+    }
+    
+    //设置百度地图
+    _mapManager = [[BMKMapManager alloc] init];
+    
+    BOOL ret = [_mapManager start:@"2DEDlIVYMNvTYHgGwxz13KbC"  generalDelegate:nil];
+    if (!ret) {
+        LYCLog(@"百度地图启动失败!");
     }
     return YES;
 }

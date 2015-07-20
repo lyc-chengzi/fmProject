@@ -181,7 +181,7 @@
                         <viewControllerLayoutGuide type="bottom" id="FsF-2N-2KJ"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="DcU-Ky-PJw">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="eXL-iS-wUh">
@@ -215,7 +215,7 @@
                         <viewControllerLayoutGuide type="bottom" id="dBU-aB-JYs"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="iS3-yj-D6B">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="P3W-vO-b2n">
@@ -326,7 +326,7 @@
                         <viewControllerLayoutGuide type="bottom" id="gtV-P6-Lb1"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Y1S-qd-miY">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="455"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" translatesAutoresizingMaskIntoConstraints="NO" id="OGa-zY-JJs">
@@ -649,7 +649,7 @@
             <objects>
                 <tableViewController id="8nv-ml-PpJ" customClass="CheckViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="uWv-2h-K0O">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="455"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
                         <prototypes>
@@ -885,8 +885,8 @@
         <scene sceneID="x4E-pJ-jfb">
             <objects>
                 <tabBarController hidesBottomBarWhenPushed="YES" id="aqR-aE-41G" sceneMemberID="viewController">
-                    <nil key="simulatedBottomBarMetrics"/>
-                    <tabBar key="tabBar" contentMode="scaleToFill" id="jeK-uR-nMb">
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics" translucent="NO"/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" translucent="NO" id="jeK-uR-nMb">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -906,7 +906,7 @@
             <objects>
                 <tableViewController id="Qnh-cV-LYD" customClass="UserCenterIndexViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="4uN-HN-Vce">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
                         <sections>
@@ -1013,6 +1013,23 @@
                                             <segue destination="grC-5K-Bfx" kind="push" id="Vh9-6h-HeG"/>
                                         </connections>
                                     </tableViewCell>
+                                    <tableViewCell autoresizesSubviews="NO" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" rowHeight="44" id="hFH-oz-neL">
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" autoresizesSubviews="NO" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="hFH-oz-neL" id="SrN-YP-vAi">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label autoresizesSubviews="NO" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="百度地图" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6KI-5E-F4o">
+                                                    <rect key="frame" x="18" y="11" width="251" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="EuN-IA-TbB" kind="push" id="ZBh-0J-u88"/>
+                                        </connections>
+                                    </tableViewCell>
                                     <tableViewCell autoresizesSubviews="NO" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" rowHeight="44" id="gnL-cf-wQM">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" autoresizesSubviews="NO" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="gnL-cf-wQM" id="5Yk-wi-uOr">
@@ -1089,7 +1106,7 @@
                         <viewControllerLayoutGuide type="bottom" id="bi1-Me-TJc"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="DAg-xE-KW8">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -1097,7 +1114,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gHt-Xr-70c" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="266" y="3699"/>
+            <point key="canvasLocation" x="700" y="3816"/>
         </scene>
         <!--我的位置-->
         <scene sceneID="0bf-id-rth">
@@ -1108,7 +1125,7 @@
                         <viewControllerLayoutGuide type="bottom" id="wHc-Fe-vJF"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="2Vg-xc-NU0">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="经度" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A3i-05-nef">
@@ -1203,7 +1220,26 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="O1C-8Q-W88" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="700" y="3827"/>
+            <point key="canvasLocation" x="700" y="3185"/>
+        </scene>
+        <!--百度地图-->
+        <scene sceneID="53F-yz-EPY">
+            <objects>
+                <viewController hidesBottomBarWhenPushed="YES" id="EuN-IA-TbB" customClass="BaiDuMapIndexViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="vd4-hJ-HJd"/>
+                        <viewControllerLayoutGuide type="bottom" id="HAu-WH-B2z"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="PE4-r2-bIE">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="百度地图" id="u2v-hF-N4d"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="JyD-ob-uRS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="700" y="4464"/>
         </scene>
         <!--地理编码-->
         <scene sceneID="m5b-nH-3p0">
@@ -1214,7 +1250,7 @@
                         <viewControllerLayoutGuide type="bottom" id="UQv-H7-Jwk"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="q29-9y-erD">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cdD-QJ-GNV">
@@ -1286,7 +1322,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="taV-EL-9kO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1158" y="3827"/>
+            <point key="canvasLocation" x="1126" y="3185"/>
         </scene>
         <!--详细信息-->
         <scene sceneID="0Vc-qt-tM4">
@@ -1297,7 +1333,7 @@
                         <viewControllerLayoutGuide type="bottom" id="esK-XO-ggI"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="iFS-LB-IiT">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -1305,7 +1341,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="y9R-8x-qZj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="700" y="3183"/>
+            <point key="canvasLocation" x="700" y="2535"/>
         </scene>
         <!--登陆页面-->
         <scene sceneID="g6v-Mj-S8D">
@@ -1448,12 +1484,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6Ln-M9-Hoe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="700" y="2543"/>
+            <point key="canvasLocation" x="700" y="1885"/>
         </scene>
         <!--个人信息-->
         <scene sceneID="90J-WU-WGC">
             <objects>
-                <navigationController id="ptF-ev-GkF" sceneMemberID="viewController">
+                <navigationController hidesBottomBarWhenPushed="YES" id="ptF-ev-GkF" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="个人信息" image="tab_usercenter.png" id="Ems-EY-Ml0">
                         <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="-3"/>
                     </tabBarItem>
