@@ -40,5 +40,7 @@
 	<false/>
 	<key>CFBundleDisplayName</key>
 	<string>开心记账</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string></string>
 </dict>
 </plist>
