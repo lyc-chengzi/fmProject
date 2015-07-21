@@ -35,7 +35,7 @@
         //设定定位精度，最佳精度
         self.clManager.desiredAccuracy = kCLLocationAccuracyBest;
         //设定距离过滤器为50米，移动50米更新一次
-        self.clManager.distanceFilter = 50;
+        //self.clManager.distanceFilter = 50;
         self.clManager.delegate = self;
         
         //开始监听定位信息

@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 #import <BaiduMapAPI/BMapKit.h>
 
-@interface BaiDuMapIndexViewController : UIViewController
+@interface BaiDuMapIndexViewController : UIViewController<BMKMapViewDelegate>
 @property (strong, nonatomic) BMKMapView *bMap;
 @end

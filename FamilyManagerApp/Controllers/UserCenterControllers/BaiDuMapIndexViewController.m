@@ -19,6 +19,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     _bMap = [[BMKMapView alloc] initWithFrame:self.view.bounds];
+    
     [self.view addSubview:self.bMap];
 }
 
@@ -33,13 +34,40 @@
 {
     [super viewWillAppear:animated];
     [_bMap viewWillAppear];
-    
+    self.bMap.delegate = self;
+}
+
+-(void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    BMKPointAnnotation* annotation = [[BMKPointAnnotation alloc]init];
+    CLLocationCoordinate2D coor;
+    coor.latitude = 39.915;
+    coor.longitude = 116.404;
+    annotation.coordinate = coor;
+    annotation.title = @"这里是北京";
+    [self.bMap addAnnotation:annotation];
 }
 
 -(void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
     [_bMap viewWillDisappear];
+    self.bMap.delegate = nil;
+}
+-(void)mapViewDidFinishLoading:(BMKMapView *)mapView
+{
+    LYCLog(@"map加载完成");
+}
+- (BMKAnnotationView *)mapView:(BMKMapView *)mapView viewForAnnotation:(id <BMKAnnotation>)annotation
+{
+    if ([annotation isKindOfClass:[BMKPointAnnotation class]]) {
+        BMKPinAnnotationView *newAnnotationView = [[BMKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"myAnnotation"];
+        newAnnotationView.pinColor = BMKPinAnnotationColorPurple;
+        newAnnotationView.animatesDrop = YES;// 设置该标注点动画显示
+        return newAnnotationView;
+    }
+    return nil;
 }
 
 /*
