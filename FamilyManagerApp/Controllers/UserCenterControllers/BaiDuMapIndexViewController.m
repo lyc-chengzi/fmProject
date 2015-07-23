@@ -19,6 +19,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     _bMap = [[BMKMapView alloc] initWithFrame:self.view.bounds];
+    _bMap.zoomLevel = 16;
+    _bmkLocationServer = [[BMKLocationService alloc] init];
     
     [self.view addSubview:self.bMap];
 }
@@ -35,18 +37,13 @@
     [super viewWillAppear:animated];
     [_bMap viewWillAppear];
     self.bMap.delegate = self;
+    self.bmkLocationServer.delegate = self;
 }
 
 -(void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    BMKPointAnnotation* annotation = [[BMKPointAnnotation alloc]init];
-    CLLocationCoordinate2D coor;
-    coor.latitude = 39.915;
-    coor.longitude = 116.404;
-    annotation.coordinate = coor;
-    annotation.title = @"这里是北京";
-    [self.bMap addAnnotation:annotation];
+    [self.bmkLocationServer startUserLocationService];
 }
 
 -(void)viewWillDisappear:(BOOL)animated
@@ -54,20 +51,56 @@
     [super viewWillDisappear:animated];
     [_bMap viewWillDisappear];
     self.bMap.delegate = nil;
+    
+    [self.bmkLocationServer stopUserLocationService];
+    self.bmkLocationServer.delegate = nil;
 }
 -(void)mapViewDidFinishLoading:(BMKMapView *)mapView
 {
     LYCLog(@"map加载完成");
 }
+
+#pragma mark BMKMapViewDelegate
 - (BMKAnnotationView *)mapView:(BMKMapView *)mapView viewForAnnotation:(id <BMKAnnotation>)annotation
 {
     if ([annotation isKindOfClass:[BMKPointAnnotation class]]) {
         BMKPinAnnotationView *newAnnotationView = [[BMKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"myAnnotation"];
-        newAnnotationView.pinColor = BMKPinAnnotationColorPurple;
+        newAnnotationView.pinColor = BMKPinAnnotationColorRed;
         newAnnotationView.animatesDrop = YES;// 设置该标注点动画显示
+        [newAnnotationView setSelected:YES];
         return newAnnotationView;
     }
     return nil;
+}
+
+#pragma mark BMKLocationServiceDelegate
+-(void)didUpdateBMKUserLocation:(BMKUserLocation *)userLocation
+{
+    CLLocation *location = userLocation.location;///< 当前位置
+    if (location != nil) {
+        BMKPointAnnotation* annotation = [[BMKPointAnnotation alloc]init];
+        CLLocationCoordinate2D coor;
+        coor.latitude = location.coordinate.latitude;
+        coor.longitude = location.coordinate.longitude;
+        annotation.coordinate = coor;
+        annotation.title = @"您当前的位置";
+        self.bMap.centerCoordinate = coor;
+        [self.bMap addAnnotation:annotation];
+        [self.bmkLocationServer stopUserLocationService];
+    }else{
+        [self showErrorInfoAlert:@"提示" andMessage:@"定位失败"];
+    }
+    
+}
+-(void)didFailToLocateUserWithError:(NSError *)error
+{
+    [self showErrorInfoAlert:@"提示" andMessage:[NSString stringWithFormat:@"定位失败，%@",error]];
+}
+
+-(void)showErrorInfoAlert:(NSString *) title andMessage:(NSString *) message
+{
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+    [alert show];
 }
 
 /*

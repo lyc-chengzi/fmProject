@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <BaiduMapAPI/BMapKit.h>
 
-@interface BaiDuMapIndexViewController : UIViewController<BMKMapViewDelegate>
-@property (strong, nonatomic) BMKMapView *bMap;
+@interface BaiDuMapIndexViewController : UIViewController<BMKMapViewDelegate, BMKLocationServiceDelegate>
+@property (strong, nonatomic) BMKMapView *bMap;///< 百度地图view
+@property (strong, nonatomic) BMKLocationService *bmkLocationServer; ///< 百度定位服务
 @end
