@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		000A16831B189FC8000C010B /* ASICustomRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 000A16821B189FC8000C010B /* ASICustomRequest.m */; };
 		004D112F1B2AFDD700EDF576 /* LycDialogView.m in Sources */ = {isa = PBXBuildFile; fileRef = 004D112E1B2AFDD700EDF576 /* LycDialogView.m */; };
+		00546B0B1B610D2C0064EA9A /* BaiduMapAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00546B0A1B610D2C0064EA9A /* BaiduMapAPI.framework */; };
+		00546B0D1B610E8F0064EA9A /* mapapi.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 00546B0C1B610E8F0064EA9A /* mapapi.bundle */; };
 		005BADB71B1ACB8300B4B69D /* ApiJsonHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 005BADB61B1ACB8300B4B69D /* ApiJsonHelper.m */; };
 		005F5FE01B22AFF7004B9FA0 /* LycTableCellViewDefault2.xib in Resources */ = {isa = PBXBuildFile; fileRef = 005F5FDF1B22AFF7004B9FA0 /* LycTableCellViewDefault2.xib */; };
 		005F5FE31B22B0A1004B9FA0 /* LycTableCellViewDefault2.m in Sources */ = {isa = PBXBuildFile; fileRef = 005F5FE21B22B0A1004B9FA0 /* LycTableCellViewDefault2.m */; };
@@ -112,7 +114,6 @@
 		5D9590C51B562DD800EE8715 /* FMLoginUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D9590C41B562DD800EE8715 /* FMLoginUser.m */; };
 		5D9EE3261B4A47B40066329C /* Local_ApplyRecordsDAO.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D9EE3251B4A47B40066329C /* Local_ApplyRecordsDAO.m */; };
 		5D9EE32B1B4A51880066329C /* Local_ApplyRecordsViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D9EE32A1B4A51880066329C /* Local_ApplyRecordsViewModel.m */; };
-		5DBE5D8B1B5E2F8A00017D4F /* BaiduMapAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DBE5D8A1B5E2F8A00017D4F /* BaiduMapAPI.framework */; };
 		5DD5AC2B1B2EB725004182D7 /* Property List.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5DD5AC2A1B2EB725004182D7 /* Property List.plist */; };
 		5DD5AC2D1B2EB803004182D7 /* CheckViewTableData.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5DD5AC2C1B2EB803004182D7 /* CheckViewTableData.plist */; };
 /* End PBXBuildFile section */
@@ -132,6 +133,8 @@
 		000A16821B189FC8000C010B /* ASICustomRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASICustomRequest.m; sourceTree = "<group>"; };
 		004D112D1B2AFDD700EDF576 /* LycDialogView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LycDialogView.h; path = LycDialogView/LycDialogView.h; sourceTree = "<group>"; };
 		004D112E1B2AFDD700EDF576 /* LycDialogView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LycDialogView.m; path = LycDialogView/LycDialogView.m; sourceTree = "<group>"; };
+		00546B0A1B610D2C0064EA9A /* BaiduMapAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BaiduMapAPI.framework; path = "../../BaiduMap_IOSSDK_v2/BaiduMap_IOSSDK_v2.8.1_Lib/Release-iphoneos/BaiduMapAPI.framework"; sourceTree = "<group>"; };
+		00546B0C1B610E8F0064EA9A /* mapapi.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = mapapi.bundle; sourceTree = "<group>"; };
 		005BADB51B1ACB8300B4B69D /* ApiJsonHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApiJsonHelper.h; sourceTree = "<group>"; };
 		005BADB61B1ACB8300B4B69D /* ApiJsonHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApiJsonHelper.m; sourceTree = "<group>"; };
 		005F5FDF1B22AFF7004B9FA0 /* LycTableCellViewDefault2.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LycTableCellViewDefault2.xib; sourceTree = "<group>"; };
@@ -313,7 +316,6 @@
 		5D9EE3251B4A47B40066329C /* Local_ApplyRecordsDAO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Local_ApplyRecordsDAO.m; sourceTree = "<group>"; };
 		5D9EE3291B4A51880066329C /* Local_ApplyRecordsViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Local_ApplyRecordsViewModel.h; sourceTree = "<group>"; };
 		5D9EE32A1B4A51880066329C /* Local_ApplyRecordsViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Local_ApplyRecordsViewModel.m; sourceTree = "<group>"; };
-		5DBE5D8A1B5E2F8A00017D4F /* BaiduMapAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BaiduMapAPI.framework; sourceTree = "<group>"; };
 		5DD5AC2A1B2EB725004182D7 /* Property List.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Property List.plist"; sourceTree = "<group>"; };
 		5DD5AC2C1B2EB803004182D7 /* CheckViewTableData.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = CheckViewTableData.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -323,6 +325,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				00546B0B1B610D2C0064EA9A /* BaiduMapAPI.framework in Frameworks */,
 				5D444F211B5CD9B100D9E6FD /* Security.framework in Frameworks */,
 				5D444F1F1B5CD9A700D9E6FD /* CoreGraphics.framework in Frameworks */,
 				5D444F1D1B5CD99400D9E6FD /* OpenGLES.framework in Frameworks */,
@@ -331,7 +334,6 @@
 				5D3861FF1B05E98C00844721 /* libxml2.dylib in Frameworks */,
 				5D3861FD1B05E95000844721 /* CFNetwork.framework in Frameworks */,
 				5D3861FB1B05E8FB00844721 /* libz.1.dylib in Frameworks */,
-				5DBE5D8B1B5E2F8A00017D4F /* BaiduMapAPI.framework in Frameworks */,
 				5D3861891B05C01300844721 /* SystemConfiguration.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -409,9 +411,10 @@
 		5D08C4241B04746900C24712 = {
 			isa = PBXGroup;
 			children = (
+				00546B0C1B610E8F0064EA9A /* mapapi.bundle */,
+				00546B0A1B610D2C0064EA9A /* BaiduMapAPI.framework */,
 				5D3861FE1B05E98C00844721 /* libxml2.dylib */,
 				5D3861FA1B05E8FB00844721 /* libz.1.dylib */,
-				5DBE5D8A1B5E2F8A00017D4F /* BaiduMapAPI.framework */,
 				5D444F201B5CD9B100D9E6FD /* Security.framework */,
 				5D444F1E1B5CD9A700D9E6FD /* CoreGraphics.framework */,
 				5D444F1C1B5CD99400D9E6FD /* OpenGLES.framework */,
@@ -991,6 +994,7 @@
 				5DD5AC2D1B2EB803004182D7 /* CheckViewTableData.plist in Resources */,
 				5D4D1A961B3CF4F20028943D /* LYCApplyMainCollectionView.xib in Resources */,
 				5D08C4801B0482FC00C24712 /* duck.png in Resources */,
+				00546B0D1B610E8F0064EA9A /* mapapi.bundle in Resources */,
 				5D08C4721B0480C300C24712 /* LycTableCellViewDefault.xib in Resources */,
 				5D33B74A1B297D8A00D15562 /* tab_usercenter@2x.png in Resources */,
 				5D08C4841B0482FC00C24712 /* rabbit.png in Resources */,
@@ -1219,7 +1223,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Rui Wu (TKH9TJ82BJ)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"/Users/artesi/Downloads/BaiduMap_IOSSDK_v2/BaiduMap_IOSSDK_v2.8.1_Lib/Release-iphoneos",
+					"/Users/lyc/lyc_Project/IOS/projectFolder/BaiduMap_IOSSDK_v2/BaiduMap_IOSSDK_v2.8.1_Lib/Release-iphoneos",
 					"$(PROJECT_DIR)",
 				);
 				HEADER_SEARCH_PATHS = (
@@ -1243,7 +1247,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"/Users/artesi/Downloads/BaiduMap_IOSSDK_v2/BaiduMap_IOSSDK_v2.8.1_Lib/Release-iphoneos",
+					"/Users/lyc/lyc_Project/IOS/projectFolder/BaiduMap_IOSSDK_v2/BaiduMap_IOSSDK_v2.8.1_Lib/Release-iphoneos",
 					"$(PROJECT_DIR)",
 				);
 				HEADER_SEARCH_PATHS = (
