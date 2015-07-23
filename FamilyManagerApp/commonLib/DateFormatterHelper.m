@@ -13,9 +13,17 @@
 +(NSDateFormatter*) getBasicFormatter
 {
     NSDateFormatter *df = [[NSDateFormatter alloc] init];
+    [df setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    return df;
+}
+
++(NSDateFormatter*) getBasicFormatter2
+{
+    NSDateFormatter *df = [[NSDateFormatter alloc] init];
     [df setDateFormat:@"yyyy年MM月dd日 HH:mm:ss"];
     return df;
 }
+
 
 +(NSDateFormatter *) getShortDateFormatter
 {

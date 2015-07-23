@@ -282,20 +282,20 @@
         //请求成功
         NSString *stringUpdateDate = [jh.jsonObj objectForKey:@"updateDate"];
         LYCLog(@"请求到得时间点为：%@", stringUpdateDate);
-        NSDate *updateDate = [[DateFormatterHelper getBasicFormatter] dateFromString:stringUpdateDate];
+        NSDateFormatter *dateFormatter = [DateFormatterHelper getBasicFormatter];
+        NSDate *updateDate = [dateFormatter dateFromString:stringUpdateDate];
         //获取上次更新的时间
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
         _lastUpdateBaseDataTimeStr = [defaults stringForKey:__fm_defaults_baseDataGetDate_Key];
         NSDate *lastUpdateTime = [NSDate dateWithTimeIntervalSince1970:0];
         //如果上次更新时间配置不存在，则默认为1970年
         if (_lastUpdateBaseDataTimeStr == nil || [_lastUpdateBaseDataTimeStr isEqualToString:@""]) {
-            _lastUpdateBaseDataTimeStr = [[DateFormatterHelper getBasicFormatter] stringFromDate:lastUpdateTime];
+            _lastUpdateBaseDataTimeStr = [dateFormatter stringFromDate:lastUpdateTime];
         }
         else{
             //如果存在,将上次基础数据更新时间配置 转换为NSDate类型数据
-            lastUpdateTime = [[DateFormatterHelper getBasicFormatter] dateFromString:_lastUpdateBaseDataTimeStr];
+            lastUpdateTime = [dateFormatter dateFromString:_lastUpdateBaseDataTimeStr];
         }
-        LYCLog(@"%@",_lastUpdateBaseDataTimeStr);
         
         if ([lastUpdateTime compare:updateDate] == NSOrderedAscending) {
             LYCLog(@"需要更新");
