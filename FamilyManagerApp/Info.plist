@@ -41,6 +41,6 @@
 	<key>CFBundleDisplayName</key>
 	<string>开心记账</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string></string>
+	<string>请允许我们定位您当前的位置</string>
 </dict>
 </plist>

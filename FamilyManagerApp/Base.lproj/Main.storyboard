@@ -885,7 +885,7 @@
         <scene sceneID="x4E-pJ-jfb">
             <objects>
                 <tabBarController hidesBottomBarWhenPushed="YES" id="aqR-aE-41G" sceneMemberID="viewController">
-                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics" translucent="NO"/>
+                    <nil key="simulatedBottomBarMetrics"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" translucent="NO" id="jeK-uR-nMb">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -1198,7 +1198,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jzb-uM-m6D">
-                                <rect key="frame" x="20" y="437" width="90" height="30"/>
+                                <rect key="frame" x="214" y="72" width="90" height="30"/>
                                 <state key="normal" title="地理编码练习">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -1206,11 +1206,24 @@
                                     <segue destination="Ggt-ad-5x8" kind="push" id="3h9-iQ-Ecz"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="地址" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FVY-se-UVg">
+                                <rect key="frame" x="20" y="443" width="34" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="awb-7I-3s2">
+                                <rect key="frame" x="111" y="443" width="176" height="56"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="我的位置" id="CkQ-yO-lfm"/>
                     <connections>
+                        <outlet property="lblAddress" destination="awb-7I-3s2" id="GsA-WG-cWY"/>
                         <outlet property="lblFX" destination="fj9-he-tVM" id="Wy6-b5-meu"/>
                         <outlet property="lblHeight" destination="qab-7E-VBD" id="2aB-Tj-xpt"/>
                         <outlet property="lblJD" destination="z8D-aE-zgw" id="Y04-h3-mrl"/>
