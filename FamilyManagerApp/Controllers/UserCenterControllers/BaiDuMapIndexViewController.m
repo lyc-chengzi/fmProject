@@ -5,7 +5,7 @@
 //  Created by ESI on 15/7/20.
 //  Copyright (c) 2015年 LYC. All rights reserved.
 //
-
+/*
 #import "BaiDuMapIndexViewController.h"
 #import "AppConfiguration.h"
 
@@ -102,7 +102,9 @@
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
     [alert show];
 }
-
+@end 
+ 
+*/
 /*
 #pragma mark - Navigation
 
@@ -113,4 +115,4 @@
 }
 */
 
-@end
+

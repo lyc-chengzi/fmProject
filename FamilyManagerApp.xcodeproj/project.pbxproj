@@ -9,8 +9,6 @@
 /* Begin PBXBuildFile section */
 		000A16831B189FC8000C010B /* ASICustomRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 000A16821B189FC8000C010B /* ASICustomRequest.m */; };
 		004D112F1B2AFDD700EDF576 /* LycDialogView.m in Sources */ = {isa = PBXBuildFile; fileRef = 004D112E1B2AFDD700EDF576 /* LycDialogView.m */; };
-		00546B0B1B610D2C0064EA9A /* BaiduMapAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00546B0A1B610D2C0064EA9A /* BaiduMapAPI.framework */; };
-		00546B0D1B610E8F0064EA9A /* mapapi.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 00546B0C1B610E8F0064EA9A /* mapapi.bundle */; };
 		005BADB71B1ACB8300B4B69D /* ApiJsonHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 005BADB61B1ACB8300B4B69D /* ApiJsonHelper.m */; };
 		005F5FE01B22AFF7004B9FA0 /* LycTableCellViewDefault2.xib in Resources */ = {isa = PBXBuildFile; fileRef = 005F5FDF1B22AFF7004B9FA0 /* LycTableCellViewDefault2.xib */; };
 		005F5FE31B22B0A1004B9FA0 /* LycTableCellViewDefault2.m in Sources */ = {isa = PBXBuildFile; fileRef = 005F5FE21B22B0A1004B9FA0 /* LycTableCellViewDefault2.m */; };
@@ -35,7 +33,6 @@
 		5D08C4391B04746900C24712 /* FamilyManagerApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5D08C4371B04746900C24712 /* FamilyManagerApp.xcdatamodeld */; };
 		5D08C4411B04746900C24712 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5D08C4401B04746900C24712 /* Images.xcassets */; };
 		5D08C4441B04746900C24712 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5D08C4421B04746900C24712 /* LaunchScreen.xib */; };
-		5D08C4501B04746900C24712 /* FamilyManagerAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D08C44F1B04746900C24712 /* FamilyManagerAppTests.m */; };
 		5D08C46F1B047D5600C24712 /* LycTableCellViewDefault.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D08C46E1B047D5600C24712 /* LycTableCellViewDefault.m */; };
 		5D08C4721B0480C300C24712 /* LycTableCellViewDefault.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5D08C4711B0480C300C24712 /* LycTableCellViewDefault.xib */; };
 		5D08C47D1B0482FC00C24712 /* 123.png in Resources */ = {isa = PBXBuildFile; fileRef = 5D08C4751B0482FC00C24712 /* 123.png */; };
@@ -118,23 +115,11 @@
 		5DD5AC2D1B2EB803004182D7 /* CheckViewTableData.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5DD5AC2C1B2EB803004182D7 /* CheckViewTableData.plist */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		5D08C44A1B04746900C24712 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 5D08C4251B04746900C24712 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 5D08C42C1B04746900C24712;
-			remoteInfo = FamilyManagerApp;
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXFileReference section */
 		000A16811B189FC8000C010B /* ASICustomRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASICustomRequest.h; sourceTree = "<group>"; };
 		000A16821B189FC8000C010B /* ASICustomRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASICustomRequest.m; sourceTree = "<group>"; };
 		004D112D1B2AFDD700EDF576 /* LycDialogView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LycDialogView.h; path = LycDialogView/LycDialogView.h; sourceTree = "<group>"; };
 		004D112E1B2AFDD700EDF576 /* LycDialogView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LycDialogView.m; path = LycDialogView/LycDialogView.m; sourceTree = "<group>"; };
-		00546B0A1B610D2C0064EA9A /* BaiduMapAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BaiduMapAPI.framework; path = "../../BaiduMap_IOSSDK_v2/BaiduMap_IOSSDK_v2.8.1_Lib/Release-iphoneos/BaiduMapAPI.framework"; sourceTree = "<group>"; };
-		00546B0C1B610E8F0064EA9A /* mapapi.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = mapapi.bundle; sourceTree = "<group>"; };
 		005BADB51B1ACB8300B4B69D /* ApiJsonHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApiJsonHelper.h; sourceTree = "<group>"; };
 		005BADB61B1ACB8300B4B69D /* ApiJsonHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApiJsonHelper.m; sourceTree = "<group>"; };
 		005F5FDF1B22AFF7004B9FA0 /* LycTableCellViewDefault2.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LycTableCellViewDefault2.xib; sourceTree = "<group>"; };
@@ -178,7 +163,6 @@
 		5D08C4381B04746900C24712 /* FamilyManagerApp.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = FamilyManagerApp.xcdatamodel; sourceTree = "<group>"; };
 		5D08C4401B04746900C24712 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		5D08C4431B04746900C24712 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		5D08C4491B04746900C24712 /* FamilyManagerAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FamilyManagerAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5D08C44E1B04746900C24712 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5D08C44F1B04746900C24712 /* FamilyManagerAppTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FamilyManagerAppTests.m; sourceTree = "<group>"; };
 		5D08C46D1B047D5600C24712 /* LycTableCellViewDefault.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LycTableCellViewDefault.h; sourceTree = "<group>"; };
@@ -325,7 +309,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				00546B0B1B610D2C0064EA9A /* BaiduMapAPI.framework in Frameworks */,
 				5D444F211B5CD9B100D9E6FD /* Security.framework in Frameworks */,
 				5D444F1F1B5CD9A700D9E6FD /* CoreGraphics.framework in Frameworks */,
 				5D444F1D1B5CD99400D9E6FD /* OpenGLES.framework in Frameworks */,
@@ -335,13 +318,6 @@
 				5D3861FD1B05E95000844721 /* CFNetwork.framework in Frameworks */,
 				5D3861FB1B05E8FB00844721 /* libz.1.dylib in Frameworks */,
 				5D3861891B05C01300844721 /* SystemConfiguration.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		5D08C4461B04746900C24712 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -411,8 +387,6 @@
 		5D08C4241B04746900C24712 = {
 			isa = PBXGroup;
 			children = (
-				00546B0C1B610E8F0064EA9A /* mapapi.bundle */,
-				00546B0A1B610D2C0064EA9A /* BaiduMapAPI.framework */,
 				5D3861FE1B05E98C00844721 /* libxml2.dylib */,
 				5D3861FA1B05E8FB00844721 /* libz.1.dylib */,
 				5D444F201B5CD9B100D9E6FD /* Security.framework */,
@@ -432,7 +406,6 @@
 			isa = PBXGroup;
 			children = (
 				5D08C42D1B04746900C24712 /* FamilyManagerApp.app */,
-				5D08C4491B04746900C24712 /* FamilyManagerAppTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -923,39 +896,17 @@
 			productReference = 5D08C42D1B04746900C24712 /* FamilyManagerApp.app */;
 			productType = "com.apple.product-type.application";
 		};
-		5D08C4481B04746900C24712 /* FamilyManagerAppTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 5D08C4561B04746900C24712 /* Build configuration list for PBXNativeTarget "FamilyManagerAppTests" */;
-			buildPhases = (
-				5D08C4451B04746900C24712 /* Sources */,
-				5D08C4461B04746900C24712 /* Frameworks */,
-				5D08C4471B04746900C24712 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				5D08C44B1B04746900C24712 /* PBXTargetDependency */,
-			);
-			name = FamilyManagerAppTests;
-			productName = FamilyManagerAppTests;
-			productReference = 5D08C4491B04746900C24712 /* FamilyManagerAppTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		5D08C4251B04746900C24712 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0620;
+				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = LYC;
 				TargetAttributes = {
 					5D08C42C1B04746900C24712 = {
 						CreatedOnToolsVersion = 6.2;
-					};
-					5D08C4481B04746900C24712 = {
-						CreatedOnToolsVersion = 6.2;
-						TestTargetID = 5D08C42C1B04746900C24712;
 					};
 				};
 			};
@@ -973,7 +924,6 @@
 			projectRoot = "";
 			targets = (
 				5D08C42C1B04746900C24712 /* FamilyManagerApp */,
-				5D08C4481B04746900C24712 /* FamilyManagerAppTests */,
 			);
 		};
 /* End PBXProject section */
@@ -994,7 +944,6 @@
 				5DD5AC2D1B2EB803004182D7 /* CheckViewTableData.plist in Resources */,
 				5D4D1A961B3CF4F20028943D /* LYCApplyMainCollectionView.xib in Resources */,
 				5D08C4801B0482FC00C24712 /* duck.png in Resources */,
-				00546B0D1B610E8F0064EA9A /* mapapi.bundle in Resources */,
 				5D08C4721B0480C300C24712 /* LycTableCellViewDefault.xib in Resources */,
 				5D33B74A1B297D8A00D15562 /* tab_usercenter@2x.png in Resources */,
 				5D08C4841B0482FC00C24712 /* rabbit.png in Resources */,
@@ -1008,13 +957,6 @@
 				5D33B74E1B297E5300D15562 /* tabzhangdan@2x.png in Resources */,
 				5DD5AC2B1B2EB725004182D7 /* Property List.plist in Resources */,
 				005F5FE01B22AFF7004B9FA0 /* LycTableCellViewDefault2.xib in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		5D08C4471B04746900C24712 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1101,23 +1043,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		5D08C4451B04746900C24712 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				5D08C4501B04746900C24712 /* FamilyManagerAppTests.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		5D08C44B1B04746900C24712 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 5D08C42C1B04746900C24712 /* FamilyManagerApp */;
-			targetProxy = 5D08C44A1B04746900C24712 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		00E8BA4B1B1F1F30009C390C /* Main.storyboard */ = {
@@ -1159,6 +1085,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -1173,7 +1100,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -1208,7 +1135,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -1235,6 +1162,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_BUNDLE_IDENTIFIER = com.lyc.fmanager;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "940dae81-4b49-44a8-a55c-dbc7e581fe7c";
 			};
@@ -1259,44 +1187,9 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_BUNDLE_IDENTIFIER = com.lyc.fmanager;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "940dae81-4b49-44a8-a55c-dbc7e581fe7c";
-			};
-			name = Release;
-		};
-		5D08C4571B04746900C24712 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = FamilyManagerAppTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FamilyManagerApp.app/FamilyManagerApp";
-			};
-			name = Debug;
-		};
-		5D08C4581B04746900C24712 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = FamilyManagerAppTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FamilyManagerApp.app/FamilyManagerApp";
 			};
 			name = Release;
 		};
@@ -1317,15 +1210,6 @@
 			buildConfigurations = (
 				5D08C4541B04746900C24712 /* Debug */,
 				5D08C4551B04746900C24712 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		5D08C4561B04746900C24712 /* Build configuration list for PBXNativeTarget "FamilyManagerAppTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				5D08C4571B04746900C24712 /* Debug */,
-				5D08C4581B04746900C24712 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
