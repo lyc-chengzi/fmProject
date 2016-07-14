@@ -83,6 +83,10 @@
                 [self setRemarkFrameByOtherFrame:_flowTypeFrame];
             }
         }
+        
+        if (self.applySubModel.cAdd == nil || self.applySubModel.cAdd.length == 0) {
+            _cellHeight += 10;
+        }
     }
 }
 

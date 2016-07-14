@@ -15,7 +15,7 @@
 {
     [super viewDidLoad];
     _clManager = [[CLLocationManager alloc] init];
-    
+    _clGeo = [[CLGeocoder alloc] init];
 }
 
 -(void)dealloc
@@ -32,6 +32,9 @@
 - (IBAction)btnBeginLocation_click:(id)sender {
     //如果定位功能可用
     if ([CLLocationManager locationServicesEnabled]) {
+        if (__fm_IOSVersion_ios8Later) {
+            [self.clManager requestWhenInUseAuthorization];
+        }
         //设定定位精度，最佳精度
         self.clManager.desiredAccuracy = kCLLocationAccuracyBest;
         //设定距离过滤器为50米，移动50米更新一次
@@ -57,10 +60,20 @@
     self.lblHeight.text = [NSString stringWithFormat:@"%g",location.altitude];
     self.lblSpeed.text = [NSString stringWithFormat:@"%g",location.speed];
     self.lblFX.text = [NSString stringWithFormat:@"%g",location.course];
+    [self.clGeo reverseGeocodeLocation:location completionHandler:^(NSArray *placemarks, NSError *error) {
+        if (error) {
+            LYCLog(@"反地理编码错误！");
+        }
+        else{
+            CLPlacemark *place = [placemarks firstObject];
+            self.lblAddress.text = place.name;
+        }
+    }];
 }
 
 -(void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
 {
     LYCLog(@"定位失败, %@",error);
 }
+
 @end

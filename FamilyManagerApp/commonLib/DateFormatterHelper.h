@@ -10,5 +10,6 @@
 
 @interface DateFormatterHelper : NSObject
 +(NSDateFormatter *) getBasicFormatter;
++(NSDateFormatter *) getBasicFormatter2;
 +(NSDateFormatter *) getShortDateFormatter;
 @end
